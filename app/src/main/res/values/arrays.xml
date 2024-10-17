@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="change_languase">
+        <item>한국어</item>
+        <item>ENGLISH</item>
+        <item>日本語</item>
+        <item>中文</item>
+    </string-array>
+
+    <string-array name="languase">
+        <item>ko</item>
+        <item>en</item>
+        <item>ja</item>
+        <item>cn</item>
+    </string-array>
+</resources>

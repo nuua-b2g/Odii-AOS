@@ -1,0 +1,470 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:id="@+id/view_main"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#E6000000"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:orientation="horizontal">
+
+            <!--
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/tmp"
+                android:layout_width="44dp"
+                android:layout_height="20dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="@drawable/ic_img_logo"
+                android:contentDescription="Odii"
+                tools:visibility="visible"/> -->
+
+            <!-- 드라이브 모드(가로형)진입 - 미사용 숨김-->
+            <LinearLayout
+                android:id="@+id/btn_driver"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:orientation="horizontal"
+                android:paddingTop="10dp"
+                android:paddingBottom="10dp"
+                android:visibility="gone">
+
+                <ImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ic_icon_drive_car"
+                    android:importantForAccessibility="no" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="12dp"
+                    android:fontFamily="sans-serif"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/drive_mode"
+                    android:textColor="#FFFFFF"
+                    android:textSize="14dp" />
+            </LinearLayout>
+
+            <!-- 글자크기 -->
+            <LinearLayout
+                android:id="@+id/btn_text_size_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/btn_close"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_texticon_t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/vk_bold"
+                    android:text="T"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/font_letterSpacing_text_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/msg_text_size"
+                    android:gravity="right|center_vertical"
+                    android:nextFocusUp="@id/tv_title"
+                    android:nextFocusDown="@id/tv_content"
+                    android:text="@string/msg_text_size"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+            <!-- 닫기 -->
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/ic_bt_hidden_player"
+                android:contentDescription="@string/close_mediaplayer" />
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="20dp"
+            android:gravity="left"
+            android:minHeight="72dp"
+            tools:background="#23D0FFA7">
+            <!-- 오디오 아티을 -->
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-thin"
+                android:gravity="left|top"
+                android:maxLines="2"
+                android:nextFocusLeft="@id/btn_close"
+                android:nextFocusRight="@id/tv_timer_start"
+                android:textColor="#FFFFFF"
+                android:textSize="24dp"
+                tools:text="오디오타이틀"/>
+
+        </LinearLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            android:layout_marginTop="4dp"
+            android:minHeight="80dp"
+            tools:background="#2FC7BDFF">
+            <!--
+            <com.triggertrap.seekarc.SeekArc
+                android:id="@+id/seekArc"
+                android:layout_width="284dp"
+                android:layout_height="284dp"
+                android:layout_centerHorizontal="true"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginTop="-52dp"
+                android:padding="30dp"
+                app:max="100"
+                app:thumb="@drawable/img_player_now2" />
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/iv_thumb"
+                android:layout_width="180dp"
+                android:layout_height="180dp"
+                android:layout_centerHorizontal="true"
+                android:src="@drawable/ic_img_scrap_dummy" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_timer_start"
+                style="@style/font_letterSpacing_Num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="65dp"
+                android:layout_marginRight="10dp"
+                android:layout_toLeftOf="@id/iv_thumb"
+                android:fontFamily="@font/vk_regular"
+                android:nextFocusLeft="@id/title"
+                android:nextFocusRight="@id/tv_timer_end"
+                android:textColor="#FFFFFF"
+                tools:text="00:00"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_timer_end"
+                style="@style/font_letterSpacing_Num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="60dp"
+                android:layout_toRightOf="@id/iv_thumb"
+                android:fontFamily="@font/vk_regular"
+                android:textColor="#e37b72"
+                tools:text="99:99"/>
+            -->
+
+            <!-- 대본 스크립트 들어가는 영역
+            android:scrollbarFadeDuration="0"
+                android:scrollbarAlwaysDrawVerticalTrack="true"
+                android:scrollbarDefaultDelayBeforeFade="500000"
+
+                android:scrollbarThumbVertical="@drawable/scrollbar_custom_thumb"
+                android:scrollbarTrackVertical="@drawable/scrollbar_custom_track"
+            -->
+            <ScrollView
+                android:id="@+id/scroll_tv_content"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp"
+                android:scrollbarThumbVertical="@drawable/scrollbar_custom_thumb"
+                android:scrollbarStyle="insideOverlay"
+                android:fillViewport="true">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_content"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="left|top"
+                        android:nextFocusUp="@id/btn_text_size_change"
+                        android:nextFocusDown="@id/btn_close"
+                        android:textColor="#ffd1d1d1"
+                        android:textSize="12dp"
+                        tools:text="@string/permission_content"
+                        />
+
+                </LinearLayout>
+
+            </ScrollView>
+
+        </RelativeLayout>
+
+        <!-- 하단 플레이어 영역-->
+        <LinearLayout
+            android:id="@+id/layout_player_menu"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <RelativeLayout
+                android:id="@+id/progress_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginBottom="10dp"
+                android:paddingLeft="20dp"
+                android:paddingRight="20dp">
+
+                <!-- 42x25dp or 34x20dp -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_backward_sec"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/seekArc2"
+                    android:background="@drawable/ic_bt_player_backward_5sec_v2"
+                    android:contentDescription="@string/audio_backward_sec" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_forward_sec"
+                    android:layout_width="40dp"
+                    android:layout_height="30dp"
+                    android:layout_alignTop="@id/seekArc2"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/ic_bt_player_forward_5sec_v2"
+                    android:contentDescription="@string/audio_forward_sec" />
+
+                <androidx.appcompat.widget.AppCompatSeekBar
+                    android:id="@+id/seekArc2"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="0dp"
+                    android:max="100"
+                    android:layout_marginTop="20dp"
+                    android:layout_toRightOf="@id/btn_player_backward_sec"
+                    android:layout_toLeftOf="@id/btn_player_forward_sec"
+                    android:paddingStart="10dp"
+                    android:paddingEnd="10dp"
+                    android:progressDrawable="@drawable/player_progress_violet"
+                    android:splitTrack="false"
+                    android:thumb="@drawable/player_progress_thumb_white"
+                    tools:progress="50"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_timer_start2"
+                    style="@style/font_letterSpacing_Num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@id/seekArc2"
+                    android:layout_toRightOf="@id/btn_player_backward_sec"
+                    android:fontFamily="@font/vk_regular"
+                    android:textColor="#ffbfbfbf"
+                    android:textSize="12dp"
+                    tools:text="00:00"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_timer_end2"
+                    style="@style/font_letterSpacing_Num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="10dp"
+                    android:layout_below="@id/seekArc2"
+                    android:layout_toLeftOf="@id/btn_player_forward_sec"
+                    android:fontFamily="@font/vk_regular"
+                    android:textColor="#ffbfbfbf"
+                    android:textSize="12dp"
+                    tools:text="99:99"/>
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="80dp"
+                android:paddingLeft="2dp"
+                android:paddingRight="2dp">
+
+                <!--ic_bt_player_play_v3, ic_bt_mini_play_v3 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_play"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="24dp"
+                    android:layout_marginRight="24dp"
+                    android:background="@drawable/ic_bt_player_play_v3"
+                    android:contentDescription="@string/audio_play" />
+                <!--ic_bt_player_pause_v3, ic_bt_mini_pause_v3-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_pause"
+                    android:layout_width="58dp"
+                    android:layout_height="58dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginRight="32dp"
+                    android:background="@drawable/ic_bt_player_pause_v3"
+                    android:contentDescription="@string/audio_pause" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_prev"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginRight="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/btn_player_play"
+                    android:background="@drawable/ic_bt_player_prev_v3"
+                    android:contentDescription="@string/audio_prev" />
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_next"
+                    android:layout_width="24dp"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="48dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/btn_player_play"
+                    android:background="@drawable/ic_bt_player_next_v3"
+                    android:contentDescription="@string/audio_next" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="40dp">
+
+                <!-- btn_player_more 기능숨김 (xml GONE, 2022.11.09) -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_more"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:background="@drawable/ic_bt_player_more"
+                    android:contentDescription="@string/menu"
+                    android:visibility="gone" />
+
+                <!-- btn_scenario , @drawable/box_circle_white삭제-->
+                <!-- 대본보기 통합, 이동버튼 숨김 -->
+                <LinearLayout
+                    android:id="@+id/btn_scenario"
+                    android:layout_width="wrap_content"
+                    android:layout_height="32dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:orientation="horizontal"
+                    android:paddingLeft="16dp"
+                    android:paddingRight="16dp"
+                    android:visibility="gone">
+
+                    <!-- 대본보기 글자색변경 #FFFFFF to #A9A9A9, 글자크기 13dp to 20dp-->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:text="@string/read_script"
+                        android:textColor="#A9A9A9"
+                        android:textSize="20dp"
+                        tools:text="대본보기"/>
+
+                </LinearLayout>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_replay"
+                    android:layout_width="30dp"
+                    android:layout_height="25dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/btn_player_2x"
+                    android:background="@drawable/ic_bt_player_replay_v2"
+                    android:contentDescription="@string/play_type_none" />
+
+                <!-- 추가수정, 랜덤(셔플)버튼 숨김, 셔플기능 없음 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_shuffle"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/btn_scenario"
+                    android:layout_marginLeft="16dp"
+                    android:background="@drawable/ic_bt_player_shuffle_v2"
+                    android:contentDescription="@string/random_play"/>
+
+                <!-- 음소거, 배속 -->
+                <!-- 32x32dp to 46x46dp , marginLeft 14dp to 20dp -->
+                <!-- 추가수정, 음소거 활성화버튼 숨김, 기본값 음소거 없음 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_mute"
+                    android:layout_width="62dp"
+                    android:layout_height="36dp"
+                    android:visibility="gone"
+                    android:layout_centerVertical="true"
+                    android:layout_toLeftOf="@id/btn_player_replay"
+                    android:layout_marginRight="4dp"
+                    android:background="@drawable/ic_bt_player_muteon_v2"
+                    android:contentDescription="@string/mute" />
+
+                <!-- 32x32dp to 46x46dp , marginRight 14dp to 20dp -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_2x"
+                    android:layout_width="62dp"
+                    android:layout_height="36dp"
+                    android:layout_centerInParent="true"
+                    android:layout_marginLeft="32dp"
+                    android:layout_marginTop="36dp"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginBottom="36dp"
+                    android:layout_toRightOf="@id/btn_player_shuffle"
+                    android:background="@drawable/ic_bt_player_1x_white_v4"
+                    android:contentDescription="@string/play_speed"
+                    android:tintMode="multiply" />
+
+                <!-- 재송목록 이동 ic_bt_playeri_plist -->
+                <!-- btn_player_list 기능숨김 (xml GONE, 2022.11.09) -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_player_list"
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:layout_centerVertical="true"
+                    android:layout_toRightOf="@id/btn_player_2x"
+                    android:background="@drawable/ic_bt_player_playlist_v2"
+                    android:contentDescription="@string/audio_list"
+                    android:visibility="visible"/>
+                <!-- 음소거, 배속 끝 ======================================================== -->
+
+            </RelativeLayout>
+
+
+        </LinearLayout>
+
+    </LinearLayout>
+
+</layout>

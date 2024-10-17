@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="#E6000000"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/tv_select_count"
+        android:layout_width="wrap_content"
+        android:layout_height="22dp"
+        android:layout_marginLeft="10dp"
+        android:layout_marginTop="-11dp"
+        android:background="@drawable/count_box"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center_vertical"
+        android:paddingLeft="8dp"
+        android:paddingRight="8dp"
+        android:textColor="#FFFFFF"
+        android:textSize="13dp"
+        android:textStyle="bold" />
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_play"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_01" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="선택 항목 듣기"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/toast_play"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_add"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/btn_toast_play"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_02" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="선택 항목 추가"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/toast_add"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_locker"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/btn_toast_add"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_03" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="선택 항목 담기"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:minWidth="60dp"
+            android:text="@string/toast_locker"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_download"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_toRightOf="@id/btn_toast_locker"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_04" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="선택 항목 다운로드"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:minWidth="60dp"
+            android:text="@string/toast_downlaod"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="6dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_close" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:contentDescription="@string/cancel"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:textColor="#80FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

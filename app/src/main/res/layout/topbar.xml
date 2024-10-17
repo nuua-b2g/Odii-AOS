@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/rootView"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_left"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:layout_centerVertical="true"
+        android:contentDescription="이전 화면 이동"
+        android:layout_marginLeft="14dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/ic_bt_top_backb" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_right"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:contentDescription="@string/close"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="14dp"
+        android:background="@drawable/ic_bt_top_closeb" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_toLeftOf="@id/btn_right"
+        android:layout_toRightOf="@id/btn_left"
+        android:ellipsize="end"
+        android:fontFamily="sans-serif-medium"
+        android:gravity="center"
+        android:maxLines="2"
+        android:textColor="#000000"
+        android:textSize="20dp" />
+
+</RelativeLayout>

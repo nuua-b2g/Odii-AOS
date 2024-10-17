@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#C0000000"
+        android:clickable="true">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_close"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_marginTop="50dp"
+            android:layout_marginRight="14dp"
+            android:background="@drawable/ic_bt_top_closew"
+            android:contentDescription="@string/close"
+            android:nextFocusUp="@null" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="20dp"
+            android:layout_marginTop="100dp"
+            android:layout_marginRight="20dp"
+            android:ellipsize="end"
+            android:focusable="true"
+            android:fontFamily="sans-serif-light"
+            android:gravity="left|bottom"
+            android:maxLines="2"
+            android:nextFocusUp="@id/btn_close"
+            android:nextFocusDown="@id/btn_text_size_change"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
+
+
+        <RelativeLayout
+            android:id="@+id/tmp1"
+            android:layout_width="match_parent"
+            android:layout_height="14dp"
+            android:layout_below="@id/tv_title"
+            android:layout_marginTop="10dp">
+
+            <View
+                android:layout_width="30dp"
+                android:layout_height="1dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:background="#80FFFFFF" />
+
+            <LinearLayout
+                android:id="@+id/btn_text_size_change"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:orientation="horizontal">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_texticon_t"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:fontFamily="@font/vk_bold"
+                    android:text="T"
+                    android:textColor="#FFFFFF"
+                    android:textSize="13dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    style="@style/font_letterSpacing_text_change"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginLeft="10dp"
+                    android:contentDescription="@string/msg_text_size"
+                    android:gravity="right|center_vertical"
+                    android:nextFocusUp="@id/tv_title"
+                    android:nextFocusDown="@id/tv_content"
+                    android:text="@string/msg_text_size"
+                    android:textColor="#FFFFFF"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+        </RelativeLayout>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/tmp1"
+            android:layout_marginTop="36dp"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|top"
+                    android:nextFocusUp="@id/btn_text_size_change"
+                    android:nextFocusDown="@id/btn_close"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:textColor="#B3FFFFFF"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+        </ScrollView>
+
+
+    </RelativeLayout>
+</layout>

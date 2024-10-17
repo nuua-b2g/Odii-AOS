@@ -1,0 +1,265 @@
+<resources>
+    <string name="app_name">Odii</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_notification_channel_id">odii_push_id_1234</string>
+    <string name="language">ja</string>
+
+    <string name="language_title">言語</string>
+
+    <string name="ok">確認</string>
+    <string name="cancel">キャンセル</string>
+    <string name="setting">設定</string>
+    <string name="download">ダウンロード</string>
+    <string name="make">作る</string>
+    <string name="finish">終了</string>
+    <string name="empty_story">選択された保管箱にセーブされたストーリーがありません。</string>
+    <string name="retry">リトライ</string>
+
+    <string name="locker_make">保管箱をつくる</string>
+    <string name="locker_edit">保管箱を修正する</string>
+    <string name="request_locker_name">保管箱にタイトルを入力してください。</string>
+    <string name="not_available_sms">当端末は、SMSを伝送できません。</string>
+
+
+    <string name="empty_player_list">再生リストがありません。</string>
+    <string name="empty_locker_list">保管箱にリストがありません。</string>
+    <string name="empty_downlaod_list">ダウンロードリストがありません。</string>
+
+    <string name="storage_limit_error">セーブできるスペースが不足しています。\nセーブスぺスを確保された後、ご利用ください。</string>
+    <string name="network_use_message">ご使用中のデータ料金制によって データ使用料金が賦課される場合があります。\n\n続けますか？</string>
+    <string name="network_use_message2">"データネットワークが遮断された状態です。\nデータネットワークを使用しますか？\n\n使用中のデータ料金制度によって、データ通話料金が賦課される場合があります。
+</string>
+    <string name="download_message">%s つのストーリーをダウンロード中です。</string>
+    <string name="locker_list_remove_message">保管箱に入れた全てのストーリーは削除されます。</string>
+    <string name="story_sort_title">再生リスト整列</string>
+    <string name="story_remove_message">選択されたストーリーを削除しますか？</string>
+    <string name="network_error">インターネットに繋がってないか、ネットワークの接続ガ不安定です。</string>
+
+    <string name="text_size_change">文字サイズを選択</string>
+
+    <string name="story_list_add_message">現在、再生リストにストーリーを追加します。</string>
+    <string name="toast_play">聞く</string>
+    <string name="toast_add">追加</string>
+    <string name="toast_locker">入れる</string>
+    <string name="toast_del">削除</string>
+    <string name="toast_downlaod">ダウンロード</string>
+    <string name="toast_detail">詳しく見る</string>
+
+    <string name="quit">アプリを終了しますか?</string>
+    <string name="message_yes">確認</string>
+    <string name="message_no">キャンセル</string>
+
+    <string name="all_select">すべて選択</string>
+    <string name="all_select_cancel">すべて解除</string>
+    <!--플레이 리스트 버튼 기능토글 텍스트 추가 -->
+    <string name="delete_selected">選択項目を削除</string>
+    <string name="playlist_change_order">並べ替え</string>
+    <string name="playlist_save_order">並べ替え保存</string>
+    <string name="playlist_playing">再生中</string>
+    <!--플레이 리스트 지도보기 , 목록보기 -->
+    <string name="playlist_show_map">地図を見る</string>
+    <string name="playlist_show_list">リストを見る</string>
+
+    <string name="select_cancel">選択解除</string>
+    <string name="basic">1X(基本)</string>
+
+
+    <string name="playlist_insert_play_msg">再生リストに追加して聞く</string>
+    <string name="playlist_replace_play_meg">再生リストを交替して聞く</string>
+    <string name="playlist_insert_play_in_play">再生リストにストーリーが追加された後、再生されます。</string>
+    <string name="all_play_msg">すべて再生</string>
+    <string name="fill_msg">保管箱</string>
+    <string name="story_search_msg">ストーリー検索</string>
+    <string name="msg_sort_1">ストーリのタイトル(あ～ら順)</string>
+    <string name="msg_sort_2">ストーリのタイトル(ら～あ順)</string>
+    <string name="msg_sort_3">地域名(あ～ら順)</string>
+    <string name="msg_sort_4">地域名(ら～あ順)</string>
+    <string name="msg_sort">再生リスト整列</string>
+    <string name="msg_sort_change_complete">再生リストが選択された順序に変更されます。</string>
+    <string name="msg_select_story_delete">選択されたストーリーを削除しますか？</string>
+    <string name="msg_request_search">検索キーワードを入力してください</string>
+    <string name="msg_order">順序整列</string>
+    <string name="msg_edit_complete">編集完了</string>
+    <string name="msg_text_size">文字サイズ</string>
+    <string name="msg_play_list_empty">プレイリストがありません。</string>
+    <string name="msg_select_fill">保管箱を選択してください。</string>
+
+    <string name="story">ストーリー</string>
+    <string name="multi_story">ストーリー</string>
+    <string name="editor">編集</string>
+    <string name="libraries">つの保管箱</string>
+    <string name="confirm">確認</string>
+
+    <string name="toast_story_insert_msg">プレイリストに%sストーリーが追加されました。</string>
+    <string name="toast_story_multi_insert_msg">プレイリストに%sストーリーが追加されました。</string>
+    <string name="permission_rquest_message">サービスを快適にご利用いただくため、アクセス権限を有効にしてください。</string>
+
+    <string name="rooted_message">脱獄」端末では本アプリはご利用できません。</string>
+    <string name="emulator_message">エミュレータ上では実行できません。</string>
+    <string name="Integrity_message">正常にインストールされたアプリケーションではありません。</string>
+
+    <string name="downlaod_complete">ダウンロードが完了しました</string>
+
+    <string name="tutorial_text_1">韓国を代表する観光地の\n歴史と文化を耳で聞いて楽しめる\nオーディオガイドアプリ「Odii(オディ)」</string>
+    <string name="tutorial_text_1_2">「Odii(オディ)」は観光地にまつわる情報や物語を\n音声で楽しめる、楽しくスマートな旅行のための\n韓国観光公社のオーディオガイドアプリです。</string>
+    <string name="tutorial_text_2">位置情報や地図をもとに\nあなたの周りの観光地の\nオーディオガイドコンテンツを提供します。</string>
+    <string name="tutorial_text_3">文化・観光情報の音声解説だけでなく\n解説テキストや観光地の写真など\n様々なコンテンツをお楽しみいただけます。</string>
+    <string name="tutorial_text_4">Wi-Fi環境であらかじめ\nコンテンツをダウンロードしておけば\n別途のデータ通信料なしでご利用いただけます。</string>
+
+    <string name="tutorial_btn_text">旅行をPLAYする</string>
+    <string name="update">アップデート</string>
+
+    <string name="msg_24_hour_dont_popup">今日一日このウィンドウを開かない</string>
+    <string name="msg_dont_popup">これ以上表示しない。</string>
+    <string name="close">閉じる</string>
+    <string name="read_script">テキストを見る</string>
+
+    <string name="add_playlist">プレイリストを作成</string>
+    <string name="save_in_library">ライブラリに追加</string>
+    <string name="playlist">プレイリスト</string>
+
+    <string name="settings">設定</string>
+
+    <string name="stamp_push_title">イベント案内</string>
+    <string name="stamp_push_go">直ぐに見る</string>
+    <string name="stamp_push_content">周囲に足裏スタンプのイベントが行われている観光地があります。\n今すぐ参加して現場でプレゼントをゲットしましょう！</string>
+
+    <string name="permission_title">アプリのアクセス権限</string>
+    <!-- 변경 permission_content, 체크대상 -->
+    <string name="permission_content">「Odii(オディ)」(旧スマートツアー)アプリが使用するアクセス権限は以下の通りです。\n\n
+
+        アクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリは「スタンプイベント」のプッシュ通知をするために、アプリを起動していない時や使用していない時でも位置情報を利用する場合がありますが、位置情報を収集・保存することはありません。\n\n
+
+        <b>* 位置情報へのアクセス</b>\n
+        - アプリの実行中、観光スポットに近づいた時に観光情報を提供します。\n
+        - 位置情報へのアクセスを「常に許可」に設定すると、「スタンプイベント」など位置情報を利用したサービスをすべてご利用いただけます。\n\n
+
+        <b>* ストレージへのアクセス</b>\n
+        - 写真のアップロードや一時ファイルの保存のために使用します。\n\n
+
+        【アクセス権限の変更方法】\n
+        スマートフォンの「設定」>「Odii」> 各アクセス権限を変更
+    </string>
+    <!-- 변경 permission_content_2, 체크대상 1-->
+    <string name="permission_content_2">「Odii(オディ)」(旧スマートツアー)アプリが使用するアクセス権限は以下の通りです。\n\n
+
+        アクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリは「スタンプイベント」のプッシュ通知をするために、アプリを起動していない時や使用していない時でも位置情報を利用する場合がありますが、位置情報を収集・保存することはありません。\n\n
+
+        <b>* 位置情報へのアクセス</b>\n
+        - アプリの実行中、観光スポットに近づいた時に観光情報を提供します。\n
+        - 位置情報へのアクセスを「常に許可」に設定すると、「スタンプイベント」など位置情報を利用したサービスをすべてご利用いただけます。\n\n
+
+        <b>* ストレージへのアクセス</b>\n
+        - 写真のアップロードや一時ファイルの保存のために使用します。\n\n
+
+        【アクセス権限の変更方法】\n
+        スマートフォンの「設定」>「Odii」> 各アクセス権限を変更
+    </string>
+    <!-- 변경 permission_content_3, 체크대상 1-->
+    <string name="permission_title_3">アプリのアクセス権限</string>
+    <string name="permission_content_3">「Odii(オディ)」(旧スマートツアー)アプリが使用するアクセス権限は以下の通りです。\n\n
+
+        アクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリは「スタンプイベント」のプッシュ通知をするために、アプリを起動していない時や使用していない時でも位置情報を利用する場合がありますが、位置情報を収集・保存することはありません。\n\n
+
+        <b>* 位置情報へのアクセス</b>\n
+        - アプリの実行中、観光スポットに近づいた時に観光情報を提供します。\n
+        - 位置情報へのアクセスを「常に許可」に設定すると、「スタンプイベント」など位置情報を利用したサービスをすべてご利用いただけます。\n\n
+
+        <b>* ストレージへのアクセス</b>\n
+        - 写真のアップロードや一時ファイルの保存のために使用します。\n\n
+
+        【アクセス権限の変更方法】\n
+        スマートフォンの「設定」>「Odii」> 各アクセス権限を変更
+    </string>
+    <!-- 변경 permission_content_4, 체크대상 1-->
+    <string name="permission_content_4">「Odii(オディ)」(旧スマートツアー)アプリが使用するアクセス権限は以下の通りです。\n\n
+
+        アクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリは「スタンプイベント」のプッシュ通知をするために、アプリを起動していない時や使用していない時でも位置情報を利用する場合がありますが、位置情報を収集・保存することはありません。\n\n
+
+        <b>* 位置情報へのアクセス</b>\n
+        - アプリの実行中、観光スポットに近づいた時に観光情報を提供します。\n
+        - 位置情報へのアクセスを「常に許可」に設定すると、「スタンプイベント」など位置情報を利用したサービスをすべてご利用いただけます。\n\n
+
+        <b>* ストレージへのアクセス</b>\n
+        - 写真のアップロードや一時ファイルの保存のために使用します。\n\n
+
+        【アクセス権限の変更方法】\n
+        スマートフォンの「設定」>「Odii」> 各アクセス権限を変更
+    </string>
+    <!-- 변경 permission_content_location_alltime 추가-->
+    <string name="permission_content_location_alltime_title">アプリのアクセス権限</string>
+    <string name="permission_content_location_alltime">「Odii(オディ)」アプリが使用するアクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリの位置情報アクセス権限を「常に許可」に設定すると、「スタンプイベント」機能をご利用いただけます。
+    </string>
+    <!-- 변경 permission_content_location_alltime_denied 추가, 체크대상 1-->
+    <string name="permission_content_location_alltime_denied_title">アプリのアクセス権限</string>
+    <string name="permission_content_location_alltime_denied">「Odii(オディ)」(旧スマートツアー)アプリが使用するアクセス権限は以下の通りです。\n\n
+
+        アクセス権限の許可に同意されない場合は、サービスを一部ご利用いただけない場合があります。\n\n
+
+        「Odii(オディ)」アプリは「スタンプイベント」のプッシュ通知をするために、アプリを起動していない時や使用していない時でも位置情報を利用する場合がありますが、位置情報を収集・保存することはありません。\n\n
+
+        <b>* 位置情報へのアクセス</b>\n
+        - アプリの実行中、観光スポットに近づいた時に観光情報を提供します。\n
+        - 位置情報へのアクセスを「常に許可」に設定すると、「スタンプイベント」など位置情報を利用したサービスをすべてご利用いただけます。\n\n
+
+        <b>* ストレージへのアクセス</b>\n
+        - 写真のアップロードや一時ファイルの保存のために使用します。\n\n
+
+        【アクセス権限の変更方法】\n
+        スマートフォンの「設定」>「Odii」> 各アクセス権限を変更
+    </string>
+
+    <string name="disclosure_use_location_title">位置情報の利用</string>
+    <string name="disclosure_use_location_message">「Odii(オディ)」サービスは、以下の目的で個人情報を利用します。\n
+        個人情報は以下の目的にのみ利用し、収集・保存しません。個人情報の利用目的が変更される場合には、事前に同意を得るものとします。\n\n
+        <b>* 位置情報の利用</b>\n
+        ユーザーの位置情報(GPS)を活用して周辺のおすすめの観光スポットを通知します。\n\n
+
+        <b>* バックグラウンドでの位置情報の利用</b>\n
+        アプリの終了時や未使用時にも位置情報(ジオフェンス)を活用して「スタンプイベント」のプッシュ通知をします。\n\n
+
+        ユーザーの個人情報については、原則として個人を識別できる情報は収集・保存しません。
+    </string>
+
+    <string name="edit_list">目録編集</string>
+    <string name="drive_mode">ドライブモード</string>
+    <string name="drive_mode_msg">走行中です。\n安全運転のため、停車された後に操作してください。</string>
+
+    <string name="setting_non_check_location">位置情報(GPS)へのアクセス権限を有効にしてください。</string>
+
+    <string name="drive_mode_msg_1">位置情報基盤の通知をオンにすると、再生リストの中に走行中の現在地周辺のストーリーがある場合、案内通知を受信いたします。\n位置情報を設定されますか？</string>
+    <string name="drive_mode_msg_2">再生</string>
+    <string name="drive_mode_msg_3">位置情報端末の通知オフ</string>
+    <string name="drive_mode_msg_4">案内する順序を編集なさると、最初の部分から案内が始まります。\n案内が終了した観光地は削除してくださるようお願いします。</string>
+    <string name="drive_mode_msg_5">再生リストの中に、現在地周辺のストーリーがあります。\n再生なさいますか？</string>
+    <string name="drive_mode_msg_6">재생목록 중 현재 주변의 \&apos;%s\&apos;가 있습니다.\nDo you want to play?</string>
+
+    <string name="driver_safety2" >走行中です。\n安全運転のため、\n停車された後に操作してください。</string>
+
+    <string name="location_usage">ユーザーの位置情報を使用しています。</string>
+
+    <string name="pe_title">Odii アプリを使用するには\n以下のアクセス権限を付与する必要があります。</string>
+    <string name="pe_button">確認</string>
+    <string name="pe_select">(オプション)</string>
+    <string name="pe_required">必須</string>
+    <string name="pe_title_1">位置情報</string>
+    <string name="pe_title_2">通知</string>
+    <string name="pe_desc_1">地図サービスと現在地の確認</string>
+    <string name="pe_desc_2">プッシュ通知サービス</string>
+    <string name="pe_desc_text">選択権限はサービス利用中に必要な時点で同意を求められています。\nアクセス許可を許可しなくてもアプリは使用可能ですが、一部のサービスが制限される場合があります。</string>
+    <string name="pe_title_3">オーディオ</string>
+    <string name="pe_title_4">画像</string>
+    <string name="pe_desc_3">オーディオサービスを使用する</string>
+    <string name="pe_desc_4">画像をアップロードする</string>
+</resources>
+

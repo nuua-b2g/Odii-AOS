@@ -1,0 +1,195 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:fab="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:cropToPadding="false"
+        tools:context=".ui.MainActivity">
+
+        <!-- 웹뷰 영역 -->
+        <kto.smarttour.webview.OdiiWebView
+            android:id="@+id/main_web_view"
+            android:nextFocusForward="@id/view_mini_player"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+        <!-- 웹오류시 차단용 뷰 -->
+        <ImageView
+            android:id="@+id/view_block"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_alignLeft="@id/main_web_view"
+            android:layout_alignTop="@id/main_web_view"
+            android:layout_alignRight="@id/main_web_view"
+            android:layout_alignBottom="@id/main_web_view"
+            android:background="#FFFFFF"
+            android:contentDescription="TODO" android:visibility="gone" />
+
+        <!-- 미니플레이어 영역 -->
+        <kto.smarttour.ui.view.MiniPlayerView
+            android:id="@+id/view_mini_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nextFocusUp="@id/main_web_view"
+            android:clipChildren="false"
+            android:cropToPadding="false"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone" />
+
+        <!-- 로딩바 -->
+        <ProgressBar
+            android:id="@+id/progress"
+            style="?android:attr/progressBarStyleLarge"
+            android:layout_width="52dp"
+            android:layout_height="52dp"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:visibility="gone" />
+
+        <!-- 인트로 비디오 영역
+        <RelativeLayout
+            android:id="@+id/layout_video"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <com.yqritc.scalablevideoview.ScalableVideoView
+                android:id="@+id/video_intro"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                app:scalableType="centerCrop" />
+        </RelativeLayout>
+        -->
+        <!-- 인트로 이미지뷰 영역 -->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/cont_intro"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="false"
+            android:importantForAccessibility="no">
+
+            <ImageView
+                android:id="@+id/iv_intro"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:adjustViewBounds="true"
+                android:scaleType="centerCrop"
+                app:layout_constraintDimensionRatio="0.75"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                />
+
+            <ImageView
+                android:id="@+id/iv_typologo"
+                android:layout_marginTop="164dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                android:src="@drawable/img_intro"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                />
+
+            <ImageButton
+                android:layout_marginTop="16dp"
+                android:id="@+id/btn_skipintro"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@android:color/transparent"
+                android:src="@drawable/btn_intro"
+                android:adjustViewBounds="true"
+                android:scaleType="fitXY"
+                android:focusable="false"
+                android:contentDescription="@string/app_name"
+                app:layout_constraintTop_toBottomOf="@id/iv_typologo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                />
+
+            <ImageView
+                android:layout_marginBottom="28dp"
+                android:id="@+id/iv_bottomlogo"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:src="@drawable/img_copyright"
+                android:background="@android:color/transparent"
+                android:scaleType="fitXY"
+                android:adjustViewBounds="true"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <!-- 테스트 징글설정 UI -->
+        <com.getbase.floatingactionbutton.FloatingActionsMenu
+            android:id="@+id/floating_action_soundpool"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="20dp"
+            fab:fab_addButtonColorNormal="@color/white"
+            fab:fab_addButtonColorPressed="@color/white_pressed"
+            fab:fab_addButtonPlusIconColor="@color/half_black"
+            fab:fab_addButtonSize="mini"
+            fab:fab_labelStyle="@style/menu_labels_style"
+            fab:fab_labelsPosition="left"
+            android:visibility="gone">
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_soundpool_intro_start_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_size="mini"
+                fab:fab_title="인트로와 함께(짧은 버전)"
+                fab:fab_colorPressed="@color/white_pressed"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_soundpool_intro_start_long"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_size="mini"
+                fab:fab_title="인트로와 함께(긴버전)"
+                fab:fab_colorPressed="@color/white_pressed"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_soundpool_intro_end_short"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_size="mini"
+                fab:fab_title="인트로 완료시(짧은 버전)"
+                fab:fab_colorPressed="@color/white_pressed"/>
+
+            <com.getbase.floatingactionbutton.FloatingActionButton
+                android:id="@+id/floating_action_soundpool_intro_end_long"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                fab:fab_colorNormal="@color/white"
+                fab:fab_size="mini"
+                fab:fab_title="인트로 완료시(긴버전)"
+                fab:fab_colorPressed="@color/white_pressed"/>
+
+        </com.getbase.floatingactionbutton.FloatingActionsMenu>
+
+    </RelativeLayout>
+
+</layout>

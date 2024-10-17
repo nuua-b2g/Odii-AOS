@@ -1,0 +1,338 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="story"
+            type="kto.smarttour.db.item.StoryItem" />
+
+    </data>
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="92dp"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <RelativeLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="50dp"
+            android:layout_height="82dp"
+            android:background="#F65857"
+            android:contentDescription="삭제"
+            android:focusable="false">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="match_parent"
+                android:layout_centerInParent="true"
+                android:clickable="false"
+                android:contentDescription="@string/story_del"
+                android:gravity="center"
+                android:src="@drawable/ic_icon_list_del" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/front_layout"
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:background="#FFFFFF"
+            android:focusable="true"
+            android:orientation="vertical"
+            tools:background="#ffddaa">
+
+            <RelativeLayout
+                android:id="@+id/view_index"
+                android:layout_width="50dp"
+                android:layout_height="match_parent"
+                android:focusable="false">
+
+                <!-- 스피커 아이콘 상시숨김으로 변경 -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_current_position"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerInParent="true"
+                    android:visibility="invisible"
+                    android:background="@drawable/ic_icon_list_ing" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_index"
+                    style="@style/font_letterSpacing_Num"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerInParent="true"
+                    android:ellipsize="end"
+                    android:fontFamily="@font/vk_regular"
+                    android:gravity="center"
+                    android:maxLines="2"
+                    android:textColor="#000000"
+                    android:textSize="13dp" />
+
+                <!-- 인덱스 텍스트 위로 선택상태 출력 -->
+                <ImageView
+                    android:id="@+id/view_selected"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:src="@drawable/ic_tx_img_dlcomp"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/iv_thumb"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_centerVertical="true"
+                android:layout_toRightOf="@id/view_index"
+                android:background="@drawable/ic_img_scrap_dummy"
+                android:focusable="false"
+                tools:background="@drawable/icon"/>
+
+            <!-- 재생중 , 텍스트기반 -->
+            <RelativeLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/iv_thumb"
+                android:layout_alignTop="@id/iv_thumb"
+                android:layout_alignRight="@id/iv_thumb"
+                android:layout_alignBottom="@id/iv_thumb"
+                android:background="#00ffffff" >
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_centerInParent="true"
+                    android:id="@+id/tv_current_position"
+                    android:layout_marginLeft="4dp"
+                    android:layout_marginRight="4dp"
+                    android:paddingLeft="4dp"
+                    android:paddingRight="4dp"
+                    android:paddingTop="2dp"
+                    android:paddingBottom="2dp"
+                    android:textColor="#ffffffff"
+                    android:background="@drawable/ic_icon_list_ing_v2"
+                    android:textSize="10dp"
+                    android:autoSizeMinTextSize="8dp"
+                    android:autoSizeMaxTextSize="12dp"
+                    android:textAlignment="center"
+                    android:layout_width="wrap_content"
+                    android:minWidth="32dp"
+                    android:layout_height="wrap_content"
+                    android:text="@string/playlist_playing"/>
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="64dp"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="16dp"
+                android:layout_toLeftOf="@id/view_more_move"
+                android:layout_toRightOf="@id/iv_thumb"
+                android:focusable="false"
+                android:orientation="vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:contentDescription="@{story.title}"
+                    android:ellipsize="end"
+                    android:focusable="false"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.title}"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+                    tools:text="타이틀"
+                    tools:background="#B0FFAD"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_sub_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="2dp"
+                    android:contentDescription="@{story.audioTitle}"
+                    android:ellipsize="end"
+                    android:focusable="false"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.audioTitle}"
+                    android:textColor="#7E7E7F"
+                    android:textSize="12dp"
+                    tools:text="오디오타이틀"
+                    tools:background="#ADE5FF"/>
+
+                <LinearLayout
+                    android:id="@+id/view_extra_info"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:layout_weight="1"
+                    android:layout_marginTop="2dp"
+                    android:orientation="horizontal"
+                    android:focusable="false"
+                    android:gravity="right|center_vertical"
+                    tools:background="#FFA2A2">
+
+                    <!-- 재생시간 텍스트+아이콘 -->
+                    <LinearLayout
+                        android:id="@+id/btn_audio_play_time"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:ellipsize="end"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
+                        tools:background="#ADBDE8FB">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_audio_play_time"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@{story.audioTitle}"
+                            android:ellipsize="end"
+                            android:focusable="false"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="left|center_vertical"
+                            android:maxLines="1"
+                            android:text=""
+                            android:textColor="#CC000000"
+                            android:textSize="12dp"
+                            tools:text="00:00"/>
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/ic_bt_place_play"
+                            android:contentDescription="@string/audio_play" />
+
+                    </LinearLayout>
+                    <!-- 세로 바 -->
+                    <LinearLayout
+                        android:layout_width="1dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginBottom="2dp"
+                        android:layout_marginLeft="8dp"
+                        android:layout_marginRight="8dp"
+                        android:orientation="horizontal"
+                        android:focusable="false"
+                        android:layout_gravity="center_vertical"
+                        android:background="#535353"/>
+                    <!-- 상세 텍스트 + 아이콘 -->
+                    <LinearLayout
+                        android:id="@+id/btn_more_detail"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:ellipsize="end"
+                        android:focusable="false"
+                        android:gravity="center_vertical"
+                        tools:background="#AD03A9F4">
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription="@string/toast_detail"
+                            android:ellipsize="end"
+                            android:focusable="false"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="left|center_vertical"
+                            android:maxLines="1"
+                            android:text="@string/toast_detail"
+                            android:textColor="#CC000000"
+                            android:textSize="12dp"
+                            tools:text="상세보기"
+                            />
+
+                        <!-- 임시로 텍스트처리
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:layout_alignParentBottom="true"
+                            android:layout_marginLeft="4dp"
+                            android:background="@drawable/ic_bt_place_play"
+                            android:contentDescription="@string/audio_play" />
+                        -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:contentDescription=""
+                            android:ellipsize="end"
+                            android:focusable="false"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="left|center_vertical"
+                            android:maxLines="1"
+                            android:text=" 〉"
+                            android:textColor="#CC000000"
+                            android:textSize="12dp"
+                            tools:text=" 〉"
+                            />
+
+                    </LinearLayout>
+
+                </LinearLayout>
+
+            </LinearLayout>
+
+            <!-- 우측 기존상세, 드래그무브 -->
+            <RelativeLayout
+                android:id="@+id/view_more_move"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="5dp"
+                android:layout_marginRight="15dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+                <RelativeLayout
+                    android:id="@+id/btn_more"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/story_detail"
+                    android:focusable="true"
+                    tools:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_bt_story_more" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/btn_move"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/story_list_order"
+                    android:focusable="true"
+                    tools:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="20dp"
+                        android:layout_height="20dp"
+                        android:layout_centerInParent="true"
+                        android:background="@drawable/ic_bt_playlist_edit" />
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+
+</layout>

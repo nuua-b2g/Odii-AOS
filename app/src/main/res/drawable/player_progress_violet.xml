@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layer-list xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@android:id/background"
+        android:gravity="center_vertical|fill_horizontal">
+        <!--배경-->
+        <shape
+            android:shape="rectangle"
+            android:tint="#ff3e287d">
+            <corners android:radius="2dp" />
+            <size android:height="4dp" />
+            <solid android:color="#ff3e287d" />
+        </shape>
+    </item>
+    <item
+        android:id="@android:id/progress"
+        android:gravity="center_vertical|fill_horizontal">
+        <scale android:scaleWidth="100%">
+            <selector>
+                <item
+                    android:drawable="@android:color/transparent"
+                    android:state_enabled="false" />
+                <item>
+                    <!--채움-->
+                    <shape
+                        android:shape="rectangle"
+                        android:tint="#ffa788ff">
+                        <corners android:radius="2dp" />
+                        <size android:height="4dp" />
+                        <solid android:color="#ffa788ff" />
+                    </shape>
+                </item>
+            </selector>
+        </scale>
+    </item>
+
+</layer-list>

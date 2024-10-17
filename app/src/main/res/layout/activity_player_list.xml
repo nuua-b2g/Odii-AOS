@@ -1,0 +1,796 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FBFBFB"
+        android:orientation="vertical"
+        tools:context=".ui.StoryPlayerListActivity">
+
+        <!-- 상단 타이틀 메뉴 -->
+        <RelativeLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:background="#F2353B49"
+            android:clickable="true"
+            android:focusable="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tmp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="20dp"
+                android:focusable="false"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="left|center_vertical"
+                android:text="@string/playlist"
+                android:textColor="#FFFFFF"
+                android:textSize="14dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/count"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="8dp"
+                android:layout_toRightOf="@id/tmp"
+                android:focusable="false"
+                android:fontFamily="@font/vk_regular"
+                android:gravity="left|center_vertical"
+                android:text="0"
+                android:textColor="#14C1EF"
+                android:textSize="14dp" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/btn_close"
+                android:layout_width="32dp"
+                android:layout_height="32dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="14dp"
+                android:background="@drawable/ic_bt_top_closew"
+                android:contentDescription="@string/close"
+                android:focusable="true" />
+
+        </RelativeLayout>
+
+        <!-- clipChildren false to true로 변경함-->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:clipChildren="true">
+
+            <!-- -->
+            <!-- 편집모드 진입 영역 -->
+            <androidx.appcompat.widget.LinearLayoutCompat
+                android:id="@+id/layout_view_play_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#E6353B49"
+                android:focusable="true"
+                android:weightSum="1">
+
+                <!-- 신규추가중인 view_show_map 왼편 배치-->
+                <HorizontalScrollView
+                    android:id="@+id/hsv"
+                    android:layout_width="0dp"
+                    android:layout_height="match_parent"
+                    android:layout_weight="1"
+                    android:focusable="true">
+
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/layout_play"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:focusable="true"
+                        android:orientation="horizontal"
+                        android:paddingStart="20dp"
+                        android:paddingEnd="20dp"
+                        android:weightSum="3"
+                        tools:background="#74FF3F3F">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4dp"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/ic_icon_toast_02"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:nextFocusLeft="@id/btn_close"
+                        android:nextFocusRight="@id/btn_locker"
+                        android:nextFocusUp="@id/btn_close"
+                        android:nextFocusDown="@id/btn_locker"
+                        android:text="@string/add_playlist"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_locker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/btn_add"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/ic_icon_toast_03"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:text="@string/save_in_library"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/editor"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+<!--
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/editor"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp"
+                        android:visibility="gone" />
+-->
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/btn_select_all_v2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:adjustViewBounds="true"
+                                android:background="@android:color/transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_player_list_check_v2" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_select_all_v2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_centerVertical="true"
+                                android:layout_gravity="center"
+                                android:layout_marginStart="4dp"
+                                android:autoSizeMaxTextSize="14dp"
+                                android:autoSizeMinTextSize="8dp"
+                                android:autoSizeStepGranularity="1sp"
+                                android:autoSizeTextType="uniform"
+                                android:background="#00ffffff"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:singleLine="false"
+                                android:text="@string/all_select"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14dp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <!-- v2, 선택삭제 v2 (선택항목이 있을 경우에만 출력 ) -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/btn_delete_selected_v2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:visibility="gone"
+                            tools:visibility="visible">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:adjustViewBounds="true"
+                                android:background="@android:color/transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_player_list_close_v2" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_delete_selected_v2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_marginStart="4dp"
+                                android:autoSizeMaxTextSize="14dp"
+                                android:autoSizeMinTextSize="8dp"
+                                android:autoSizeStepGranularity="1sp"
+                                android:autoSizeTextType="uniform"
+                                android:background="#00ffffff"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:singleLine="false"
+                                android:text="@string/delete_selected"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14dp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <!-- v2, 순서변경/변경저장 v2 -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/btn_reorder_drag_v2"
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_marginStart="12dp"
+                            android:layout_weight="1"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="16dp"
+                                android:layout_height="16dp"
+                                android:layout_gravity="center_vertical"
+                                android:adjustViewBounds="true"
+                                android:background="@android:color/transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_player_list_order_v2" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:id="@+id/tv_reorder_drag_v2"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                android:autoSizeMaxTextSize="14dp"
+                                android:autoSizeMinTextSize="8dp"
+                                android:autoSizeStepGranularity="1sp"
+                                android:autoSizeTextType="uniform"
+                                android:background="#00ffffff"
+                                android:gravity="center_vertical"
+                                android:maxLines="1"
+                                android:singleLine="false"
+                                android:text="@string/playlist_change_order"
+                                android:textColor="#FFFFFF"
+                                android:textSize="14dp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </HorizontalScrollView>
+
+                <!-- 지도 | 목록 버튼 -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/view_show_map"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_vertical"
+                    android:layout_marginStart="12dp"
+                    android:layout_marginEnd="8dp"
+                    android:background="@drawable/box_circle_gray_8dp"
+                    android:gravity="center_vertical"
+                    android:orientation="horizontal"
+                    android:padding="4dp"
+                    tools:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_show_map"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="4dp"
+                        android:adjustViewBounds="true"
+                        android:background="@android:color/transparent"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/ic_player_list_map_v2" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_show_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="center_vertical"
+                        android:layout_marginStart="6dp"
+                        android:layout_marginEnd="4dp"
+                        android:background="#00ffffff"
+                        android:text="@string/playlist_show_list"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+                <RelativeLayout
+                    android:id="@+id/layout_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_select_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/all_select"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@id/btn_select_all"
+                        android:contentDescription="@string/msg_order"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/msg_order"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_edit_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:contentDescription="@string/msg_edit_complete"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/msg_edit_complete"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+            </androidx.appcompat.widget.LinearLayoutCompat>
+
+            <!--
+            <RelativeLayout
+                android:id="@+id/layout_view_play_edit"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#E6353B49"
+                android:focusable="true">
+
+                &lt;!&ndash; 신규추가중인 view_show_map 왼편 배치&ndash;&gt;
+                <RelativeLayout
+                    android:id="@+id/layout_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_toLeftOf="@id/view_show_map"
+                    android:focusable="true"
+                    tools:background="#74FF3F3F">
+
+                    &lt;!&ndash; 2021.09.07 gone처리 추가 (서비스 중단)&ndash;&gt;
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_add"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="4dp"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/ic_icon_toast_02"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:maxLines="2"
+                        android:nextFocusLeft="@id/btn_close"
+                        android:nextFocusRight="@id/btn_locker"
+                        android:nextFocusUp="@id/btn_close"
+                        android:nextFocusDown="@id/btn_locker"
+                        android:text="@string/add_playlist"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    &lt;!&ndash; 2021.09.07 gone처리  (서비스 중단)&ndash;&gt;
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_locker"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="8dp"
+                        android:layout_toRightOf="@id/btn_add"
+                        android:clickable="true"
+                        android:drawableLeft="@drawable/ic_icon_toast_03"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center_vertical"
+                        android:text="@string/save_in_library"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    &lt;!&ndash; 숨김 v2로 기능변경 , 2022.10.20 &ndash;&gt;
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:visibility="gone"
+                        android:id="@+id/btn_edit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="10dp"
+                        android:clickable="true"
+                        android:focusable="true"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingLeft="8dp"
+                        android:paddingRight="8dp"
+                        android:text="@string/editor"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    &lt;!&ndash; v2~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~v2 &ndash;&gt;
+                    &lt;!&ndash; v2, 전체선택2/전체해제2&ndash;&gt;
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/btn_select_all_v2"
+                        android:layout_marginLeft="20dp"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/ic_player_list_check_v2">
+                        </androidx.appcompat.widget.AppCompatImageView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_select_all_v2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/all_select"
+                            android:textColor="#FFFFFF"
+                            android:background="#00ffffff"
+                            android:textSize="14dp"
+                            />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    &lt;!&ndash; v2, 선택삭제 v2 (선택항목이 있을 경우에만 출력 ) &ndash;&gt;
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/btn_delete_selected_v2"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/btn_select_all_v2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal"
+                        android:visibility="gone"
+                        tools:visibility="visible">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/ic_player_list_close_v2">
+                        </androidx.appcompat.widget.AppCompatImageView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_delete_selected_v2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/delete_selected"
+                            android:textColor="#FFFFFF"
+                            android:background="#00ffffff"
+                            android:textSize="14dp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                    &lt;!&ndash; v2, 순서변경/변경저장 v2 &ndash;&gt;
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:id="@+id/btn_reorder_drag_v2"
+                        android:layout_marginLeft="12dp"
+                        android:layout_toRightOf="@id/btn_delete_selected_v2"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:gravity="center_vertical"
+                        android:orientation="horizontal">
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="16dp"
+                            android:layout_height="16dp"
+                            android:background="@drawable/ic_player_list_order_v2">
+                        </androidx.appcompat.widget.AppCompatImageView>
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_reorder_drag_v2"
+                            android:layout_width="wrap_content"
+                            android:layout_height="match_parent"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="4dp"
+                            android:gravity="left|center_vertical"
+                            android:text="@string/playlist_change_order"
+                            android:textColor="#FFFFFF"
+                            android:background="#00ffffff"
+                            android:textSize="14dp" />
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </RelativeLayout>
+                &lt;!&ndash; 추가 지도보기 &ndash;&gt;
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:id="@+id/view_show_map"
+                    android:layout_marginLeft="12dp"
+                    android:layout_marginRight="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:minWidth="80dp"
+                    android:minHeight="20dp"
+                    android:orientation="horizontal"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_alignParentRight="true"
+                    android:background="@drawable/box_circle_gray_8dp"
+                    android:padding="4dp"
+                    tools:visibility="visible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_show_map"
+                        android:layout_width="14dp"
+                        android:layout_height="14dp"
+                        android:layout_marginLeft="4dp"
+                        android:background="@drawable/ic_player_list_map_v2">
+                    </androidx.appcompat.widget.AppCompatImageView>
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_show_map"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="6dp"
+                        android:layout_marginRight="4dp"
+                        android:gravity="center"
+                        android:text="@string/playlist_show_list"
+                        android:textColor="#FFFFFF"
+                        android:background="#00ffffff"
+                        android:textSize="14dp" />
+                </androidx.appcompat.widget.LinearLayoutCompat>
+                &lt;!&ndash; 추가 지도보기 끝 &ndash;&gt;
+
+                <RelativeLayout
+                    android:id="@+id/layout_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:focusable="true"
+                    android:visibility="gone">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_select_all"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/all_select"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_sort"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_centerVertical="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_toRightOf="@id/btn_select_all"
+                        android:contentDescription="@string/msg_order"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/msg_order"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_edit_complete"
+                        android:layout_width="wrap_content"
+                        android:layout_height="match_parent"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:contentDescription="@string/msg_edit_complete"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/msg_edit_complete"
+                        android:textColor="#FFFFFF"
+                        android:textSize="14dp" />
+                </RelativeLayout>
+
+
+            </RelativeLayout>
+
+
+            -->
+
+            <!-- 추가수정 android:layout_above="@id/view_bottom_area" : view_bottom_area 차지하는 visibility하단영역만큼 양보 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/view_bottom_area"
+                android:layout_below="@id/layout_view_play_edit"
+                android:background="#FFFFFF"
+                android:clipToOutline="true"
+                android:scrollbars="vertical"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
+                tools:background="#44ff0044" />
+
+            <!-- no item 표시 empty_view-->
+            <include
+                android:id="@+id/empty_view"
+                layout="@layout/empty_playlist_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/layout_view_play_edit"
+                android:layout_alignBottom="@id/list"
+                android:visibility="gone"
+                tools:visibility='visible' />
+
+            <!-- 위치보기용 뷰가 들어갈 영역 clickable true, 덮어진 뷰로 클릭이벤트 전달됨을 방지 -->
+            <RelativeLayout
+                android:id="@+id/layout_map_showing"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/view_bottom_area"
+                android:layout_below="@id/layout_view_play_edit"
+                android:background="#ffffffff"
+                android:clickable="true"
+                android:visibility="gone"
+                tools:visibility="gone">
+
+                <ImageView
+                    android:id="@+id/iv_dumpimage_for_infowindow"
+                    android:layout_width="50dp"
+                    android:layout_height="50dp"
+                    android:focusable="false"
+                    android:focusableInTouchMode="false"
+                    android:screenReaderFocusable="false"></ImageView>
+
+                <!-- 네이버 지도가 들어갈 위치 -->
+                <LinearLayout
+                    android:id="@+id/view_map_area"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    tools:background="#74FF3F3F">
+                    <!-- 코드로 초기화해서 넣음
+                    <com.naver.maps.map.MapView
+                        android:id="@+id/map_view"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent" />
+                    -->
+                    <!--
+                    <fragment
+                        android:id="@+id/map_fragment"
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:name="com.naver.maps.map.MapFragment" />
+                    -->
+                </LinearLayout>
+                <!--목록보기 : 목록으로 돌아가기 끝-->
+
+            </RelativeLayout>
+
+            <!-- view_bottom_area -->
+            <RelativeLayout
+                android:id="@+id/view_bottom_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:clipChildren="false"
+                android:cropToPadding="false">
+                <!-- view_player 를 대체하는 MiniPlayerView -->
+                <kto.smarttour.ui.view.MiniPlayerView
+                    android:id="@+id/view_mini_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:cropToPadding="false"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+                <!-- view_mini_player 대체
+                    <RelativeLayout
+                        android:id="@+id/view_player"
+                        android:layout_width="match_parent"
+                        android:layout_height="72dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#E6000000"
+                        android:clickable="true"
+                        android:focusable="true">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_play_list_play"
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/ic_bt_player_play"
+                            android:contentDescription="@string/audio_play" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_play_list_pause"
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_centerHorizontal="true"
+                            android:layout_centerVertical="true"
+                            android:background="@drawable/ic_bt_player_pause"
+                            android:contentDescription="@string/audio_pause" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_play_list_next"
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="31dp"
+                            android:layout_toRightOf="@id/btn_play_list_play"
+                            android:background="@drawable/ic_bt_player_next"
+                            android:contentDescription="@string/audio_next" />
+
+                        <ImageView
+                            android:id="@+id/btn_play_list_prev"
+                            android:layout_width="46dp"
+                            android:layout_height="46dp"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="31dp"
+                            android:layout_toLeftOf="@id/btn_play_list_play"
+                            android:background="@drawable/ic_bt_player_prev"
+                            android:contentDescription="@string/audio_prev" />
+
+                        <de.hdodenhof.circleimageview.CircleImageView
+                            android:id="@+id/iv_thumb"
+                            android:layout_width="42dp"
+                            android:layout_height="42dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="14dp" />
+                    </RelativeLayout>
+                    -->
+
+                <!-- 기타하단 모음 -->
+                <include
+                    android:id="@+id/toast_menu"
+                    layout="@layout/bottom_toast_menu_play_list_edit"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:focusable="true"
+                    android:visibility="gone"
+                    tools:visibility="gone" />
+
+                <RelativeLayout
+                    android:id="@+id/dump_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    android:visibility="gone"
+                    tools:visibility="gone" />
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</layout>
+

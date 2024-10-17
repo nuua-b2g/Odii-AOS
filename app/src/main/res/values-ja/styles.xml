@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <style name="font_letterSpacing">
+        <item name="android:letterSpacing">0.0</item>
+    </style>
+
+    <style name="font_letterSpacing_Num">
+        <item name="android:letterSpacing">0.05</item>
+    </style>
+    <style name="font_letterSpacing_text_change">
+        <item name="android:letterSpacing">0.0</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+</resources>

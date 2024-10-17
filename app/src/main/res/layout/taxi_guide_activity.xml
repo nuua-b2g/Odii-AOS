@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <ImageView
+            android:id="@+id/dump_view"
+            android:background="#696CFF"
+            android:layout_width="match_parent" android:contentDescription="TODO" 
+            android:layout_height="wrap_content"/>
+
+        <RelativeLayout
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="54dp"
+            android:background="#696CFF">
+
+            <TextView
+                android:layout_marginTop="14dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="오디 관광택시 도움말"
+                android:textColor="#FFFFFF"
+                android:textSize="20dp" />
+
+            <ImageView
+                android:layout_marginTop="14dp"
+                android:id="@+id/btn_close"
+                android:layout_width="wrap_content" android:contentDescription="TODO" 
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/ic_bt_top_closew" />
+
+        </RelativeLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:background="#696CFF"
+            android:layout_width="match_parent" android:contentDescription="TODO" 
+            android:layout_height="14dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:fillViewport="true">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="320dp"
+                    android:layout_height="160dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    android:background="@drawable/tx_img_help"
+                    android:contentDescription="TODO" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="40dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:text="오디 관광택시는 각 지역 별 관광 택시를 위한 외국인 승객 대상 오디오 관광 해설 서비스 입니다."
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#EBEBEB" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="각 언어별로 필요한 오디오 해설 파일을 다운로드 받으신 후 외국인 관광객 탑승 시 목적지에 따라 필요한 오디오를 재생하시면 됩니다."
+                    android:textColor="#898989"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="오디오 해설 파일은 용량이 크므로 가급적 WiFi 환경에서 다운로드 받으시기 바랍니다."
+                    android:textColor="#898989"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="GPS 정보를 통해 관광지 접근 시 해설 오디오를 편리하게 재생하실 수 있습니다.\n스마트폰의 설정 화면에서 오디 앱의 GPS 사용 여부를 허용으로 설정 해주세요."
+                    android:textColor="#898989"
+                    android:textSize="14dp" />
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="left|center_vertical"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="20dp"
+                    android:layout_marginBottom="20dp"
+                    android:text="관광 택시 기사분들께서 일반 사용자용 오디 서비스를 이용하고자 하실 경우에는 오디 앱을 삭제하신 후 재설치 하셔야 합니다."
+                    android:textColor="#898989"
+                    android:textSize="14dp" />
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_marginRight="10dp"
+                    android:background="#EBEBEB" />
+            </LinearLayout>
+        </ScrollView>
+    </LinearLayout>
+</layout>

@@ -1,0 +1,170 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="folder"
+            type="kto.smarttour.db.item.StoryFolderItem" />
+
+    </data>
+
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="290dp"
+        android:background="#FFFFFF"
+        android:importantForAccessibility="no"
+        android:focusable="false">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#FFFFFF"
+            android:contentDescription="보관함 사진 선택시 변경이 가능합니다." />
+
+        <LinearLayout
+            android:id="@+id/btn_story_info_view"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="#4D000000"
+            android:importantForAccessibility="no"
+            android:focusable="false"
+            android:orientation="vertical" />
+
+        <View
+            android:id="@+id/divider"
+            android:layout_width="20dp"
+            android:layout_height="1dp"
+            android:layout_alignParentBottom="true"
+            android:layout_marginLeft="20dp"
+            android:layout_marginBottom="90dp"
+            android:background="#FFFFFF" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_above="@id/divider"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:layout_marginBottom="18dp"
+            android:contentDescription="@{folder.title}"
+            android:focusable="true"
+            android:fontFamily="sans-serif-light"
+            android:gravity="left|bottom"
+            android:text="@{folder.title}"
+            android:textColor="#FFFFFF"
+            android:textSize="30dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_del"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentBottom="true"
+            android:layout_marginRight="14dp"
+            android:layout_marginBottom="64dp"
+            android:background="@drawable/ic_bt_box_del"
+            android:contentDescription="@string/story_del" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="50dp"
+            android:layout_alignParentBottom="true"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/btn_select_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_select_all_icon"
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/ic_icon_selectall_dis" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/btn_select_all_text"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/all_select"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/all_select"
+                    android:textColor="#000000"
+                    android:textSize="11dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/btn_play_all"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="16dp"
+                android:layout_toRightOf="@id/btn_select_all"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:layout_marginRight="8dp"
+                    android:background="@drawable/ic_icon_list_play" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="@string/all_play_msg"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:text="@string/all_play_msg"
+                    android:textColor="#000000"
+                    android:textSize="11dp" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginLeft="16dp"
+                android:layout_marginRight="16dp"
+                android:focusable="true"
+                android:gravity="center_vertical">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_count"
+                    style="@style/font_letterSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="6dp"
+                    android:focusable="false"
+                    android:fontFamily="@font/vk_regular"
+                    android:gravity="left|center_vertical"
+                    android:textColor="#000000"
+                    android:textSize="11dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:focusable="false"
+                    android:contentDescription="@string/story"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="right|center_vertical"
+                    android:text="@string/story"
+                    android:textColor="#80000000"
+                    android:textSize="12dp" />
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+    </RelativeLayout>
+</layout>

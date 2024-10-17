@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<font-family xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <!-- VK-Light -->
+    <font
+        android:font="@font/vk_light"
+        android:fontStyle="normal"
+        app:font="@font/vk_light"
+        app:fontStyle="normal" />
+
+    <!-- VK-Medium -->
+    <font
+        android:font="@font/vk_medium"
+        android:fontStyle="normal"
+        app:font="@font/vk_medium"
+        app:fontStyle="normal" />
+
+    <!-- VK-Regular -->
+    <font
+        android:font="@font/vk_regular"
+        android:fontStyle="normal"
+        app:font="@font/vk_regular"
+        app:fontStyle="normal" />
+
+    <!-- VK-bold -->
+    <font
+        android:font="@font/vk_bold"
+        android:fontStyle="normal"
+        app:font="@font/vk_bold"
+        app:fontStyle="normal" />
+
+</font-family>

@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <import type="android.text.TextUtils" />
+        <import type="kto.smarttour.common.utils.SystemUtils" />
+
+        <variable
+            name="story"
+            type="kto.smarttour.db.item.StoryItem" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="104dp"
+        android:background="#FFFFFF"
+        app:selected="@{story.isSelected}">
+
+        <ImageView
+            android:id="@+id/iv_thumb"
+            android:layout_width="80dp"
+            android:contentDescription="TODO"
+            android:layout_height="80dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginTop="14dp"
+            android:adjustViewBounds="true"
+            android:scaleType="centerCrop"
+            android:background="@drawable/ic_img_scrap_dummy" />
+
+        <RelativeLayout
+            android:id="@+id/layout_bottom"
+            android:layout_width="98dp"
+            android:layout_height="match_parent"
+            android:layout_alignParentRight="true">
+
+            <!-- 신규, 위치보기 -->
+            <LinearLayout
+                android:id="@+id/view_location_control"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp">
+                <ImageView
+                    android:id="@+id/btn_txlist_location"
+                    android:layout_width="36dp" android:contentDescription="TODO"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tx_img_txlist_location" />
+            </LinearLayout>
+            <!-- 기존 및 기능확장 -->
+            <LinearLayout
+                android:id="@+id/view_action_control"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:layout_marginLeft="4dp"
+                android:layout_toRightOf="@id/view_location_control">
+                <ImageView
+                    android:id="@+id/btn_play"
+                    android:layout_width="36dp" android:contentDescription="TODO"
+                    android:layout_height="36dp"
+                    android:layout_gravity="center"
+                    android:background="@drawable/tx_img_txlist_play" />
+            </LinearLayout>
+
+        </RelativeLayout>
+
+        <LinearLayout
+            android:id="@+id/layout_body"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="20dp"
+            android:layout_toLeftOf="@id/layout_bottom"
+            android:layout_toRightOf="@id/iv_thumb"
+            android:gravity="center_vertical"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tv_titile"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="left|center_vertical"
+                android:maxLines="2"
+                android:singleLine="true"
+                android:text="@{!TextUtils.isEmpty(story.titleKo)?story.titleKo:story.title }"
+                android:textColor="#000000"
+                android:textSize="18dp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="10dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:contentDescription="재생시간"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|top"
+                    android:text="재생시간"
+                    android:textColor="#898989"
+                    android:textSize="13dp" />
+
+                <TextView
+                    android:layout_marginLeft="4dp"
+                    android:id="@+id/tv_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="0dp"
+                    android:contentDescription="@{SystemUtils.sec2minsec(story.audioPlayTime)}"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|top"
+                    android:text="@{SystemUtils.sec2minsec(story.audioPlayTime)}"
+                    android:textColor="#898989"
+                    android:textSize="13dp" />
+            </LinearLayout>
+
+        </LinearLayout>
+
+    </RelativeLayout>
+
+</layout>

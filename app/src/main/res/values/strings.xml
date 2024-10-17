@@ -1,0 +1,309 @@
+<resources>
+    <string name="app_name">Odii</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_notification_channel_id">odii_push_id_1234</string>
+    <string name="language">en</string>
+
+    <string name="language_title">Language</string>
+
+    <string name="ok">Confirm</string>
+    <string name="cancel">Cancel</string>
+    <string name="setting">Settings</string>
+    <string name="download">Download</string>
+    <string name="make">Create</string>
+    <string name="finish">Exit</string>
+    <string name="empty_story">No saved stories in selected library.</string>
+    <string name="retry">RETRY</string>
+
+    <string name="locker_make">create library</string>
+    <string name="locker_edit">Modify library</string>
+    <string name="request_locker_name">Enter title of library.</string>
+    <string name="not_available_sms">This device cannot send SMS.</string>
+
+    <string name="empty_player_list">No playlist.</string>
+    <string name="empty_locker_list">No stories in the library.</string>
+    <string name="empty_downlaod_list">No stories in the library.</string>
+
+    <string name="storage_limit_error">Not enough space to store.\nPlease secure the storage space to use.</string>
+    <string name="network_use_message">Data call fees may be charged depending on data plan you use.  Do you want to continue?</string>
+    <string name="network_use_message2">"Data network is blocked.\nDo you want to use data network?\n\nData call fees may be charged depending on data plan you use.</string>
+    <string name="download_message">"Downloading %s stories. "</string>
+    <string name="locker_list_remove_message">All stories in the library will be deleted.</string>
+    <string name="story_sort_title">Arrange the playlist</string>
+    <string name="story_remove_message">Do you want to delete selected story?</string>
+    <string name="network_error">You are not connected to the Internet or your network connection is weak.</string>
+
+    <string name="text_size_change">Select font size</string>
+
+    <string name="story_list_add_message">Add stories to current playlist.</string>
+    <string name="toast_play">Play</string>
+    <string name="toast_add">Add</string>
+    <string name="toast_locker">Fill</string>
+    <string name="toast_del">Delete</string>
+    <string name="toast_downlaod">Download</string>
+    <string name="toast_detail">See details</string>
+
+    <string name="quit">Are you sure you want to exit?</string>
+    <string name="message_yes">Confirm</string>
+    <string name="message_no">Cancel</string>
+
+    <string name="all_select">Select all</string>
+    <string name="all_select_cancel">Deselect all</string>
+    <!--플레이 리스트 버튼 기능토글 텍스트 추가 , delete_selected:Delete selected to Delete -->
+    <string name="delete_selected">Delete</string>
+    <string name="playlist_change_order">Rearrange</string>
+    <string name="playlist_save_order">Save order</string>
+    <string name="playlist_playing">Playing</string>
+    <!--플레이 리스트 지도보기 , 목록보기 -->
+    <string name="playlist_show_map">View map</string>
+    <string name="playlist_show_list">Back to list</string>
+
+    <string name="select_cancel">Deselect</string>
+    <string name="basic">1X(Default)</string>
+
+
+    <string name="playlist_insert_play_msg">Play after adding to the playlist</string>
+    <string name="playlist_replace_play_meg">Play after replacing the playlist</string>
+    <string name="playlist_insert_play_in_play">After story is added to the playlist, it plays.</string>
+    <string name="all_play_msg">Play all</string>
+    <string name="fill_msg">Library</string>
+    <string name="story_search_msg">Search stories</string>
+    <string name="msg_sort_1">Title of story (A~Z order)</string>
+    <string name="msg_sort_2">Title of story (Z~A order)</string>
+    <string name="msg_sort_3">Name of region ((A~Z order)</string>
+    <string name="msg_sort_4">Name of region(Z~A order)</string>
+    <string name="msg_sort">Arrange the playlist</string>
+    <string name="msg_sort_change_complete">The playlist changes in the order you select.</string>
+    <string name="msg_select_story_delete">Do you want to delete selected story?</string>
+    <string name="msg_request_search">Please enter your search term.</string>
+    <string name="msg_order">arrange order</string>
+    <string name="msg_edit_complete">complete to edit</string>
+    <string name="msg_text_size">FONT SIZE</string>
+    <string name="msg_play_list_empty">No stories in the playlist.</string>
+    <string name="msg_select_fill">Please select library.</string>
+
+    <string name="story">STORY</string>
+    <string name="multi_story">STORIES</string>
+    <string name="editor">edit</string>
+    <string name="libraries">library</string>
+    <string name="confirm">Confirm</string>
+
+    <string name="toast_story_insert_msg">%s story is added to the playlist.</string>
+    <string name="toast_story_multi_insert_msg">%s stories are added to the playlist.</string>
+    <string name="permission_rquest_message">Please turn on device location for better experience.</string>
+
+    <string name="rooted_message">App cannot be used on jailbroken device.</string>
+    <string name="emulator_message">App not executable within emulator.</string>
+    <string name="Integrity_message">App not installed properly.</string>
+
+    <string name="downlaod_complete">Download completed</string>
+
+    <string name="tutorial_text_1">Odii, the audio guide service provider,\n tells interesting stories about the history and culture of Korean representative tourist spots.</string>
+    <string name="tutorial_text_1_2">Odii is an audio guide application that is developed by the Korea Tourism Organization.\nIt vividly delivers hidden stories of tourist spots for your pleasure and to smart travel.</string>
+    <string name="tutorial_text_2">With GPS services,\n it provides the audio guide contents of the tourist spots around you.</string>
+    <string name="tutorial_text_3">In addition to cultural tourism audio commentaries,\n it also provides various contents such as photos and scripts of tourist spots.</string>
+    <string name="tutorial_text_4">You can enjoy the contents without extra data charges if the content is downloaded with Wifi in advance.</string>
+
+    <string name="tutorial_btn_text">PLAY \&quot;Travel\&quot;</string>
+    <string name="update">Update</string>
+
+    <string name="msg_24_hour_dont_popup">Do not show again today</string>
+    <string name="msg_dont_popup">Never see it again </string>
+    <string name="close">Close</string>
+    <string name="read_script">Read the script</string>
+
+    <string name="add_playlist">add playlist</string>
+    <string name="save_in_library">save in library</string>
+    <string name="playlist">Playlist</string>
+
+    <string name="settings">SETTINGS</string>
+
+    <string name="stamp_push_title">Event information</string>
+    <string name="stamp_push_go">Check</string>
+    <string name="stamp_push_content">There is a tourist spot in the vicinity of the foot painting event.\nParticipate right now and take prizes on site!</string>
+
+    <string name="permission_title">App Permissions</string>
+    <!-- 변경 permission_content, 체크대상 -->
+    <string name="permission_content">Access permissions used by Odii (formerly Smart Tour) are as follows:\n\n
+        You may be partially restricted from using parts of the services if you do not agree to give access permissions.
+        Odii may use location information to send push notifications of the \&quot;Stamp Event\&quot; even when the app is closed or not in use.
+        The used location data will not be collected/stored.\n\n
+
+        <b>* Location Access Permission</b>\n
+        - Required to provide location information when you approach certain tourist spot while the app is running.\n\n
+
+        - Select "Always Allow" for permission to use location information. You may enjoy the \&quot;Stamp Event\&quot; and all location-based services.\n\n
+
+        <b>* Storage Access Permission</b>\n
+        - Required for uploading photos and storing temporary files\n\n
+
+        Change Access Permission\n
+        Device settings > Odii > Change each access permission
+    </string>
+    <!-- 변경 permission_content_2, 체크대상 1-->
+    <string name="permission_content_2">Access permissions used by Odii (formerly Smart Tour) are as follows:\n\n
+        You may be partially restricted from using parts of the services if you do not agree to give access permissions.
+        Odii may use location information to send push notifications of the \&quot;Stamp Event\&quot; even when the app is closed or not in use.
+        The used location data will not be collected/stored.\n\n
+
+        <b>* Location Access Permission</b>\n
+        - Required to provide location information when you approach certain tourist spot while the app is running.\n\n
+
+        - Select "Always Allow" for permission to use location information. You may enjoy the \&quot;Stamp Event\&quot; and all location-based services.\n\n
+
+        <b>* Storage Access Permission</b>\n
+        - Required for uploading photos and storing temporary files\n\n
+
+        Change Access Permission\n
+        Device settings > Odii > Change each access permission
+    </string>
+    <!-- 변경 permission_content_3, 체크대상 1-->
+    <string name="permission_title_3">App Permissions</string>
+    <string name="permission_content_3">Access permissions used by Odii (formerly Smart Tour) are as follows:\n\n
+        You may be partially restricted from using parts of the services if you do not agree to give access permissions.
+        Odii may use location information to send push notifications of the \&quot;Stamp Event\&quot; even when the app is closed or not in use.
+        The used location data will not be collected/stored.\n\n
+
+        <b>* Location Access Permission</b>\n
+        - Required to provide location information when you approach certain tourist spot while the app is running.\n\n
+
+        - Select "Always Allow" for permission to use location information. You may enjoy the \&quot;Stamp Event\&quot; and all location-based services.\n\n
+
+        <b>* Storage Access Permission</b>\n
+        - Required for uploading photos and storing temporary files\n\n
+
+        Change Access Permission\n
+        Device settings > Odii > Change each access permission
+    </string>
+    <!-- 변경 permission_content_4, 체크대상 1-->
+    <string name="permission_content_4">Access permissions used by Odii (formerly Smart Tour) are as follows:\n\n
+        You may be partially restricted from using parts of the services if you do not agree to give access permissions.
+        Odii may use location information to send push notifications of the \&quot;Stamp Event\&quot; even when the app is closed or not in use.
+        The used location data will not be collected/stored.\n\n
+
+        <b>* Location Access Permission</b>\n
+        - Required to provide location information when you approach certain tourist spot while the app is running.\n\n
+
+        - Select "Always Allow" for permission to use location information. You may enjoy the \&quot;Stamp Event\&quot; and all location-based services.\n\n
+
+        <b>* Storage Access Permission</b>\n
+        - Required for uploading photos and storing temporary files\n\n
+
+        Change Access Permission\n
+        Device settings > Odii > Change each access permission
+    </string>
+    <!-- 변경 permission_content_location_alltime 추가-->
+    <string name="permission_content_location_alltime_title">Location Access Permission</string>
+    <string name="permission_content_location_alltime">You may be partially restricted from using parts of the services if you do not agree to give access permissions.\n\n
+
+        You may enjoy the \&quot;Stamp Event\&quot; in the app if you set the location access permission to \&quot;Always Allow\&quot;.
+    </string>
+    <!-- 변경 permission_content_location_alltime_denied 추가, 체크대상 1-->
+    <string name="permission_content_location_alltime_denied_title">App Permissions</string>
+    <string name="permission_content_location_alltime_denied">Access permissions used by Odii (formerly Smart Tour) are as follows:\n\n
+        You may be partially restricted from using parts of the services if you do not agree to give access permissions.
+        Odii may use location information to send push notifications of the \&quot;Stamp Event\&quot; even when the app is closed or not in use.
+        The used location data will not be collected/stored.\n\n
+
+        <b>* Location Access Permission</b>\n
+        - Required to provide location information when you approach certain tourist spot while the app is running.\n\n
+
+        - Select "Always Allow" for permission to use location information. You may enjoy the \&quot;Stamp Event\&quot; and all location-based services.\n\n
+
+        <b>* Storage Access Permission</b>\n
+        - Required for uploading photos and storing temporary files\n\n
+
+        Change Access Permission\n
+        Device settings > Odii > Change each access permission
+    </string>
+
+    <string name="unknown_location">Unknown location</string>
+    <string name="permission_rationale">All the time location permission required for core functionality</string>
+    <plurals name="num_locations_reported">
+        <item quantity="zero">No location reported</item>
+        <item quantity="one">One location reported</item>
+        <item quantity="other">%d locations reported</item>
+    </plurals>
+
+    <string name="taxi_info">안내</string>
+    <string name="taxi_ok">확인</string>
+    <string name="taxi_cancel">취소</string>
+    <string name="taxi_no_select">이야기를 선택해주세요.</string>
+    <string name="taxi_network_use_message">오디오 해설 파일을 다운로드 하시겠습니까?\nWiFi 환경이 아닐 경우 데이터 요금이 발생할 수 있습니다.</string>
+    <string name="taxi_network_error">인터넷에 연결되어 있지 않거나 네트워크 상태가 원활하지 않습니다.</string>
+    <string name="taxi_storage_limit_error">저장공간이 부족합니다.\n저장공간 확보 후 다시 이용 해주세요.</string>
+    <string name="taxi_download_message">%s개 이야기를 다운로드 중입니다.</string>
+    <string name="taxi_download">다운로드</string>
+    <string name="taxi_finish">종료</string>
+    <string name="taxi_retry">재시도</string>
+
+    <string name="driver_safety">주행 중입니다.\n안전 운전을 위해 정차 후\n조작 해주시기 바랍니다.</string>
+
+    <!-- 20201208 접근성 문구 -->
+    <string name="close_mediaplayer">닫기</string>
+    <string name="audio_prev">이전 이야기</string>
+    <string name="audio_next">다음 이야기</string>
+
+    <string name="audio_backward_sec">5초 뒤로</string>
+    <string name="audio_forward_sec">5초 앞으로</string>
+
+    <string name="audio_play">재생</string>
+    <string name="audio_pause">일시정지</string>
+    <string name="audio_list">재생목록</string>
+    <string name="search">검색</string>
+    <string name="mute">음소거</string>
+    <string name="random_play">렌덤 재생</string>
+    <string name="play_type_none">반복 재생 설정</string>
+    <string name="play_speed">배속 설정</string>
+    <string name="story_detail">메뉴 열기</string>
+    <string name="story_list_order">순서 변경을 원하면 더블 롱탭하고 상하로 이동해 주세요.</string>
+    <string name="story_del">삭제</string>
+    <string name="menu">메뉴 열기</string>
+    <string name="gallery">사진 설정</string>
+
+    <string name="disclosure_use_location_title">Use of location information</string>
+    <string name="disclosure_use_location_message">Odii Service only processes personal information for the following purposes and does not collect or store personal information separately.\n
+        We always obtain the service users\&apos; prior consent in the event of a change in the purpose of use of their personal information.\n\n
+        <b>* Use of location information</b>\n
+        We process personal information in order to provide information on nearby recommended tourist sites based on the user\&apos;s GPS location information.\n\n
+
+        <b>* Use of background location information</b>\n
+        We use location-related data to provide push notification on Geofence-based \&quot;Stamp Events\&quot; even when the app is closed or not being used.\n\n
+
+        We do not collect or store personal information with which private individuals can be identified.
+    </string>
+
+    <string name="edit_list">Edit list</string>
+    <string name="drive_mode">Drive mode</string>
+    <string name="drive_mode_msg">Driving\nFor safe driving, please operate after stopping.</string>
+
+    <string name="setting_non_check_location">Please enable your GPS to continue.</string>
+
+    <string name="drive_mode_msg_1">If you turn on location alerts, you will receive a notification of story about the places near your current location you are driving in the playlists.\nDo you want to turn on location alert?</string>
+    <string name="drive_mode_msg_2">Play</string>
+    <string name="drive_mode_msg_3">Turn off location alerts</string>
+    <string name="drive_mode_msg_4">If you want to edit guide order, the guide will start from the first.\nPlease, delete tourist spots when the guide has been completed.</string>
+    <string name="drive_mode_msg_5">Among the playlists, there is a story of current location.\nDo you want to play?</string>
+    <string name="drive_mode_msg_6">재생목록 중 현재 주변의 \&apos;%s\&apos;가 있습니다.\nDo you want to play?</string>
+
+    <string name="driver_safety2">Driving.\nFor safe driving,\nplease operate after stopping.</string>
+
+    <string name="location_usage">The user\'s location information is being used in the Odii.</string>
+
+    <string name="pe_title">To use the Odii app\n you must grant the access permissions below.</string>
+    <string name="pe_button">Confirm</string>
+    <string name="pe_select">(Optional)</string>
+    <string name="pe_required">Required</string>
+    <string name="pe_title_1">Location</string>
+    <string name="pe_title_2">Notification</string>
+    <string name="pe_desc_1">Map services and current location</string>
+    <string name="pe_desc_2">Push notification service</string>
+    <string name="pe_desc_text">Optional permissions are requested at the time they are needed during service usage.\nEven if you do not allow access permissions, the app is still usable, but some services may be limited.</string>
+
+    <string name="pe_title_3">Audio</string>
+    <string name="pe_title_4">Image</string>
+    <string name="pe_desc_3">Use Audio Service</string>
+    <string name="pe_desc_4">Upload Image</string>
+</resources>
+
+

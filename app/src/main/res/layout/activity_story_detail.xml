@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".ui.StoryDetailActivity">
+
+    <data>
+
+        <import type="android.text.Html" />
+
+        <variable
+            name="content"
+            type="kto.smarttour.db.item.StoryItem" />
+
+    </data>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:clipChildren="false"
+        android:cropToPadding="false"
+        android:background="#FFFFFF">
+
+        <kto.smarttour.ui.view.CustomScrollView
+            android:id="@+id/view_scroll"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clipChildren="false"
+            android:cropToPadding="false"
+            android:fillViewport="true">
+
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="320dp">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/iv_thumb"
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp" />
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="match_parent"
+                        android:layout_height="320dp"
+                        android:background="#4D000000" />
+
+                    <View
+                        android:id="@+id/divider"
+                        android:layout_width="20dp"
+                        android:layout_height="1dp"
+                        android:layout_alignParentBottom="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginBottom="120dp"
+                        android:background="#FFFFFF" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_above="@id/divider"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginBottom="18dp"
+                        android:ellipsize="end"
+                        android:fontFamily="sans-serif-light"
+                        android:gravity="left|bottom"
+                        android:maxLines="2"
+                        android:text="@{content.title}"
+                        android:contentDescription="@{content.title}"
+                        android:textColor="#FFFFFF"
+                        android:textSize="30dp" />
+
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_alignParentBottom="true"
+                        android:background="#B3000000">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_play"
+                            android:layout_width="34dp"
+                            android:layout_height="34dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_centerVertical="true"
+                            android:layout_marginRight="23dp"
+                            android:contentDescription="@string/audio_play"
+                            android:background="@drawable/ic_bt_contents_play" />
+
+                    </RelativeLayout>
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="60dp">
+
+                    <LinearLayout
+                        android:id="@+id/btn_text_size_change"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_marginRight="20dp"
+                        android:orientation="horizontal">
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:layout_width="8dp"
+                            android:layout_height="10dp"
+                            android:layout_gravity="center_vertical"
+                            android:background="@drawable/ic_icon_text_size" />
+
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_marginLeft="10dp"
+                            android:fontFamily="sans-serif-medium"
+                            android:gravity="right|center_vertical"
+                            android:text="@string/msg_text_size"
+                            android:contentDescription="@string/msg_text_size"
+                            android:textColor="#737373"
+                            android:textSize="12dp" />
+
+                    </LinearLayout>
+
+
+                </RelativeLayout>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#F6F6F6" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="75dp"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|top"
+                    android:padding="20dp"
+                    android:text="@{Html.fromHtml(content.audioScript)}"
+                    android:contentDescription="@{Html.fromHtml(content.audioScript)}"
+                    android:textColor="#CC000000"
+                    android:textSize="14dp" />
+
+            </LinearLayout>
+
+
+        </kto.smarttour.ui.view.CustomScrollView>
+
+        <kto.smarttour.ui.view.MiniPlayerView
+            android:id="@+id/view_mini_player"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:clipChildren="false"
+            android:cropToPadding="false"
+            android:layout_alignParentBottom="true"
+            android:visibility="gone" />
+
+        <kto.smarttour.ui.view.Topbar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="76dp" />
+
+        <RelativeLayout
+            android:id="@+id/dump_view"
+            android:layout_width="match_parent"
+            android:layout_height="0dp" />
+
+    </RelativeLayout>
+
+
+</layout>
+

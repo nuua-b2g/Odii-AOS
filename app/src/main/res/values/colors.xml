@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#008577</color>
+    <color name="colorPrimaryDark">#00574B</color>
+    <color name="colorAccent">#D81B60</color>
+    <color name="colorOverlay">#78ffffff</color>
+
+    <color name="black_overlay">#66000000</color>
+    <color name="black_overlay2">#88000000</color>
+    <color name="black_overlay3">#af000000</color>
+    <color name="divider">#F6F6F6</color>
+
+    <color name="tint_color_enable">#000000</color>
+    <color name="tint_color_disable">#31000000</color>
+
+    <color name="tint_color_play_enable_2x">#FFFFFFFF</color>
+    <color name="tint_color_play_disable_2x">#80FFFFFF</color>
+
+    <color name="tint_color_library_delete">#B3000000</color>
+
+    <!-- com.getbase.floatingactionbutton.FloatingActionsMenu 관련-->
+    <color name="black_semi_transparent">#B2000000</color>
+    <color name="background">#e5e5e5</color>
+    <color name="half_black">#808080</color>
+    <color name="white">#fafafa</color>
+    <color name="white_pressed">#FB8484</color>
+    <color name="pink">#e91e63</color>
+    <color name="pink_pressed">#ec407a</color>
+    <color name="blue_semi_transparent">#805677fc</color>
+    <color name="blue_semi_transparent_pressed">#80738ffe</color>
+</resources>

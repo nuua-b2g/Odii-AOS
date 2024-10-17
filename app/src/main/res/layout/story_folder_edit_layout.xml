@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="150dp"
+    android:background="#FFFFFF"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="50dp">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerVertical="true"
+            android:layout_marginLeft="20dp"
+            android:contentDescription="@string/locker_edit"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="left|center_vertical"
+            android:text="@string/locker_edit"
+            android:textColor="#000000"
+            android:textSize="14dp" />
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/btn_close"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:background="@drawable/ic_bt_pop_close"
+            android:contentDescription="@string/close" />
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="100dp">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:id="@+id/iv_thumb"
+            android:layout_width="80dp"
+            android:layout_height="80dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginBottom="20dp"
+            android:background="@drawable/ic_img_scrap_dummy"
+            android:contentDescription="@string/gallery" />
+
+        <EditText
+            android:id="@+id/edit_folder_name"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="14dp"
+            android:layout_toRightOf="@id/iv_thumb"
+            android:background="@drawable/edit_box"
+            android:focusable="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="left|center_vertical"
+            android:hint="@string/request_locker_name"
+            android:imeOptions="actionDone"
+            android:maxLines="1"
+            android:paddingLeft="16dp"
+            android:paddingRight="16dp"
+            android:singleLine="true"
+            android:textColor="#000000"
+            android:textColorHint="#33000000"
+            android:textSize="14dp" />
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="60dp"
+            android:layout_below="@id/edit_folder_name"
+            android:layout_toRightOf="@id/iv_thumb">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_make"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp"
+                android:contentDescription="@string/ok"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:text="@string/ok"
+                android:textColor="#696CFF"
+                android:textSize="13dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/btn_cancel"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginRight="20dp"
+                android:layout_toLeftOf="@id/btn_make"
+                android:contentDescription="@string/cancel"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:paddingLeft="10dp"
+                android:paddingRight="10dp"
+                android:text="@string/cancel"
+                android:textColor="#000000"
+                android:textSize="13dp" />
+
+        </RelativeLayout>
+
+
+    </RelativeLayout>
+
+
+</LinearLayout>

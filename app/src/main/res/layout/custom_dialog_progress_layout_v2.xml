@@ -1,0 +1,296 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <!-- 숨김 -->
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/view_title"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:background="#111111">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" />
+    </RelativeLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <!-- 숨김 -->
+        <RelativeLayout
+            android:visibility="gone"
+            android:id="@+id/view_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/message"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="24dp"
+                android:layout_marginRight="30dp"
+                android:layout_marginBottom="24dp"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="center"
+                android:textColor="#898989"
+                android:textSize="12dp" />
+
+        </RelativeLayout>
+
+        <!-- 스탬1,2 -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <!-- 단계1 , 초기상태 숨김, 코드에서 활성화-->
+            <LinearLayout
+                android:visibility="gone"
+                android:id="@+id/view_step_one"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_gravity="right"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="1/2"
+                    android:textColor="#767676"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_marginTop="12dp"
+                    android:layout_width="180dp" android:contentDescription="TODO"
+                    android:layout_height="180dp"
+                    android:background="@drawable/tx_img_tx_downloadstep_one" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+
+                    android:layout_marginTop="32dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="01"
+                    android:textColor="#060606"
+                    android:textSize="24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="주의사항 안내"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="주의사항 안내"
+                    android:textColor="#000000"
+                    android:textSize="26dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_step_one_msg"
+                    android:layout_marginTop="12dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="주행중 앱 사용은 운전에 매우 위험합니다. 정차 후 사용해 주세요."
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="주행중 앱 사용은\n운전에 매우 위험합니다.\n정차 후 사용해 주세요."
+                    android:textColor="#000000"
+                    android:textSize="20dp" />
+
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="20dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_step_one_action"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="0dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/confirm"
+                        android:contentDescription="@string/confirm"
+                        android:textColor="#ffffff"
+                        android:background="#593bbd"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+            <!-- 단계2 -->
+            <LinearLayout
+                android:visibility="visible"
+                android:id="@+id/view_step_two"
+                android:layout_centerVertical="true"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_gravity="right"
+                    android:layout_marginRight="32dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:text="2/2"
+                    android:textColor="#767676"
+                    android:textSize="20dp" />
+
+                <ImageView
+                    android:layout_marginTop="12dp"
+                    android:layout_width="180dp" android:contentDescription="TODO"
+                    android:layout_height="180dp"
+                    android:background="@drawable/tx_img_tx_downloadstep_two" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+
+                    android:layout_marginTop="32dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-light"
+                    android:gravity="center"
+                    android:text="02"
+                    android:textColor="#060606"
+                    android:textSize="24dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_marginTop="20dp"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:contentDescription="오디오 다운로드"
+                    android:fontFamily="sans-serif-black"
+                    android:gravity="center"
+                    android:text="오디오 다운로드"
+                    android:textColor="#000000"
+                    android:textSize="26dp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_step_two_msg"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:contentDescription="관광택시 오디오 파일을 다운로드 합니다. 데이터 요금이 발생할 수 있으니 WI-FI를 이용해 주세요."
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="관광택시 오디오 파일을 다운로드\n합니다. 데이터 요금이 발생할 수\n있으니 WI-FI를 이용해 주세요."
+                    android:textColor="#000000"
+                    android:textSize="16dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_step_two_size"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="center"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="[ 파일 총 용량 1,234GB ]"
+                    android:textColor="#6f6f6f"
+                    android:textSize="14dp" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_step_two_percentage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:contentDescription=""
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="right"
+                    android:paddingLeft="20dp"
+                    android:paddingRight="20dp"
+                    android:text="38%"
+                    android:layout_gravity="right"
+                    android:textColor="#6f6f6f"
+                    android:textSize="14dp" />
+
+                <ProgressBar
+                    android:id="@+id/progress"
+                    style="@android:style/Widget.ProgressBar.Horizontal"
+                    android:layout_width="match_parent"
+                    android:layout_height="4dp"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_marginBottom="0dp"
+                    android:max="100"
+                    android:progressDrawable="@drawable/download_progress_v2" />
+
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_marginTop="0dp"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_step_two_action"
+                        android:layout_width="match_parent"
+                        android:layout_height="80dp"
+                        android:layout_marginEnd="0dp"
+                        android:layout_marginRight="0dp"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="center"
+                        android:paddingLeft="10dp"
+                        android:paddingRight="10dp"
+                        android:text="@string/download"
+                        android:contentDescription="@string/download"
+                        android:textColor="#050505"
+                        android:background="#ffffff"
+                        android:textSize="18dp"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+                </androidx.constraintlayout.widget.ConstraintLayout>
+
+            </LinearLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+
+</LinearLayout>

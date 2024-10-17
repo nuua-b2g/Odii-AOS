@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#FBFBFB"
+        android:orientation="vertical"
+        tools:context=".ui.StoryDownloadActivity">
+
+        <kto.smarttour.ui.view.Topbar
+            android:id="@+id/topbar"
+            android:layout_width="match_parent"
+            android:layout_height="76dp" />
+
+        <LinearLayout
+            android:id="@+id/view_search"
+            android:layout_width="match_parent"
+            android:layout_height="40dp"
+            android:layout_marginLeft="14dp"
+            android:layout_marginRight="14dp"
+            android:background="#EBEBEB"
+            android:padding="1dp">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:background="#FFFFFF">
+
+                <!-- android:tint="#31000000" -->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_find"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:contentDescription="@string/search"
+                    android:background="@android:color/transparent"
+                    android:src="@drawable/ic_bt_form_search"
+                    android:tint="#88000000"
+                    android:tintMode="src_in"
+                    tools:ignore="VectorDrawableCompat" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_clear"
+                    android:layout_width="30dp"
+                    android:layout_height="30dp"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="6dp"
+                    android:layout_toLeftOf="@id/btn_find"
+                    android:contentDescription="검색창 입력 삭제"
+                    android:background="@drawable/ic_bt_form_del"
+                    android:visibility="invisible" />
+
+                <!-- android:textColorHint="#33000000" -->>
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/edit_search"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_toLeftOf="@id/btn_clear"
+                    android:background="#FFFFFF"
+                    android:focusable="true"
+                    android:hint="@string/msg_request_search"
+                    android:textSize="16dp"
+                    android:imeOptions="actionSearch"
+                    android:inputType="text"
+                    android:maxLines="1"
+                    android:paddingLeft="16dp"
+                    android:textColor="#000000"
+                    android:textColorHint="#88000000" />
+
+            </RelativeLayout>
+        </LinearLayout>
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="76dp"
+            android:orientation="horizontal">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:layout_alignParentBottom="true"
+                android:orientation="horizontal">
+
+                <LinearLayout
+                    android:id="@+id/btn_select_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:id="@+id/btn_select_all_icon"
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/ic_icon_selectall_dis" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/btn_select_all_text"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/all_select"
+                        android:contentDescription="@string/all_select"
+                        android:textColor="#000000"
+                        android:textSize="11dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/btn_play_all"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="16dp"
+                    android:layout_toRightOf="@id/btn_select_all"
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:layout_marginRight="8dp"
+                        android:background="@drawable/ic_icon_list_play" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="left|center_vertical"
+                        android:text="@string/all_play_msg"
+                        android:contentDescription="@string/all_play_msg"
+                        android:textColor="#000000"
+                        android:textSize="11dp" />
+
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/tv_story_count"
+                    android:layout_width="wrap_content"
+                    android:layout_height="match_parent"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginLeft="16dp"
+                    android:focusable="true"
+                    android:layout_marginRight="16dp"
+                    android:gravity="center_vertical">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_count"
+                        style="@style/font_letterSpacing"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginRight="6dp"
+                        android:fontFamily="@font/vk_regular"
+                        android:focusable="false"
+                        android:gravity="left|center_vertical"
+                        android:textColor="#000000"
+                        android:textSize="11dp" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_count_unit"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="right|center_vertical"
+                        android:focusable="false"
+                        android:text="@string/story"
+                        android:textColor="#80000000"
+                        android:textSize="12dp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#FFFFFF"
+            android:clipChildren="false">
+
+            <!-- 추가수정 android:layout_above="@id/view_bottom_area" : view_mini_player가 차지하는 visibility하단영역만큼 양보 -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/list"
+                android:scrollbars="vertical"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_above="@id/view_bottom_area"
+                tools:background="#44ff0044"
+                app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
+
+            <include
+                android:id="@+id/empty_view"
+                layout="@layout/empty_download_view"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignBottom="@id/list"
+                android:visibility="gone"
+                tools:visibility="visible"/>
+
+            <RelativeLayout
+                android:id="@+id/view_bottom_area"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:cropToPadding="false"
+                android:layout_alignParentBottom="true">
+
+                <include
+                    android:id="@+id/toast_menu"
+                    layout="@layout/bottom_toast_menu_download"
+                    android:layout_width="match_parent"
+                    android:layout_height="72dp"
+                    android:visibility="gone"
+                    tools:visibility="visible"/>
+
+                <kto.smarttour.ui.view.MiniPlayerView
+                    android:id="@+id/view_mini_player"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:clipChildren="false"
+                    android:cropToPadding="false"
+                    android:visibility="gone"
+                    tools:visibility="gone"/>
+            </RelativeLayout>
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>
+

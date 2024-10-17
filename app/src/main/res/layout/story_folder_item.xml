@@ -1,0 +1,123 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="folder"
+            type="kto.smarttour.db.item.StoryFolderItem" />
+    </data>
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="78dp"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <RelativeLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="50dp"
+            android:focusable="false"
+            android:layout_height="match_parent"
+            android:contentDescription="삭제"
+            android:background="#F65857">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:clickable="false"
+                android:background="@drawable/ic_icon_list_del"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/front_layout"
+            android:layout_width="match_parent"
+            android:layout_height="78dp"
+            android:focusable="true"
+            android:background="#FFFFFF"
+            android:orientation="vertical">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="14dp"
+                app:localError="@{@drawable/ic_img_scrap_dummy}"
+                app:localImageName="@{folder.imgUrl}" />
+
+            <RelativeLayout
+                android:id="@+id/btn_play"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="17dp"
+                android:layout_marginRight="13dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:contentDescription="@string/audio_play"
+                    android:background="@drawable/ic_bt_place_play" />
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tmp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/btn_play"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="right|center_vertical"
+                android:text="@string/story"
+                android:contentDescription="@string/story"
+                android:textColor="#80000000"
+                android:textSize="12dp" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_story_count"
+                style="@style/font_letterSpacing_Num"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_marginLeft="12dp"
+                android:layout_marginRight="6dp"
+                android:layout_toLeftOf="@id/tmp"
+                android:fontFamily="@font/vk_regular"
+                android:gravity="left|center_vertical"
+                android:text="@{folder.fileData}"
+                android:contentDescription="@{folder.fileData}"
+                android:textColor="#000000"
+                android:textSize="11dp" />
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/title"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/tv_story_count"
+                android:layout_toRightOf="@id/thumbnail"
+                android:ellipsize="end"
+                android:fontFamily="sans-serif-medium"
+                android:gravity="left|center_vertical"
+                android:maxLines="3"
+                android:text="@{folder.title}"
+                android:contentDescription="@{folder.title}"
+                android:textColor="#000000"
+                android:textSize="14dp" />
+
+        </RelativeLayout>
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+</layout>

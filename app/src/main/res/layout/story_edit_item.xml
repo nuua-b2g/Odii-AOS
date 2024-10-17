@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <variable
+            name="story"
+            type="kto.smarttour.db.item.StoryItem" />
+
+    </data>
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="82dp"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <RelativeLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="50dp"
+            android:focusable="false"
+            android:layout_height="82dp"
+            android:contentDescription="삭제"
+            android:background="#F65857">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:clickable="false"
+                android:contentDescription="@string/story_del"
+                android:background="@drawable/ic_icon_list_del"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/front_layout"
+            android:layout_width="match_parent"
+            android:layout_height="82dp"
+            android:background="#FFFFFF"
+            android:focusable="true"
+            android:orientation="vertical"
+            app:selected="@{story.isSelected}">
+
+            <RelativeLayout
+                android:id="@+id/view_index"
+                android:layout_width="50dp"
+                android:layout_height="match_parent">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/tv_index"
+                    style="@style/font_letterSpacing"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:fontFamily="@font/vk_regular"
+                    android:gravity="center"
+                    android:textColor="#000000"
+                    android:textSize="13dp" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/iv_current_position"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_icon_list_ing" />
+
+
+            </RelativeLayout>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_marginTop="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="16dp"
+                android:layout_toRightOf="@id/view_index" />
+
+            <RelativeLayout
+                android:id="@+id/iv_more"
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_alignParentRight="true"
+                android:layout_centerVertical="true"
+                android:contentDescription="@string/story_list_order"
+                android:focusable="true"
+                android:layout_marginRight="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:layout_centerHorizontal="true"
+                    android:layout_centerVertical="true"
+                    android:background="@drawable/ic_bt_playlist_edit" />
+
+            </RelativeLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_centerVertical="true"
+                android:layout_toLeftOf="@id/iv_more"
+                android:layout_toRightOf="@id/thumbnail"
+                android:orientation="vertical">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.title}"
+                    android:contentDescription="@{story.title}"
+                    android:textColor="#000000"
+                    android:textSize="14dp" />
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sub_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@id/title"
+                    android:layout_marginTop="6dp"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.audioTitle}"
+                    android:contentDescription="@{story.audioTitle}"
+                    android:textColor="#959595"
+                    android:textSize="12dp" />
+
+
+            </LinearLayout>
+        </RelativeLayout>
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+
+</layout>

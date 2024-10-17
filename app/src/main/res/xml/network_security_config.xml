@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<network-security-config>
+
+    <base-config cleartextTrafficPermitted="true">
+        <trust-anchors>
+            <certificates src="system" />
+        </trust-anchors>
+    </base-config>
+
+    <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="true">odii.kr</domain>
+        <domain includeSubdomains="true">www.odii.kr</domain>
+        <domain includeSubdomains="true">*.odii.kr</domain>
+        <domain includeSubdomains="true">*.ktcdn.co.kr</domain>
+        <domain includeSubdomains="true">*.map.naver.com</domain>
+        <domain includeSubdomains="true">*.map.naver.net</domain>
+    </domain-config>
+
+</network-security-config>

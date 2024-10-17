@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="72dp"
+    android:background="#E6000000"
+    android:orientation="vertical">
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_detail"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_marginLeft="20dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_detail" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/toast_detail"
+            android:contentDescription="@string/toast_detail"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+    <!-- 2021.09.07 gone처리 -->
+    <RelativeLayout
+        android:visibility="gone"
+        android:id="@+id/btn_toast_locker"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_toRightOf="@id/btn_toast_detail"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_03" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:minWidth="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/toast_locker"
+            android:contentDescription="@string/toast_locker"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_download"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_toRightOf="@id/btn_toast_locker"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_04" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:minWidth="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/toast_downlaod"
+            android:contentDescription="@string/toast_downlaod"
+            android:textColor="#FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+
+    <RelativeLayout
+        android:id="@+id/btn_toast_cancel"
+        android:layout_width="wrap_content"
+        android:layout_height="72dp"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="6dp"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="12dp"
+            android:background="@drawable/ic_icon_toast_close" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="60dp"
+            android:layout_height="wrap_content"
+            android:layout_alignParentBottom="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginBottom="12dp"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:text="@string/cancel"
+            android:contentDescription="@string/cancel"
+            android:textColor="#80FFFFFF"
+            android:textSize="11dp" />
+
+    </RelativeLayout>
+
+</RelativeLayout>

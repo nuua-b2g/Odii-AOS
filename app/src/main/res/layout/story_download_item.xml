@@ -1,0 +1,184 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+
+        <variable
+            name="story"
+            type="kto.smarttour.db.item.StoryItem" />
+
+    </data>
+
+    <com.chauthai.swipereveallayout.SwipeRevealLayout
+        android:id="@+id/swipe_layout"
+        android:layout_width="match_parent"
+        android:layout_height="108dp"
+        app:dragEdge="right"
+        app:mode="same_level">
+
+        <RelativeLayout
+            android:id="@+id/delete_layout"
+            android:layout_width="50dp"
+            android:layout_height="108dp"
+            android:background="#F65857"
+            android:contentDescription="삭제">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="30dp"
+                android:layout_height="30dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_icon_list_del"
+                android:clickable="false"
+                android:gravity="center" />
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/front_layout"
+            android:layout_width="match_parent"
+            android:layout_height="108dp"
+            android:background="#FFFFFF"
+            android:orientation="vertical"
+            app:selected="@{story.isSelected}">
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/thumbnail"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:layout_marginLeft="14dp"
+                android:layout_marginTop="14dp"
+                android:layout_marginRight="20dp"
+                android:layout_marginBottom="14dp"
+                tools:background="@drawable/icon"/>
+
+            <ImageView
+                android:id="@+id/view_selected"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignLeft="@id/thumbnail"
+                android:layout_alignTop="@id/thumbnail"
+                android:layout_alignRight="@id/thumbnail"
+                android:layout_alignBottom="@id/thumbnail"
+                android:focusable="false"
+                android:importantForAccessibility="no"
+                android:padding="20dp"
+                android:src="@drawable/ic_tx_img_dlcomp"
+                android:visibility="invisible" />
+
+            <RelativeLayout
+                android:id="@+id/view_control"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/thumbnail"
+                android:layout_alignBottom="@id/thumbnail"
+                android:layout_alignParentRight="true"
+                android:layout_marginRight="20dp">
+
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_detail"
+                    android:layout_width="20dp"
+                    android:layout_height="20dp"
+                    android:background="@drawable/ic_bt_story_more_dn"
+                    android:focusable="false"
+                    android:importantForAccessibility="no"
+                    android:contentDescription="상세 정보" />
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_play"
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="4dp"
+                    android:background="@drawable/ic_bt_place_play"
+                    android:contentDescription="@string/audio_play" />
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_alignTop="@id/thumbnail"
+                android:layout_alignBottom="@id/thumbnail"
+                android:layout_toLeftOf="@id/view_control"
+                android:layout_toRightOf="@id/thumbnail">
+
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/title"
+                    android:layout_width="match_parent"
+                    android:layout_height="24dp"
+                    android:layout_marginLeft="16dp"
+                    android:contentDescription="@{story.title}"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.title}"
+                    android:textColor="#000000"
+                    android:textSize="14dp"
+                    tools:text="오디오타이틀 가나다라마바사아자차카타파하"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/sub_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/title"
+                    android:layout_marginLeft="16dp"
+                    android:layout_marginBottom="16dp"
+                    android:contentDescription="@{story.addrList}"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@{story.addrList}"
+                    android:textColor="#CC000000"
+                    android:textSize="12dp"
+                    tools:text="오디오서브타이틀 가나다라마바사아자차카타파하"/>
+
+                <LinearLayout
+                    android:id="@+id/view_distance"
+                    style="@style/font_letterSpacing"
+                    android:layout_width="match_parent"
+                    android:layout_height="20dp"
+                    android:layout_below="@id/sub_title"
+                    android:layout_alignParentBottom="true"
+                    android:layout_marginLeft="16dp"
+                    android:fontFamily="@font/vk_medium"
+                    android:gravity="left|center_vertical"
+                    android:orientation="horizontal"
+                    android:textColor="#80000000"
+                    android:textSize="10dp"
+                    tools:background="#FFC1C1"
+                    tools:visibility="invisible">
+
+                    <androidx.appcompat.widget.AppCompatImageView
+                        android:layout_width="8dp"
+                        android:layout_height="12dp"
+                        android:background="@drawable/ic_icon_list_pin" />
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/tv_distance"
+                        style="@style/font_letterSpacing_Num"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_gravity="left|center_vertical"
+                        android:layout_marginLeft="10dp"
+                        android:fontFamily="@font/vk_regular"
+                        android:gravity="center_vertical"
+                        android:textColor="#80000000"
+                        android:textSize="10dp" />
+
+                </LinearLayout>
+
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </com.chauthai.swipereveallayout.SwipeRevealLayout>
+
+
+</layout>

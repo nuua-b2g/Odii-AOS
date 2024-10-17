@@ -1,0 +1,230 @@
+<resources>
+    <string name="app_name">오디</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_notification_channel_id">odii_push_id_1234</string>
+    <string name="language">ko</string>
+
+    <string name="language_title">언어</string>
+
+    <string name="ok">확인</string>
+    <string name="cancel">취소</string>
+    <string name="setting">설정</string>
+    <string name="download">다운로드</string>
+    <string name="make">만들기</string>
+    <string name="finish">종료</string>
+    <string name="empty_story">선택한 보관함에 저장된 이야기가 없습니다.</string>
+    <string name="retry">재시도</string>
+
+    <string name="locker_make">보관함 만들기</string>
+    <string name="locker_edit">보관함 수정</string>
+    <string name="request_locker_name">보관함 제목을 입력하세요.</string>
+    <string name="not_available_sms">해당 단말은 SMS를 전송할 수 없습니다.</string>
+
+    <string name="empty_player_list">재생목록이 없습니다.</string>
+    <string name="empty_locker_list">보관함 리스트가 없습니다.</string>
+    <string name="empty_downlaod_list">다운로드 리스트가 없습니다.</string>
+
+    <string name="storage_limit_error">저장공간이 부족합니다.\n저장공간 확보 후 다시 이용 해주세요.</string>
+    <string name="network_use_message">사용중인 데이터 요금제에 따라 데이터 통화료가 부과될 수 있습니다.\n\n계속 하시겠습니까?</string>
+    <string name="network_use_message2">데이터 네트워크가 차단상태입니다.\n데이터 네트워크를 사용하시겠습니까?\n\n사용중인 데이터 요금제에 따라 데이터 통화료가 부과될 수 있습니다.</string>
+    <string name="download_message">%s개 이야기를 다운로드 중입니다.</string>
+    <string name="locker_list_remove_message">보관함에 담긴 모든 이야기가 삭제됩니다.</string>
+    <string name="story_sort_title">재생목록 정렬</string>
+    <string name="story_remove_message">선택된 이야기를 삭제하시겠습니까?</string>
+    <string name="network_error">인터넷에 연결되어 있지 않거나 네트워크 상태가 원활하지 않습니다.</string>
+
+    <string name="text_size_change">글자크기 선택</string>
+
+    <string name="story_list_add_message">현재 재생목록에 이야기를 추가합니다.</string>
+    <string name="toast_play">듣기</string>
+    <string name="toast_add">추가</string>
+    <string name="toast_locker">담기</string>
+    <string name="toast_del">삭제</string>
+    <string name="toast_downlaod">다운로드</string>
+    <string name="toast_detail">상세보기</string>
+
+    <string name="quit">종료하시겠습니까?</string>
+    <string name="message_yes">예</string>
+    <string name="message_no">아니오</string>
+
+    <string name="all_select">전체선택</string>
+    <string name="all_select_cancel">전체해제</string>
+    <!--플레이 리스트 버튼 기능토글 텍스트 추가 -->
+    <string name="delete_selected">선택삭제</string>
+    <string name="playlist_change_order">순서변경</string>
+    <string name="playlist_save_order">변경저장</string>
+    <string name="playlist_playing">재생중</string>
+    <!--플레이 리스트 지도보기 , 목록보기 -->
+    <string name="playlist_show_map">지도보기</string>
+    <string name="playlist_show_list">목록보기</string>
+
+    <string name="select_cancel">선택해제</string>
+    <string name="basic">기본</string>
+
+
+    <string name="playlist_insert_play_msg">재생목록에 추가하고 듣기</string>
+    <string name="playlist_replace_play_meg">재생목록을 교체하고 듣기</string>
+    <string name="playlist_insert_play_in_play">재생목록에 이야기가 추가된 후 재생됩니다.</string>
+    <string name="all_play_msg">전체듣기</string>
+    <string name="fill_msg">보관함</string>
+    <string name="story_search_msg">이야기 검색</string>
+    <string name="msg_sort_1">이야기 제목 (가~하 순)</string>
+    <string name="msg_sort_2">이야기 제목 (하~가 순)</string>
+    <string name="msg_sort_3">지역명 (가~하 순)</string>
+    <string name="msg_sort_4">지역명 (하~가 순)</string>
+    <string name="msg_sort">재생목록 정렬</string>
+    <string name="msg_sort_change_complete">재생목록이 선택한 순서로 변경됩니다.</string>
+    <string name="msg_select_story_delete">선택된 이야기를 삭제하시겠습니까?</string>
+    <string name="msg_request_search">검색어를 입력하세요.</string>
+    <string name="msg_order">순서정렬</string>
+    <string name="msg_edit_complete">편집완료</string>
+    <string name="msg_text_size">글자크기</string>
+    <string name="msg_play_list_empty">재생목록이 없습니다.</string>
+    <string name="msg_select_fill">보관함을 선택해주세요.</string>
+
+    <string name="story">이야기</string>
+    <string name="multi_story">이야기</string>
+    <string name="editor">편집</string>
+    <string name="libraries">개의 보관함</string>
+    <string name="confirm">확인</string>
+
+    <string name="toast_story_insert_msg">재생목록에 %s 이야기가 추가되었습니다.</string>
+    <string name="toast_story_multi_insert_msg">재생목록에 %s 이야기가 추가되었습니다.</string>
+    <string name="permission_rquest_message">서비스를 원활하게 사용하기 위해서는 권한 설정항목을 활성화해주세요.</string>
+
+    <string name="rooted_message">탈옥된 단말기는 앱을 사용할 수 없습니다.</string>
+    <string name="emulator_message">에뮬레이터에서는 실행이 불가능합니다.</string>
+    <string name="Integrity_message">정상적으로 설치된 어플리케이션이 아닙니다.</string>
+
+    <string name="downlaod_complete">다운로드 완료</string>
+
+    <string name="tutorial_text_1">대한민국 대표 관광지의\n역사와 문화 이야기를 재미있게 들려주는\n오디오 가이드 서비스 오디(Odii)</string>
+    <string name="tutorial_text_1_2">오디(Odii)는 즐겁고 스마트한 여행이 되도록\n관광지 곳곳에 숨어있는 이야기를 재미있고 생생하게 들려주는\n한국관광공사의 오디오 가이드 앱입니다.</string>
+    <string name="tutorial_text_2">GPS, 지도 기반으로 내 주변의 관광지에 대한\n오디오 가이드 콘텐츠를 제공합니다.</string>
+    <string name="tutorial_text_3">문화관광 해설 오디오 뿐만 아니라\n관광지의 사진, 대본 등의 다양한 콘텐츠를\n함께 제공합니다.</string>
+    <string name="tutorial_text_4">Wifi 환경에서 미리 다운로드 받은 콘텐츠를\n실행하여 별도의 데이터 요금발생 없이\n이용하실 수 있습니다.</string>
+
+    <string name="tutorial_btn_text">여행 PLAY 시작하기</string>
+    <string name="update">업데이트</string>
+
+    <string name="msg_24_hour_dont_popup">오늘 하루 보지 않기</string>
+    <string name="msg_dont_popup">다시 보지 않기</string>
+    <string name="close">닫기</string>
+    <string name="read_script">대본보기</string>
+
+    <string name="add_playlist">재생목록 추가</string>
+    <string name="save_in_library">보관함에 담기</string>
+    <string name="playlist">재생목록</string>
+
+    <string name="settings">설정</string>
+
+    <string name="stamp_push_title">이벤트 안내</string>
+    <string name="stamp_push_go">바로 보기</string>
+    <string name="stamp_push_content">주변에 발도장 이벤트 진행 중인 관광지가 있습니다.\n지금 바로 참여하고 현장에서 경품도 받아가세요!</string>
+
+    <string name="permission_title">앱 접근권한 사용안내</string>
+    <!-- 변경 permission_content, 체크대상 -->
+    <string name="permission_content">오디 앱에서 사용하는 접근권한에 대하여 아래와 같이 안내해 드립니다.\n\n앱 접근 권한 중 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적인 제약이 발생합니다. 오디(Odii) 앱은 \&quot;발도장이벤트\&quot; 기능을 사용하기위해 앱이 닫혀 있을 때나 사용되지 않을 때 위치정보를 이용하여 서비스를 제공할 수 있으나 위치정보를 수집 및 저장하지 않습니다.\n\n
+        <b>* 위치 엑세스 권한</b>\n
+        - 앱 실행 중 관광지안내지점 접근 시 위치확인 후 해당정보 안내필요\n
+        - 위치사용 권한을 \&quot;항상허용\&quot;으로 설정하여 발도장 이벤트 및 모든 위치기반 서비스 활용 가능\n\n
+
+        <b>* 저장용량 액세스 권한</b>\n
+        - 내부 서비스 중 보관함 앨범설정 기능에 필요\n\n
+
+        <b>접근권한 변경방법</b>\n
+        휴대폰 설정>오디>항목 별 권한 변경
+    </string>
+    <!-- 변경 permission_content_2, 체크대상 1-->
+    <string name="permission_content_2">오디 앱에서 사용하는 접근권한에 대하여 아래와 같이 안내해 드립니다.\n앱 접근 권한은 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적으로 제약이 발생합니다.\n\n
+        <b>* 위치 엑세스 권한</b>\n
+        - 주변관광지정보 안내에 따른 필요\n
+
+        <b>* 저장용량 액세스 권한</b>\n
+        - 내부 서비스 중 보관함 앨범설정 기능에 필요\n\n
+
+        <b>접근권한 변경방법</b>\n
+        휴대폰 설정>오디>항목 별 권한 변경
+    </string>
+    <!-- 변경 permission_content_3, 체크대상 1-->
+    <string name="permission_title_3">앱 접근권한 사용안내</string>
+    <string name="permission_content_3">오디 앱에서 사용하는 접근권한에 대하여 아래와 같이 안내해 드립니다.\n\n앱 접근 권한 중 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적인 제약이 발생합니다. 오디(Odii) 앱은 \&quot;발도장이벤트\&quot; 기능을 사용하기위해 앱이 닫혀 있을 때나 사용되지 않을 때 위치정보를 이용하여 서비스를 제공할 수 있으나 위치정보를 수집 및 저장하지 않습니다.\n\n
+        <b>* 위치 엑세스 권한</b>\n
+        - 앱 실행 중 관광지안내지점 접근 시 위치확인 후 해당정보 안내필요\n
+        - 위치사용 권한을 \&quot;항상허용\&quot;으로 설정하여 발도장 이벤트 및 모든 위치기반 서비스 활용 가능\n\n
+
+        <b>접근권한 변경방법</b>\n
+        휴대폰 설정>오디>항목 별 권한 변경
+    </string>
+    <!-- 변경 permission_content_4, 체크대상 1-->
+    <string name="permission_content_4">오디 앱에서 사용하는 접근권한에 대하여 아래와 같이 안내해 드립니다.\n앱 접근 권한은 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적으로 제약이 발생합니다.\n\n
+        <b>* 위치 엑세스 권한</b>\n
+        - 주변관광지정보 안내에 따른 필요\n\n
+
+        <b>접근권한 변경방법</b>\n
+        휴대폰 설정>오디>항목 별 권한 변경
+    </string>
+    <!-- 변경 permission_content_location_alltime 추가-->
+    <string name="permission_content_location_alltime_title">위치엑서스 권한 사용안내</string>
+    <string name="permission_content_location_alltime">앱 접근 권한 중 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적인 제약이 발생합니다.\n오디(Odii) 앱은 위치엑서스 권한을 \&quot;항상허용\&quot;으로 설정할경우 \&quot;발도장이벤트\&quot; 기능을 사용할 수 있습니다.
+    </string>
+    <!-- 변경 permission_content_location_alltime_denied 추가, 체크대상 1-->
+    <string name="permission_content_location_alltime_denied_title">앱 접근권한 사용안내</string>
+    <string name="permission_content_location_alltime_denied">오디 앱에서 사용하는 접근권한에 대하여 아래와 같이 안내해 드립니다.\n\n앱 접근 권한 중 선택적 접근권한으로 허용에 동의하지 않으실 경우 서비스 사용에 부분적인 제약이 발생합니다. 오디(Odii) 앱은 \&quot;발도장이벤트\&quot; 기능을 사용하기위해 앱이 닫혀 있을 때나 사용되지 않을 때 위치정보를 이용하여 서비스를 제공할 수 있으나 위치정보를 수집 및 저장하지 않습니다.\n\n
+        <b>* 위치 엑세스 권한</b>\n
+        - 앱 실행 중 관광지안내지점 접근 시 위치확인 후 해당정보 안내필요\n
+        - 위치사용 권한을 \&quot;항상허용\&quot;으로 설정하여 발도장 이벤트 및 모든 위치기반 서비스 활용 가능\n\n
+
+        <b>* 저장용량 액세스 권한</b>\n
+        - 내부 서비스 중 보관함 앨범설정 기능에 필요\n\n
+
+        <b>접근권한 변경방법</b>\n
+        휴대폰 설정>오디>항목 별 권한 변경
+    </string>
+
+    <string name="disclosure_use_location_title">위치정보 사용</string>
+    <string name="disclosure_use_location_message">오디(Odii) 서비스는 개인정보를 다음의 목적을 위해 처리합니다.\n
+        처리한 개인정보는 다음의 목적으로만 이용하며, 별도 수집 및 저장하지 않습니다. 개인정보의 이용 목적이 변경될 시에는 사전 동의를 구할 예정입니다.\n\n
+        <b>* 위치정보 사용</b>\n
+        사용자의 GPS 위치정보를 활용하여 주변 관광정보에 대한 추천 관광지 알림 제공을 목적으로 개인정보를 처리합니다.\n\n
+
+        <b>* 백그라운드 위치정보 사용</b>\n
+        앱이 종료되거나 사용되지 않을 때도 지오펜스(Geofence)를 활용한 \&quot;발도장 이벤트\&quot; 푸시알림 제공을 목적으로 위치 데이터를 사용합니다.\n\n
+
+        이용자 개인정보는 원칙적으로 개인을 식별할 수 있는 개인정보를 수집하거나 저장하지 않습니다.
+    </string>
+
+    <string name="edit_list">목록편집</string>
+    <string name="drive_mode">드라이브모드</string>
+    <string name="drive_mode_msg">주행 중입니다\n안전 운전을 위해 정차 후 조작 해주시기 바랍니다.</string>
+
+    <string name="setting_non_check_location">GPS설정을 활성화해주세요.</string>
+
+
+    <string name="drive_mode_msg_1">위치 기반 알림을 켜시면 재생 목록 중 주행 중인 현재 위치 주변의 재생목록이 있을 경우 안내 알림을 받습니다.\n위치 기반 알림을 켜시겠습니까?</string>
+    <string name="drive_mode_msg_2">재생</string>
+    <string name="drive_mode_msg_3">위치기반 알림 끄기</string>
+    <string name="drive_mode_msg_4">안내 순서를 편집 하실 경우 처음부터 안내가 시작됩니다.\n안내가 완료된 관광지는 삭제해주세요.</string>
+    <string name="drive_mode_msg_5">재생목록 중 현재 주변의 이야기가 있습니다.\n재생 하시겠습니까?</string>
+    <string name="drive_mode_msg_6">재생목록 중 현재 주변의 \&apos;%s\&apos;가 있습니다.\n재생 하시겠습니까?</string>
+
+    <string name="driver_safety2" >주행 중입니다.\n안전 운전을 위해 정차 후\n조작 해주시기 바랍니다.</string>
+
+    <string name="location_usage">위치정보를 사용하고 있습니다.</string>
+
+    <string name="pe_title">오디 앱 이용을 위해\n 아래 접근 권한을 허용이 필요합니다.</string>
+    <string name="pe_button">확인</string>
+    <string name="pe_select">(선택)</string>
+    <string name="pe_required">필수</string>
+    <string name="pe_title_1">위치</string>
+    <string name="pe_title_2">알림</string>
+    <string name="pe_desc_1">지도 서비스 및 현 위치 확인</string>
+    <string name="pe_desc_2">푸시알림 서비스</string>
+    <string name="pe_desc_text">선택 권한은 서비스 사용 중 필요한 시점에 동의를 받고 있습니다.\n접근 권한을 허용 하지 않아도 앱 이용이 가능하나 일부 서비스 이용에 제한이 있을 수 있습니다.</string>
+
+    <string name="pe_title_3">오디오</string>
+    <string name="pe_title_4">이미지</string>
+    <string name="pe_desc_3">오디오 서비스 이용</string>
+    <string name="pe_desc_4">이미지 업로드</string>
+</resources>
+

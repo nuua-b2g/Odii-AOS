@@ -1,0 +1,480 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/view_mini_player_self"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@android:color/transparent"
+    android:clipChildren="false"
+    android:cropToPadding="false">
+
+    <!-- 손잡이 영역 -->
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_oc_toggle"
+        android:layout_width="60dp"
+        android:layout_height="26dp"
+        android:minWidth="26dp"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/ic_bt_mini_player_oc_toggle" />
+
+    <RelativeLayout
+        android:id="@+id/toast_view"
+        android:layout_width="match_parent"
+        android:layout_height="32dp"
+        android:background="#696CFF"
+        android:layout_alignBottom="@id/btn_oc_toggle"
+        android:visibility="gone"
+        tools:visibility="invisible">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_toast_msg"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_centerVertical="true"
+            android:fontFamily="sans-serif-medium"
+            android:gravity="center"
+            android:textColor="#FFFFFF"
+            android:textSize="12dp" />
+
+    </RelativeLayout>
+
+    <!-- layout_mini_player android:background="#E6FFFFFF" ,android:layout_height="72dp" -->
+    <!-- 154dp to 198dp to 212dp-->
+    <RelativeLayout
+        android:id="@+id/layout_mini_player"
+        android:layout_width="match_parent"
+        android:layout_height="198dp"
+        android:layout_below="@id/btn_oc_toggle"
+        android:background="#3F1A9D"
+        android:orientation="vertical"
+        android:focusable="false"
+        android:visibility="gone"
+        tools:visibility="visible">
+
+        <!--미니플레이어 높이 확장 72 -> 154dp 및 상하단 컴포넌트 재배치 , 상단-->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
+            <!-- mini_player_top ,paddingBottom 8dp to 16dp-->
+            <RelativeLayout
+                android:background="#00FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:layout_marginTop="24dp"
+                android:orientation="horizontal">
+
+                <!-- player_thumb 섬네일 미사용, 리소스 로드x -->
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:id="@+id/player_thumb"
+                    android:layout_width="42dp"
+                    android:layout_height="42dp"
+                    android:focusable="false"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:visibility="gone"
+                    tools:background="@drawable/icon"
+                    tools:visibility="gone"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:id="@+id/view_empty_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_centerVertical="true"
+                    android:layout_marginLeft="14dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_toRightOf="@id/player_thumb"
+                    android:contentDescription="@string/msg_play_list_empty"
+                    android:ellipsize="end"
+                    android:fontFamily="sans-serif-medium"
+                    android:gravity="left|center_vertical"
+                    android:maxLines="1"
+                    android:text="@string/msg_play_list_empty"
+                    android:textColor="#000000"
+                    android:textSize="12dp"
+                    android:visibility="gone" />
+
+                <!-- 실제 상단 아이콘 타이틀 mt 20-->
+                <LinearLayout
+                    android:id="@+id/view_play"
+                    android:layout_width="match_parent"
+                    android:layout_height="48dp"
+                    android:layout_marginLeft="20dp"
+                    android:layout_marginRight="14dp"
+                    android:layout_centerVertical="true"
+                    android:gravity="center_vertical"
+                    android:layout_toLeftOf="@id/btn_mini_player_close"
+                    android:layout_toRightOf="@id/player_thumb"
+                    android:focusable="true"
+                    android:orientation="horizontal"
+                    tools:background="#68FF6868">
+
+                    <!-- android:maxWidth="212dp" maxEms 9로 대체(테스트) -->
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mini_player_title"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:minHeight="32dp"
+                        android:ellipsize="end"
+                        android:focusable="false"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="left|center_vertical"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#FFFFFF"
+                        android:textSize="20dp"
+                        android:paddingRight="8dp"
+                        tools:text="오디오 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15"
+                        />
+
+                    <!-- 미사용 숨김 -->
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:layout_gravity="center_vertical"
+                        android:visibility="gone">
+                        <!-- 대본보기 표기 -->
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:id="@+id/view_show_script"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:minHeight="24dp"
+                            android:background="@drawable/box_circle_gray_mini_script_4dp"
+                            android:layout_gravity="center_vertical"
+                            android:gravity="center_vertical"
+                            android:orientation="horizontal"
+                            android:paddingLeft="4dp"
+                            android:paddingRight="4dp"
+                            tools:visibility="visible">
+
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:layout_width="12dp"
+                                android:layout_height="12dp"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="4dp"
+                                android:adjustViewBounds="true"
+                                android:background="@android:color/transparent"
+                                android:scaleType="fitXY"
+                                android:src="@drawable/ic_mini_player_script" />
+
+                            <androidx.appcompat.widget.AppCompatTextView
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_marginStart="6dp"
+                                android:layout_marginEnd="4dp"
+                                android:background="#00ffffff"
+                                android:text="@string/read_script"
+                                android:textColor="#ffcfbff8"
+                                android:maxLines="2"
+                                android:textSize="14dp" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <!-- 서브 타이틀
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/mini_player_subtitle"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:ellipsize="end"
+                        android:focusable="false"
+                        android:fontFamily="sans-serif-medium"
+                        android:gravity="left|center_vertical"
+                        android:maxLines="1"
+                        android:singleLine="true"
+                        android:textColor="#CCFFFFFF"
+                        android:textSize="12dp"
+                        android:visibility="visible"
+                        tools:text="오디오 서브제목_긴글자프리뷰 가나다라마바사아자차카타파하 아이우에오"
+                        />
+                     -->
+                    </LinearLayout>
+
+                </LinearLayout>
+
+                <!-- 미니플레이어 닫기버튼 메인타이틀 우측으로 이동 layout_marginTop -16dp to 0-->
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/btn_mini_player_close"
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:layout_alignParentRight="true"
+                    android:layout_centerVertical="true"
+                    android:layout_marginRight="20dp"
+
+                    android:clipChildren="false"
+                    android:contentDescription="미니플레이어 닫기"
+                    android:cropToPadding="false"
+                    android:padding="8dp"
+                    android:src="@drawable/ic_bt_miniplay_close_v2"
+                    android:visibility="gone"
+                    tools:visibility="visible" />
+            </RelativeLayout>
+            <!-- mini_player_bottom -->
+            <RelativeLayout
+                android:background="#00FFFFFF"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="top">
+
+                <!-- bottom의 상/하단 -->
+                <androidx.appcompat.widget.LinearLayoutCompat
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="120dp"
+                    android:orientation="vertical">
+
+                    <!-- 미니플레이어 시크파 준비중 layout_marginStart 14 -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:paddingLeft="20dp"
+                        android:paddingRight="20dp"
+                        android:minHeight="32dp">
+
+                        <!-- 42x25dp or 34x20dp -->
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_backward_sec"
+                            android:layout_width="36dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentLeft="true"
+                            android:layout_below="@id/seek_mini_player"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_bt_mini_backward_5sec_v2"
+                            android:contentDescription="@string/audio_backward_sec" />
+
+                        <androidx.appcompat.widget.AppCompatImageView
+                            android:id="@+id/btn_forward_sec"
+                            android:layout_width="36dp"
+                            android:layout_height="25dp"
+                            android:layout_alignParentRight="true"
+                            android:layout_below="@id/seek_mini_player"
+                            android:layout_marginTop="6dp"
+                            android:background="@drawable/ic_bt_mini_forward_5sec_v2"
+                            android:contentDescription="@string/audio_forward_sec" />
+
+                        <androidx.appcompat.widget.AppCompatSeekBar
+                            android:id="@+id/seek_mini_player"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_toRightOf="@id/btn_backward_sec"
+                            android:layout_toLeftOf="@id/btn_forward_sec"
+                            android:layout_centerVertical="true"
+                            android:layout_marginLeft="4dp"
+                            android:layout_marginRight="4dp"
+                            android:max="100"
+                            android:paddingStart="10dp"
+                            android:paddingEnd="10dp"
+                            android:progressDrawable="@drawable/player_progress_v2"
+                            android:splitTrack="false"
+                            android:thumb="@drawable/player_progress_thumb_white"
+                            tools:progress="50" />
+
+                        <!-- 현재 재생길이(시간) 표시 -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_timer_start"
+                            style="@style/font_letterSpacing_Num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/seek_mini_player"
+                            android:layout_marginLeft="48dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/vk_regular"
+                            android:nextFocusLeft="@id/mini_player_title"
+                            android:nextFocusRight="@id/tv_timer_end"
+                            android:textColor="#ff9b7fe4"
+                            android:textSize="12dp"
+                            android:text="00:00"
+                            tools:text="00:00"
+                            tools:background="#4400ff44"/>
+                        <!-- 미디어 재생길이(시간) 표시 -->
+                        <androidx.appcompat.widget.AppCompatTextView
+                            android:id="@+id/tv_timer_end"
+                            style="@style/font_letterSpacing_Num"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@id/seek_mini_player"
+                            android:layout_alignRight="@id/seek_mini_player"
+                            android:layout_marginRight="10dp"
+                            android:layout_marginTop="20dp"
+                            android:fontFamily="@font/vk_regular"
+                            android:textColor="#ff9b7fe4"
+                            android:textSize="12dp"
+                            android:text="00:00"
+                            tools:text="99:99"
+                            tools:background="#440044ff"/>
+                    </RelativeLayout>
+                    <!-- btn_mini_player 영역 기준-->
+                    <androidx.appcompat.widget.LinearLayoutCompat
+                        android:background="#00ffffff"
+                        android:id="@+id/view_bottom_buttons_right"
+                        android:layout_centerVertical="true"
+                        android:layout_alignParentRight="true"
+                        android:layout_marginLeft="20dp"
+                        android:layout_marginRight="20dp"
+                        android:layout_marginTop="12dp"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:weightSum="5"
+                        tools:background="#ff5544aa">
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="left|center_vertical"
+                            android:layout_weight="1"
+                            tools:background="#86FF4444">
+                            <!-- 다음 오디오, 대체기능 배속설정 ic_bt_player_1x_v2 to ic_bt_player_1x_white_v3-->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_mini_player_speed"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:background="@drawable/ic_bt_mini_player_1x_white"
+                                android:nextFocusForward="@id/btn_mini_player_list" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            tools:background="#86F344FF">
+                            <!--이전 오디오(추가) -->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:visibility="visible"
+                                android:id="@+id/btn_mini_player_prev"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginRight="12dp"
+                                android:background="@drawable/ic_bt_mini_prev_v2"
+                                android:contentDescription="@string/audio_prev"
+                                android:nextFocusForward="@id/btn_mini_player_list" />
+
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <RelativeLayout
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:layout_weight="1"
+                            tools:background="#86FFB444">
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_mini_player_play"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:layout_centerInParent="true"
+                                android:background="@drawable/ic_bt_mini_play_v3"
+                                android:contentDescription="@string/audio_play"
+                                android:nextFocusForward="@id/btn_mini_player_speed" />
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_mini_player_pause"
+                                android:layout_width="44dp"
+                                android:layout_height="44dp"
+                                android:layout_centerVertical="true"
+                                android:layout_alignLeft="@id/btn_mini_player_play"
+                                android:background="@drawable/ic_bt_mini_pause_v3"
+                                android:contentDescription="@string/audio_pause"
+                                android:nextFocusForward="@id/btn_mini_player_speed" />
+                        </RelativeLayout>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="center"
+                            android:layout_weight="1"
+                            tools:background="#8644C4FF">
+                            <!--다음 오디오 -->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:visibility="visible"
+                                android:id="@+id/btn_mini_player_next"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:layout_marginLeft="12dp"
+                                android:background="@drawable/ic_bt_mini_next_v2"
+                                android:contentDescription="@string/audio_next"
+                                android:nextFocusForward="@id/btn_mini_player_list" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+
+                        <androidx.appcompat.widget.LinearLayoutCompat
+                            android:layout_width="0dp"
+                            android:layout_height="match_parent"
+                            android:gravity="right|center_vertical"
+                            android:layout_weight="1"
+                            tools:background="#86E2FF63">
+                            <!--다음 오디오 -->
+                            <androidx.appcompat.widget.AppCompatImageView
+                                android:id="@+id/btn_mini_player_list"
+                                android:layout_width="26dp"
+                                android:layout_height="26dp"
+                                android:background="@drawable/ic_bt_mini_plist_v3"
+                                android:contentDescription="@string/audio_list"
+                                android:nextFocusForward="@id/btn_mini_player_close" />
+                        </androidx.appcompat.widget.LinearLayoutCompat>
+                    </androidx.appcompat.widget.LinearLayoutCompat>
+
+                </androidx.appcompat.widget.LinearLayoutCompat>
+
+            </RelativeLayout>
+        </LinearLayout>
+        <!-- a -->
+    </RelativeLayout>
+
+    <!-- floating 미니플레이어 (레이아웃 제어에서 코드에서 숨김상태 유지중 -->
+    <RelativeLayout
+        android:id="@+id/layout_float"
+        android:layout_width="match_parent"
+        android:layout_height="72dp"
+        android:background="@android:color/transparent"
+        android:importantForAccessibility="no"
+        android:visibility="gone"
+        tools:visibility="invisible">
+
+        <RelativeLayout
+            android:id="@+id/btn_mini_player_play2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerInParent="true"
+            android:layout_marginRight="20dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:id="@+id/player_thumb2"
+                android:layout_width="42dp"
+                android:layout_height="42dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/box_circle"
+                android:clickable="false"
+                android:contentDescription="미니플레이어 열기" />
+
+            <ImageView
+                android:id="@+id/iv_float"
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:layout_centerInParent="true"
+                android:background="@drawable/ic_bt_miniplay_float"
+                android:clickable="false"
+                android:importantForAccessibility="no" />
+
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- 미니플레이어 닫기버튼 위치변경
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/btn_mini_player_close"
+        android:layout_width="30dp"
+        android:layout_height="30dp"
+        android:layout_alignTop="@id/layout_mini_player"
+        android:layout_alignParentRight="true"
+        android:layout_marginTop="-15dp"
+        android:layout_marginRight="20dp"
+        android:clipChildren="false"
+        android:contentDescription="미니플레이어 닫기"
+        android:cropToPadding="false"
+        android:padding="5dp"
+        android:src="@drawable/ic_bt_miniplay_close"
+        android:visibility="gone"
+        tools:visibility="visible" />
+    -->
+</RelativeLayout>

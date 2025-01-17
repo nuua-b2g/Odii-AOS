@@ -35,7 +35,7 @@ public class AppTutorialActivity extends BaseActivity {
 	private HashMap<String,String> mapLayoutContentDesc = new HashMap<>();
 	private int positionCurrent = 0;
 	private final String mSelectedColor = "#696CFF";
-	private final String mUnselectedColor = "#EBEBEB";
+	private final String mUnselectedColor = "#C0C0C0";
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {

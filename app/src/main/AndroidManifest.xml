@@ -57,27 +57,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-            <!-- android:autoVerify="true 추가 -->
-            <intent-filter android:autoVerify="true">
-                <action android:name="android.intent.action.VIEW" />
-                <category android:name="android.intent.category.DEFAULT" />
-                <category android:name="android.intent.category.BROWSABLE" />
-                <data
-                    android:host="spot"
-                    android:scheme="stgapplink" />
-                <!--
-                host 변경 전
-                <data
-                    android:host="odii.or.kr"
-                    android:scheme="http" />
-                -->
-                <!--
-                host 변경 후,
-                host="www.odii.kr" 변경
-                -->
-                <data
-                    android:host="www.odii.kr"
-                    android:scheme="http" />
+
+            <intent-filter>
+                <data android:scheme="ktoodii" />
+                <action android:name="android.intent.action.VIEW"/>
+                <category android:name="android.intent.category.DEFAULT"/>
+                <category android:name="android.intent.category.BROWSABLE"/>
             </intent-filter>
         </activity>
         <activity

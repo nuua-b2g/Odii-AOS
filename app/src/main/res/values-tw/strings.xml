@@ -1,0 +1,265 @@
+<resources>
+    <string name="app_name">Odii</string>
+    <string name="action_settings">Settings</string>
+    <string name="default_notification_channel_id">odii_push_id_1234</string>
+    <string name="language">tw</string>
+
+    <string name="language_title">語言</string>
+
+    <string name="ok">確認</string>
+    <string name="cancel">取消</string>
+    <string name="setting">設定</string>
+    <string name="download">下載</string>
+    <string name="make">建立</string>
+    <string name="finish">退出</string>
+    <string name="empty_story">在選定的保管箱中沒有任何故事。</string>
+    <string name="retry">重試</string>
+
+    <string name="locker_make">建立保管箱</string>
+    <string name="locker_edit">修改保管箱</string>
+    <string name="request_locker_name">請輸入保管箱的名稱。</string>
+    <string name="not_available_sms">該終端無法傳送SMS。</string>
+
+    <string name="empty_player_list">沒有播放列表。</string>
+    <string name="empty_locker_list">沒有保管箱列表</string>
+    <string name="empty_downlaod_list">下載列表為空</string>
+
+    <string name="storage_limit_error">沒有足夠的儲存空間。\n請在釋放儲存空間後再次使用。</string>
+    <string name="network_use_message">根據正在使用的流量費制度，可能要收取流量通話費。\n\n要繼續嗎？</string>
+    <string name="network_use_message2">"流量網路被阻塞。\n是否要使用流量網路？\n\n根據使用的流量費用制度，可能會收取資料通話費。</string>
+    <string name="download_message">下載%s個語音導覽。</string>
+    <string name="locker_list_remove_message">裝進保管箱裡的所有故事都將被刪除。</string>
+    <string name="story_sort_title">播放列表的排列</string>
+    <string name="story_remove_message">是否確實要刪除選定的故事？</string>
+    <string name="network_error">未連接到網路，或網路狀態不順暢。</string>
+
+    <string name="text_size_change">字級設定</string>
+
+    <string name="story_list_add_message">正在向當前播放列表中添加故事</string>
+    <string name="toast_play">聆聽</string>
+    <string name="toast_add">新增</string>
+    <string name="toast_locker">裝進</string>
+    <string name="toast_del">刪除</string>
+    <string name="toast_downlaod">下載</string>
+    <string name="toast_detail">查看詳情</string>
+
+    <string name="quit">你確定要退出程式嗎?</string>
+    <string name="message_yes">確認</string>
+    <string name="message_no">取消</string>
+
+    <string name="all_select">全選</string>
+    <string name="all_select_cancel">全部取消</string>
+    <string name="delete_selected">刪除已選項</string>
+    <string name="playlist_change_order">排序</string>
+    <string name="playlist_save_order">更改順序</string>
+    <string name="playlist_playing">正在播放</string>
+    <string name="playlist_show_map">查看地圖</string>
+    <string name="playlist_show_list">查看列表</string>
+
+    <string name="select_cancel">取消選擇</string>
+    <string name="basic">1X(預設)</string>
+
+    <string name="playlist_insert_play_msg">新增並收聽播放列表</string>
+    <string name="playlist_replace_play_meg">取代播放列表並收聽</string>
+    <string name="playlist_insert_play_in_play">在將故事新增到播放列表後進行播放。</string>
+    <string name="all_play_msg">全部播放</string>
+    <string name="fill_msg">保管箱</string>
+    <string name="story_search_msg">故事搜尋</string>
+    <string name="msg_sort_1">故事的標題（按升序排列）</string>
+    <string name="msg_sort_2">故事的標題（按降序排列）</string>
+    <string name="msg_sort_3">地區名（按升序排列）</string>
+    <string name="msg_sort_4">地區名（按降序排列）</string>
+    <string name="msg_sort">播放列表的排列</string>
+    <string name="msg_sort_change_complete">播放列表按選定的順序更改。</string>
+    <string name="msg_select_story_delete">是否確實要刪除選定的故事？</string>
+    <string name="msg_request_search">請輸入關鍵字搜尋</string>
+    <string name="msg_order">排列順序</string>
+    <string name="msg_edit_complete">完成編輯</string>
+    <string name="msg_text_size">字級設定</string>
+    <string name="msg_play_list_empty">播放列表為空。</string>
+    <string name="msg_select_fill">請選擇一個保管箱。</string>
+
+    <string name="story">個語音導覽</string>
+    <string name="multi_story">個語音導覽</string>
+    <string name="editor">編輯</string>
+    <string name="libraries">個保管箱</string>
+    <string name="confirm">確認</string>
+
+    <string name="toast_story_insert_msg">%s個語音導覽已新增至播放列表。</string>
+    <string name="toast_story_multi_insert_msg">%s個語音導覽已新增至播放列表。</string>
+    <string name="permission_rquest_message">為保證服務的正常使用，請將訪問權限設定為\&quot;始終允許\&quot;。</string>
+
+    <string name="rooted_message">越獄手機無法使用該應用程式。</string>
+    <string name="emulator_message">模擬器無法執行該應用程式。</string>
+    <string name="Integrity_message">這不是正常安裝的應用程式。</string>
+
+    <string name="downlaod_complete">下載完畢</string>
+
+    <string name="tutorial_text_1">Odii（原Smart Tour）是一款旅遊景點語音導覽APP\n透過生動的語音講解來向世界各地的遊客介紹韓國名勝古蹟的歷史和文化</string>
+    <string name="tutorial_text_1_2">Odii（原Smart Tour）是由韓國旅遊發展局主持研發的語音導覽APP\n透過生動有趣的語音講解方式介紹隱藏在韓國名勝古蹟各處的歷史文化故事\n讓旅行變得更加愉快和有深度！</string>
+    <string name="tutorial_text_2">基於GPS和地圖為您提供周邊旅遊景點的語音導覽內容。</string>
+    <string name="tutorial_text_3">提供旅遊景點圖片、文字實錄、文化旅遊語音導覽等多種內容。</string>
+    <string name="tutorial_text_4">您可以在Wi-Fi環境下預先下載內容，使用時將不會額外消耗資料流量。</string>
+
+    <string name="tutorial_btn_text">開始旅行PLAY</string>
+    <string name="update">更新</string>
+
+    <string name="msg_24_hour_dont_popup">今天不開此窗</string>
+    <string name="msg_dont_popup">不再提示</string>
+    <string name="close">關閉</string>
+    <string name="read_script">文字內容</string>
+
+    <string name="add_playlist">新增播放清單</string>
+    <string name="save_in_library">放入保管箱</string>
+    <string name="playlist">播放列表</string>
+
+    <string name="settings">設定</string>
+
+    <string name="stamp_push_title">活動指南</string>
+    <string name="stamp_push_go">觀看</string>
+    <string name="stamp_push_content">附近有一個旅遊景點正在舉辦腳印活動。\n馬上加入，當場領獎！</string>
+
+
+    <!-- 변경 permission_content_location_alltime 추가-->
+    <string name="permission_content_location_alltime_title">应用程序访问权限</string>
+    <string name="permission_content_location_alltime">如您拒绝向Odii提供访问权限，服务使用将部分受限。\n\n
+
+        仅在将Odii位置访问权限设置为\&quot;始终允许\&quot;时，方可使用\&quot;打卡活动\&quot;功能。
+    </string>
+    <!-- 변경 permission_content_location_alltime_denied 추가, 체크대상 1-->
+    <string name="permission_content_location_alltime_denied_title">应用程序访问权限</string>
+    <string name="permission_content_location_alltime_denied">Odii使用的访问权限如下：\n\n
+
+        如您拒绝提供访问权限，服务使用将部分受限。\n\n
+
+        为确保\&quot;打卡活动\&quot;功能的正常使用，Odii（原Smart Tour）可能会在不收集或保存位置信息的前提下，在应用程序关闭或未使用期间访问您的位置信息以向您提供相关服务。\n\n
+
+        <b>* 位置访问权限</b>\n
+        - 应用程序运行过程中，靠近旅游景点时访问位置信息后提供相关旅游信息\n
+        - 仅在将位置访问权限设置为\&quot;始终允许\&quot;时，方可使用所有基于位置提供的服务和参加\&quot;打卡活动\&quot;\n\n
+
+        <b>* 本机存储访问权限</b>\n
+        - 用于上传照片和存储临时文件\n\n
+
+        访问权限变更方法：\n
+        手机设置>Odii>各项权限变更
+    </string>
+
+    <string name="disclosure_use_location_title">使用位置信息</string>
+    <string name="disclosure_use_location_message">Odii服务处理个人信息的目的如下。\n\n
+        <b>* 使用位置信息的目的</b>\n
+        利用用户的GPS位置信息，向用户推送周边旅游景点的推荐通知。\n\n
+
+        <b>* 使用后台位置信息的目的</b>\n
+        在应用程序关闭或未使用时，也能通过地理围栏（Geofence）功能向用户提供\&quot;打卡活动\&quot;的通知推送服务。\n\n
+
+        处理后的个人信息仅用于以上目的，不会单独收集和存储。当个人信息的使用目的发生变化时，将事先征得用户本人的同意。\n\n
+
+        原则上不收集或存储可识别个人身份的用户个人信息。
+    </string>
+
+    <string name="edit_list">编辑列表</string>
+    <string name="drive_mode">驱动模式</string>
+    <string name="drive_mode_msg">我在开车模式。\n为了安全驾驶，请停车后操作。</string>
+
+    <string name="setting_non_check_location">请开启gps定位。</string>
+
+
+    <string name="drive_mode_msg_1">打开定位通知的话，播放类别中，会接收到出现在所在位置的周边播放目录。\n您要打开定位通知吗？</string>
+    <string name="drive_mode_msg_2">播放</string>
+    <string name="drive_mode_msg_3">关闭定位通知</string>
+    <string name="drive_mode_msg_4">编辑介绍顺序时，会从头开始介绍。\请删除已完成介绍的旅游景点。</string>
+    <string name="drive_mode_msg_5">再生リストの中に、現在地周辺のストーリーがあります。\n您要播放吗？</string>
+    <string name="permission_title">應用程式訪問權限</string>
+    <!-- 變更 permission_content, 檢查對象 -->
+    <string name="permission_content">Odii使用的訪問權限如下：\n\n
+
+        如您拒絕提供訪問權限，服務使用將部分受限。\n\n
+
+        為確保\&quot;打卡活動\&quot;功能的正常使用，Odii（原Smart Tour）可能會在不收集或保存位置信息的前提下，在應用程式關閉或未使用期間訪問您的位置信息以向您提供相關服務。\n\n
+
+        <b>* 位置訪問權限</b>\n
+        - 應用程式運行過程中，靠近旅遊景點時訪問位置信息後提供相關旅遊信息\n
+        - 僅在將位置訪問權限設置為\&quot;始終允許\&quot;時，方可使用所有基於位置提供的服務和參加\&quot;打卡活動\&quot;\n\n
+
+        <b>* 本機儲存訪問權限</b>\n
+        - 用於上傳照片和儲存臨時檔案\n\n
+
+        訪問權限變更方法：\n
+        手機設置>Odii>各項權限變更
+    </string>
+    <!-- 變更 permission_content_2, 檢查對象 1-->
+    <string name="permission_content_2">Odii使用的訪問權限如下：\n\n
+
+        如您拒絕提供訪問權限，服務使用將部分受限。\n\n
+
+        為確保\&quot;打卡活動\&quot;功能的正常使用，Odii（原Smart Tour）可能會在不收集或保存位置信息的前提下，在應用程式關閉或未使用期間訪問您的位置信息以向您提供相關服務。\n\n
+
+        <b>* 位置訪問權限</b>\n
+        - 應用程式運行過程中，靠近旅遊景點時訪問位置信息後提供相關旅遊信息\n
+        - 僅在將位置訪問權限設置為\&quot;始終允許\&quot;時，方可使用所有基於位置提供的服務和參加\&quot;打卡活動\&quot;\n\n
+
+        <b>* 本機儲存訪問權限</b>\n
+        - 用於上傳照片和儲存臨時檔案\n\n
+
+        訪問權限變更方法：\n
+        手機設置>Odii>各項權限變更
+    </string>
+    <!-- 變更 permission_content_3, 檢查對象 1-->
+    <string name="permission_title_3">應用程式訪問權限</string>
+    <string name="permission_content_3">Odii使用的訪問權限如下：\n\n
+
+        如您拒絕提供訪問權限，服務使用將部分受限。\n\n
+
+        為確保\&quot;打卡活動\&quot;功能的正常使用，Odii（原Smart Tour）可能會在不收集或保存位置信息的前提下，在應用程式關閉或未使用期間訪問您的位置信息以向您提供相關服務。\n\n
+
+        <b>* 位置訪問權限</b>\n
+        - 應用程式運行過程中，靠近旅遊景點時訪問位置信息後提供相關旅遊信息\n
+        - 僅在將位置訪問權限設置為\&quot;始終允許\&quot;時，方可使用所有基於位置提供的服務和參加\&quot;打卡活動\&quot;\n\n
+
+        <b>* 本機儲存訪問權限</b>\n
+        - 用於上傳照片和儲存臨時檔案\n\n
+
+        訪問權限變更方法：\n
+        手機設置>Odii>各項權限變更
+    </string>
+    <!-- 變更 permission_content_4, 檢查對象 1-->
+    <string name="permission_content_4">Odii使用的訪問權限如下：\n\n
+
+        如您拒絕提供訪問權限，服務使用將部分受限。\n\n
+
+        為確保\&quot;打卡活動\&quot;功能的正常使用，Odii（原Smart Tour）可能會在不收集或保存位置信息的前提下，在應用程式關閉或未使用期間訪問您的位置信息以向您提供相關服務。\n\n
+
+        <b>* 位置訪問權限</b>\n
+        - 應用程式運行過程中，靠近旅遊景點時訪問位置信息後提供相關旅遊信息\n
+        - 僅在將位置訪問權限設置為\&quot;始終允許\&quot;時，方可使用所有基於位置提供的服務和參加\&quot;打卡活動\&quot;\n\n
+
+        <b>* 本機儲存訪問權限</b>\n
+        - 用於上傳照片和儲存臨時檔案\n\n
+
+        訪問權限變更方法：\n
+        手機設置>Odii>各項權限變更
+    </string>
+
+    <string name="drive_mode_msg_6">播放清單中有目前周邊的 \&apos;%s\&apos;。\n是否播放？</string>
+
+    <string name="driver_safety2" >我在駕駛模式中。\n為了安全駕駛\n請在停車後操作。</string>
+
+    <string name="location_usage">正在使用使用者的位置信息。</string>
+
+    <string name="pe_title">為了使用該應用程式\n需要允許以下訪問權限。</string>
+    <string name="pe_button">確認</string>
+    <string name="pe_select">(選擇)</string>
+    <string name="pe_required">必要</string>
+    <string name="pe_title_1">位置</string>
+    <string name="pe_title_2">通知</string>
+    <string name="pe_desc_1">地圖服務和當前位置</string>
+    <string name="pe_desc_2">推播通知服務</string>
+    <string name="pe_desc_text">選擇權限會在使用服務時請求同意。\n即使不允許訪問權限，也可以使用應用程式，但某些服務可能會受限。</string>
+    <string name="pe_title_3">音訊</string>
+    <string name="pe_title_4">圖像</string>
+    <string name="pe_desc_3">使用音訊服務</string>
+    <string name="pe_desc_4">上傳圖像</string>
+
+</resources>
+

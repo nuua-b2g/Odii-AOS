@@ -339,6 +339,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 				case "zh_TW":
 					locale = "zh";
 					break;
+				case "tw":
+					locale = "tw";
+					break;
 				case "ja":
 					locale = "ja";
 					break;
@@ -1604,6 +1607,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		switch (language) {
 			case "zh":
 				language = "cn1";
+				break;
+			case "tw":
+				language = "cn2";
 				break;
 			case "ja":
 				language = "jp";

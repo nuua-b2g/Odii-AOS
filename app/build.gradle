@@ -18,8 +18,8 @@ android {
         minSdkVersion 21
         compileSdk 34
         targetSdkVersion 34
-        versionCode 104
-        versionName "4.3.4"
+        versionCode 108
+        versionName "4.3.5"
         multiDexEnabled true
         buildConfigField("String", "SIGN_ACCESS_KEY", sign_access_key)
     }

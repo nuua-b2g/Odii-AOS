@@ -698,6 +698,12 @@ public class StoryDbManager extends SQLiteOpenHelper {
 			//item_langCode = "cn";
 			item_langCode = "cn1";
 		}
+		else if(sLocale.contains("tw"))
+		{
+			//item_langCode = "'%cn%'"; //"cn1" 인데 "cn"을 포함하는것으로 처리하자
+			//item_langCode = "cn";
+			item_langCode = "cn2";
+		}
 		else if(sLocale.contains("ja"))
 		{
 			//item_langCode = "'%jp%'";

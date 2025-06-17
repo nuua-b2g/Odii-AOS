@@ -34,6 +34,9 @@ public class AnalyticsInterface {
 			case "zh":
 				sb.append("z_");
 				break;
+			case "tw":
+				sb.append("t_");
+				break;
 			case "ja":
 				sb.append("j_");
 				break;
@@ -57,6 +60,9 @@ public class AnalyticsInterface {
 				break;
 			case "zh":
 				sb.append("z_");
+				break;
+			case "tw":
+				sb.append("t_");
 				break;
 			case "ja":
 				sb.append("j_");

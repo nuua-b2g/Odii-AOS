@@ -71,6 +71,9 @@ public class BaseActivity extends AppCompatActivity {
 				case "zh_TW":
 					locale = "zh";;
 					break;
+				case "tw":
+					locale = "tw";
+					break;
 				case "ja":
 					locale = "ja";
 					break;

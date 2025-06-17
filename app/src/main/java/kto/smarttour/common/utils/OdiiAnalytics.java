@@ -25,6 +25,8 @@ public class OdiiAnalytics {
 		//DB 오디오리소스 lang_code와도 같은값으로 치환중..
 		if ("zh".equals(langCode)) {
 			langCode = "cn1";
+		} else if("tw".equals(langCode)) {
+			langCode = "cn2";
 		} else if("ja".equals(langCode)) {
 			langCode = "jp";
 		}
@@ -62,6 +64,8 @@ public class OdiiAnalytics {
 		String country = CommonUtils.getCountry(context);
 		if ("zh".equals(langCode)) {
 			langCode = "cn1";
+		} else if("tw".equals(langCode)) {
+			langCode = "cn2";
 		} else if("ja".equals(langCode)) {
 			langCode = "jp";
 		}

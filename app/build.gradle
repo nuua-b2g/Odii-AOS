@@ -4,6 +4,7 @@ apply plugin: 'com.google.firebase.crashlytics'
 apply plugin: 'org.jetbrains.kotlin.android'
 
 android {
+    namespace 'kto.smarttour'
 //      서명 정보
     signingConfigs {
         release {
@@ -18,8 +19,8 @@ android {
         minSdkVersion 21
         compileSdk 34
         targetSdkVersion 34
-        versionCode 108
-        versionName "4.3.5"
+        versionCode 109
+        versionName "4.3.6"
         multiDexEnabled true
         buildConfigField("String", "SIGN_ACCESS_KEY", sign_access_key)
     }
@@ -47,10 +48,6 @@ android {
         }
     }
 
-    lintOptions {
-        checkReleaseBuilds false
-        abortOnError false
-    }
 
     buildFeatures {
         dataBinding true
@@ -60,19 +57,15 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INF/LICENSE.md'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INF/license.txt'
-        exclude 'META-INF/NOTICE'
-        exclude 'META-INF/NOTICE.md'
-        exclude 'META-INF/NOTICE.txt'
-        exclude 'META-INF/INDEX.LIST'
-        exclude 'META-INF/notice.txt'
-        exclude 'META-INF/ASL2.0'
+        resources {
+            excludes += ['META-INF/DEPENDENCIES', 'META-INF/LICENSE', 'META-INF/LICENSE.md', 'META-INF/LICENSE.txt', 'META-INF/license.txt', 'META-INF/NOTICE', 'META-INF/NOTICE.md', 'META-INF/NOTICE.txt', 'META-INF/INDEX.LIST', 'META-INF/notice.txt', 'META-INF/ASL2.0']
+        }
+    }
+
+    lint {
+        abortOnError false
+        checkReleaseBuilds false
     }
 }
 

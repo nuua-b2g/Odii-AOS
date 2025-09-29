@@ -259,7 +259,9 @@
     <string name="pe_desc_text">選択権限はサービス利用中に必要な時点で同意を求められています。\nアクセス許可を許可しなくてもアプリは使用可能ですが、一部のサービスが制限される場合があります。</string>
     <string name="pe_title_3">オーディオ</string>
     <string name="pe_title_4">画像</string>
+    <string name="pe_title_5">カメラ</string>
     <string name="pe_desc_3">オーディオサービスを使用する</string>
     <string name="pe_desc_4">画像をアップロードする</string>
+    <string name="pe_desc_5">写真と動画を撮影する</string>
 </resources>
 

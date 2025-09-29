@@ -260,7 +260,9 @@
     <string name="pe_desc_text">选择权限在服务使用中需要时请求同意的。\n即使您不允许访问权限，应用仍然可以使用，但某些服务可能受到限制。</string>
     <string name="pe_title_3">音频</string>
     <string name="pe_title_4">图像</string>
+    <string name="pe_title_5">相机</string>
     <string name="pe_desc_3">使用音频服务</string>
     <string name="pe_desc_4">上传图像</string>
+    <string name="pe_desc_5">拍照和录像</string>
 </resources>
 

@@ -58,13 +58,13 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
                 <!-- 하얀색 동그라미 박스 -->
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/blue_circle"
                     android:src="@drawable/geoaltfill"/>
 
@@ -77,14 +77,14 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="4dp"
                 android:orientation="horizontal">
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_marginEnd="8dp"
+                    android:layout_marginEnd="6dp"
                     android:text="@string/pe_title_1"
-                    android:textSize="16sp"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:textColor="@android:color/black"/>
                 <TextView
@@ -102,7 +102,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pe_desc_1"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="#909090"/>
 
@@ -118,12 +118,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/blue_circle"
                     android:src="@drawable/noti"/>
                 <!-- 타이틀, "(필수)" 텍스트 -->
@@ -135,14 +135,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="4dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="6dp"
                             android:text="@string/pe_title_2"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>
                         <TextView
@@ -160,7 +160,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pe_desc_2"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="#909090"/>
 
@@ -174,12 +174,12 @@
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/blue_circle"
                     android:src="@drawable/audio"/>
                 <!-- 타이틀, "(필수)" 텍스트 -->
@@ -191,14 +191,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="4dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="6dp"
                             android:text="@string/pe_title_3"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>
                         <TextView
@@ -216,7 +216,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pe_desc_3"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="#909090"/>
 
@@ -224,18 +224,18 @@
 
 
             </LinearLayout>
-            <!-- 두 번째 로우 -->
+            <!-- 네 번째 로우 -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal"
                 android:gravity="center"
-                android:layout_marginBottom="14dp">
+                android:layout_marginBottom="10dp">
                 <androidx.appcompat.widget.AppCompatImageView
-                    android:layout_width="48dp"
-                    android:layout_height="48dp"
-                    android:padding="12dp"
-                    android:layout_marginEnd="16dp"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:padding="10dp"
+                    android:layout_marginEnd="12dp"
                     android:background="@drawable/blue_circle"
                     android:src="@drawable/image"/>
                 <!-- 타이틀, "(필수)" 텍스트 -->
@@ -247,14 +247,14 @@
                     <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginBottom="8dp"
+                        android:layout_marginBottom="4dp"
                         android:orientation="horizontal">
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
-                            android:layout_marginEnd="8dp"
+                            android:layout_marginEnd="6dp"
                             android:text="@string/pe_title_4"
-                            android:textSize="16sp"
+                            android:textSize="14sp"
                             android:textStyle="bold"
                             android:textColor="@android:color/black"/>
                         <TextView
@@ -272,7 +272,64 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:text="@string/pe_desc_4"
-                        android:textSize="14sp"
+                        android:textSize="12sp"
+                        android:textStyle="normal"
+                        android:textColor="#909090"/>
+
+                </LinearLayout>
+
+
+            </LinearLayout>
+            <!-- 다섯 번째 로우 -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="center"
+                android:layout_marginBottom="10dp">
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:layout_marginEnd="12dp"
+                    android:background="@drawable/blue_circle"
+                    android:padding="10dp"
+                    android:src="@drawable/camera" />
+                <!-- 타이틀, "(필수)" 텍스트 -->
+                <LinearLayout
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginBottom="4dp"
+                        android:orientation="horizontal">
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginEnd="6dp"
+                            android:text="@string/pe_title_5"
+                            android:textSize="14sp"
+                            android:textStyle="bold"
+                            android:textColor="@android:color/black"/>
+                        <TextView
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="@string/pe_select"
+                            android:textSize="12sp"
+                            android:textStyle="bold"
+                            android:textColor="#5D64FB" />
+
+                    </LinearLayout>
+
+                    <!-- 서브타이틀 -->
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="@string/pe_desc_5"
+                        android:textSize="12sp"
                         android:textStyle="normal"
                         android:textColor="#909090"/>
 
@@ -301,7 +358,7 @@
                 android:layout_weight="3"
                 android:text="@string/pe_desc_text"
                 android:textColor="#909090"
-                android:textSize="14sp" />
+                android:textSize="12sp" />
 
         </LinearLayout>
 

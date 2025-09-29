@@ -224,7 +224,9 @@
 
     <string name="pe_title_3">오디오</string>
     <string name="pe_title_4">이미지</string>
+    <string name="pe_title_5">카메라</string>
     <string name="pe_desc_3">오디오 서비스 이용</string>
     <string name="pe_desc_4">이미지 업로드</string>
+    <string name="pe_desc_5">사진 및 동영상 촬영</string>
 </resources>
 

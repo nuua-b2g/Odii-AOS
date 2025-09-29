@@ -258,8 +258,10 @@
     <string name="pe_desc_text">選擇權限會在使用服務時請求同意。\n即使不允許訪問權限，也可以使用應用程式，但某些服務可能會受限。</string>
     <string name="pe_title_3">音訊</string>
     <string name="pe_title_4">圖像</string>
+    <string name="pe_title_5">相機</string>
     <string name="pe_desc_3">使用音訊服務</string>
     <string name="pe_desc_4">上傳圖像</string>
+    <string name="pe_desc_5">拍照和錄影</string>
 
 </resources>
 

@@ -1052,16 +1052,7 @@ public class PlayerService extends MediaBrowserServiceCompat implements AudioMan
 
 		ComponentName mediaButtonReceiver = new ComponentName(this, MediaButtonReceiver.class);
 
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-			//PendingIntent pIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
-			//PendingIntentUtils
-			PendingIntent pIntent = PendingIntentUtils.getActivity(this, 0, new Intent(), 0);
-			mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, pIntent);
-		}
-		else {
-			mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, null);
-		}
-
+		mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, null);
 		mediaSessionCompat.setCallback(mediaSessionCallback);
 		mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
 		mediaSessionCompat.setPlaybackToLocal(AudioManager.STREAM_MUSIC);

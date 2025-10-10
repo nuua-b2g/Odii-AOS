@@ -1051,8 +1051,32 @@ public class PlayerService extends MediaBrowserServiceCompat implements AudioMan
 	private void initMediaSession() {
 
 		ComponentName mediaButtonReceiver = new ComponentName(this, MediaButtonReceiver.class);
+		/*
+		    'NUUA202510 : 변경내용'
+		    오류 해결
+		    -> java.lang.IllegalArgumentException: The media button receiver cannot be set to an activity.
+		    error code:
+		    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+			    //PendingIntent pIntent = PendingIntent.getActivity(this, 0, new Intent(), PendingIntent.FLAG_IMMUTABLE);
+			    //PendingIntentUtils
+			    PendingIntent pIntent = PendingIntentUtils.getActivity(this, 0, new Intent(), 0);
+			    mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, pIntent);
+		    }
+		    else {
+			    mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, null);
+		    }
 
+		    수정 근거:
+		    Activity 를 MediaButtonReceiver 로 넘길 수 없음.
+		    API 21 이상에서는 시스템이 자동으로 활성화된 MediaSession에 미디어 버튼 이벤트를 전달하기 때문에 pIntent를 수동으로 넘길 필요가 없다.
+
+            참고 자료:
+            On Android 5.0 (API level 21) and higher, Android automatically dispatches media button events to your active media session.
+            https://developer.android.com/media/legacy/media-buttons?utm_source=chatgpt.com
+
+		 */
 		mediaSessionCompat = new MediaSessionCompat(getApplicationContext(), "MediaTAG", mediaButtonReceiver, null);
+		//'NUUA202510 : 변경내용' - 끝
 		mediaSessionCompat.setCallback(mediaSessionCallback);
 		mediaSessionCompat.setFlags(MediaSessionCompat.FLAG_HANDLES_MEDIA_BUTTONS | MediaSessionCompat.FLAG_HANDLES_TRANSPORT_CONTROLS);
 		mediaSessionCompat.setPlaybackToLocal(AudioManager.STREAM_MUSIC);

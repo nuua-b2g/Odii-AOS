@@ -17,6 +17,8 @@ android {
     defaultConfig {
         applicationId "kto.smarttour"
         minSdkVersion 21
+        //'NUUA202510 : 변경내용'
+        // Android 15 SDK 설정
         compileSdk 35
         targetSdkVersion 35
         versionCode 109
@@ -51,6 +53,9 @@ android {
 
     buildFeatures {
         dataBinding true
+        //'NUUA202510 : 변경내용'
+        // Build Type contains custom BuildConfig fields, but the feature is disabled
+        // 참고 자료: https://android.googlesource.com/platform/tools/base/+/370c706fb6553dc5952e10323a81f2b195405c3f%5E%21/
         buildConfig true
     }
 

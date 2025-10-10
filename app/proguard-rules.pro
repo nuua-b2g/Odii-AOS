@@ -75,6 +75,9 @@
 -dontwarn javax.annotation.**
 -dontwarn kotlin.Unit
 -dontwarn retrofit2.KotlinExtensions
+# 'NUUA202510 : 변경내용'
+# 오류 해결
+#  java.lang.IllegalArgumentException: Call return type must be parameterized as Call<Foo> or Call<? extends Foo>
 -dontwarn retrofit2.KotlinExtensions$*
 -if interface * { @retrofit2.http.* <methods>; }
 -keep,allowobfuscation interface <1>
@@ -84,6 +87,7 @@
 -if interface * { @retrofit2.http.* public *** *(...); }
 -keep,allowoptimization,allowshrinking,allowobfuscation class <3>
 -keep,allowobfuscation,allowshrinking class retrofit2.Response
+# 'NUUA202510 : 변경내용' - 끝
 
 # KOTLINX
 -keepnames class kotlinx.coroutines.internal.MainDispatcherFactory {}

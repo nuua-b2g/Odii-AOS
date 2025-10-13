@@ -5,13 +5,15 @@ import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.View;
+import android.view.Window;
+import android.view.WindowInsetsController;
 import android.widget.Toast;
 
 import androidx.annotation.Nullable;
@@ -20,7 +22,6 @@ import androidx.core.view.WindowCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
-import java.util.Locale;
 
 import kto.smarttour.OdiiApplication;
 import kto.smarttour.R;
@@ -28,7 +29,6 @@ import kto.smarttour.common.utils.CommonUtils;
 import kto.smarttour.common.utils.DialogUtil;
 import kto.smarttour.common.utils.SettingsUtil;
 import kto.smarttour.db.StampDBManager;
-import kto.smarttour.geo.GeofenceController;
 import kto.smarttour.geo.LocationService;
 import kto.smarttour.network.response.dao.StampEventList;
 import kto.smarttour.service.PlayerConstants;
@@ -46,7 +46,10 @@ public class BaseActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
+        //Android 15 edge-to-edge 비활성화
 		WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
+        //상단바 icon 사라짐 문제 해결
+        setStatusBarIconToDark(getWindow());
 		String locale = SettingsUtil.getLocale(this);
 		if (locale != null) {
 			//iOS 긴체 ( zh-Hans ) , 번체 ( zh-Hant )
@@ -149,6 +152,28 @@ public class BaseActivity extends AppCompatActivity {
 			LocalBroadcastManager.getInstance(this).sendBroadcast(intent);
 		}, 1000);
 	}
+
+    public static void setStatusBarIconToDark(Window window) {
+        // icon 어둡게
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
+            WindowInsetsController controller = window.getInsetsController();
+            if (controller != null) {
+                controller.setSystemBarsAppearance(
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS,
+                        WindowInsetsController.APPEARANCE_LIGHT_STATUS_BARS
+                );
+            }
+        } else {
+            int flags = window.getDecorView().getSystemUiVisibility();
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                flags |= View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR; // dark icons
+                window.getDecorView().setSystemUiVisibility(flags);
+            } else {
+                // M 미만: light status bar 지원 안 됨
+                window.setStatusBarColor(Color.BLACK); // 검은색 배경
+            }
+        }
+    }
 
 	private void getStatusBarHeight() {
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {

@@ -46,10 +46,6 @@ public class BaseActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
-        //Android 15 edge-to-edge 비활성화
-		WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
-        //상단바 icon 사라짐 문제 해결
-        setStatusBarIconToDark(getWindow());
 		String locale = SettingsUtil.getLocale(this);
 		if (locale != null) {
 			//iOS 긴체 ( zh-Hans ) , 번체 ( zh-Hant )
@@ -116,6 +112,15 @@ public class BaseActivity extends AppCompatActivity {
 		LocalBroadcastManager.getInstance(this).registerReceiver(receiver, mediaFilter);
 
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void onWindowFocusChanged(boolean hasFocus) {
+		super.onWindowFocusChanged(hasFocus);
+		//Android 15 edge-to-edge 비활성화
+		WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
+		//상단바 icon 사라짐 문제 해결
+		setStatusBarIconToDark(getWindow());
 	}
 
 	@Override

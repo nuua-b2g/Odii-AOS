@@ -10,6 +10,7 @@
         android:layout_height="match_parent"
         android:clipChildren="false"
         android:cropToPadding="false"
+        android:fitsSystemWindows="true"
         tools:context=".ui.MainActivity">
 
         <!-- 웹뷰 영역 -->

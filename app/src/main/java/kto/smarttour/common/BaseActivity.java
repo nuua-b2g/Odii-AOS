@@ -16,6 +16,7 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.view.WindowCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
 import java.util.ArrayList;
@@ -45,7 +46,7 @@ public class BaseActivity extends AppCompatActivity {
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
-
+		WindowCompat.setDecorFitsSystemWindows(getWindow(), true);
 		String locale = SettingsUtil.getLocale(this);
 		if (locale != null) {
 			//iOS 긴체 ( zh-Hans ) , 번체 ( zh-Hant )

@@ -12,10 +12,12 @@ import android.os.Handler;
 import android.os.Looper;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.ViewGroup;
 import android.view.Window;
 import android.view.WindowInsetsController;
 import android.widget.Toast;
 
+import androidx.annotation.LayoutRes;
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.WindowCompat;
@@ -112,6 +114,28 @@ public class BaseActivity extends AppCompatActivity {
 		LocalBroadcastManager.getInstance(this).registerReceiver(receiver, mediaFilter);
 
 		super.onCreate(savedInstanceState);
+	}
+
+	@Override
+	public void setContentView(@LayoutRes int layoutResID) {
+		super.setContentView(layoutResID);
+		applyFitsSystemWindows();
+	}
+
+	@Override
+	public void setContentView(View view) {
+		super.setContentView(view);
+		applyFitsSystemWindows();
+	}
+
+	private void applyFitsSystemWindows() {
+		ViewGroup contentView = findViewById(android.R.id.content);
+		if (contentView != null && contentView.getChildCount() > 0) {
+			View rootView = contentView.getChildAt(0);
+			if (rootView != null) {
+				rootView.setFitsSystemWindows(true);
+			}
+		}
 	}
 
 	@Override

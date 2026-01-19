@@ -1,6 +1,7 @@
 package kto.smarttour.ui.popup;
 
 import android.graphics.Color;
+import android.graphics.drawable.GradientDrawable;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -44,7 +45,7 @@ public class AppTutorialActivity extends BaseActivity {
 		initTutorialDescriptionMap();
 
 		mBind = DataBindingUtil.setContentView(this, R.layout.tutorial_main_layout);
-		mBind.btnClose.setOnClickListener(v -> finish());
+		mBind.tutorialSkipBtn.setOnClickListener(v -> finish());
 		mBind.btnTutorialPlay.setOnClickListener(v -> finish());
 		mBind.btnTutorialPlay.setVisibility(View.GONE);
 
@@ -57,10 +58,11 @@ public class AppTutorialActivity extends BaseActivity {
 		//mBind.viewPager.setAccessibilityDelegate(accessibilityDelegate);
 
 		mBind.viewPager.setOnClickListener(mOnClickListener);
-		mBind.layoutIndicator.setOnClickListener(mOnClickListener);
-		mBind.layoutIndicator.setFocusable(true);
-		mBind.layoutIndicator.setFocusableInTouchMode(true);
-		mBind.layoutIndicator.setContentDescription("다음 페이지로 이동");
+        mBind.tutorialNextPageBtn.setOnClickListener(mOnClickListener);
+		mBind.tutorialControlLayout.setOnClickListener(mOnClickListener);
+		mBind.tutorialControlLayout.setFocusable(true);
+		mBind.tutorialControlLayout.setFocusableInTouchMode(true);
+		mBind.tutorialControlLayout.setContentDescription("다음 페이지로 이동");
 
 		//초기값 지정
 		applyStateOnPageSelected(0,true);
@@ -224,17 +226,20 @@ public class AppTutorialActivity extends BaseActivity {
 	private void applyStateOnPageSelected(int position, boolean onInit){
 
 		mBind.btnTutorialPlay.setVisibility(View.GONE);
-		mBind.layoutIndicator.setVisibility(View.VISIBLE);
+		mBind.tutorialControlLayout.setVisibility(View.VISIBLE);
+        mBind.tutorialNextPageBtn.setText(
+                getString(R.string.tutorial_next_btn, position + 1, layouts.length)
+        );
 
 		positionCurrent = position;
 		//Log.d("TAG","onPageSelected 위치 = " + position);
 
 		if(position==3){
-			mBind.layoutIndicator.setFocusable(false);
-			mBind.layoutIndicator.setFocusableInTouchMode(false);
+			mBind.tutorialControlLayout.setFocusable(false);
+			mBind.tutorialControlLayout.setFocusableInTouchMode(false);
 		}else{
-			mBind.layoutIndicator.setFocusable(true);
-			mBind.layoutIndicator.setFocusableInTouchMode(true);
+			mBind.tutorialControlLayout.setFocusable(true);
+			mBind.tutorialControlLayout.setFocusableInTouchMode(true);
 		}
 
 		//==========
@@ -244,66 +249,34 @@ public class AppTutorialActivity extends BaseActivity {
 			mBind.viewPager.setContentDescription( mapLayoutContentDesc.get(key) );
 		}
 		mBind.viewPager.performAccessibilityAction(AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
-		mBind.layoutIndicator.performAccessibilityAction(AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
+		mBind.tutorialControlLayout.performAccessibilityAction(AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
 
 		//==========
 		int maxCount = layouts.length;
 		mBind.layoutIndicator.setContentDescription(""+maxCount+"페이지 중 "+ (position+1)+"번 페이지 입니다. 다음 페이지로 이동");
 
-		switch (position) {
-			case 0:
-			{
-				//mBind.viewPager.setContentDescription("오디 사용자 가이드 4개의 페이지 중 1번째 페이지입니다. 다음 페이지로 이동하려면 스와이프 하세요.");
-				mBind.viewPos1.setBackgroundColor(Color.parseColor(mSelectedColor));
-				mBind.viewPos2.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos3.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos4.setBackgroundColor(Color.parseColor(mUnselectedColor));
-
-				break;
-			}
-			case 1:
-			{
-				//mBind.viewPager.setContentDescription("오디 사용자 가이드 4개의 페이지 중 2번째 페이지입니다. 다음 페이지로 이동하려면 스와이프 하세요.");
-				mBind.viewPos1.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos2.setBackgroundColor(Color.parseColor(mSelectedColor));
-				mBind.viewPos3.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos4.setBackgroundColor(Color.parseColor(mUnselectedColor));
-
-				//추가2
-				//runOnUiThread(() -> mBind.viewPager.sendAccessibilityEvent(AccessibilityEvent.TYPE_VIEW_FOCUSED));
-				break;
-			}
-			case 2:
-			{
-				//mBind.viewPager.setContentDescription("오디 사용자 가이드 4개의 페이지 중 3번째 페이지입니다. 다음 페이지로 이동하려면 스와이프 하세요.");
-				mBind.viewPos1.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos2.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos3.setBackgroundColor(Color.parseColor(mSelectedColor));
-				mBind.viewPos4.setBackgroundColor(Color.parseColor(mUnselectedColor));
-
-				break;
-			}
-			case 3:
-			{
-				//mBind.viewPager.setContentDescription("오디 사용자 가이드 4개의 페이지 중 4번째 페이지입니다. 다음 페이지로 이동하려면 스와이프 하세요.");
-				mBind.viewPos1.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos2.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos3.setBackgroundColor(Color.parseColor(mUnselectedColor));
-				mBind.viewPos4.setBackgroundColor(Color.parseColor(mSelectedColor));
-
-				mBind.btnTutorialPlay.setVisibility(View.VISIBLE);
-				mBind.layoutIndicator.setVisibility(View.GONE);
-
-				break;
-			}
-			default:
-			{
-				break;
-			}
-		}
+        //indicator control
+        View[] viewPosArray = {mBind.viewPos1, mBind.viewPos2, mBind.viewPos3, mBind.viewPos4 };
+        if(position == layouts.length - 1) {
+            mBind.btnTutorialPlay.setVisibility(View.VISIBLE);
+            mBind.tutorialControlLayout.setVisibility(View.GONE);
+        } else {
+            //dot 모양으로 변경
+            for (int i = 0; i < viewPosArray.length; i++) {
+                View view = viewPosArray[i];
+                GradientDrawable drawable = new GradientDrawable();
+                drawable.setShape(GradientDrawable.OVAL);
+                if(position == i) {
+                    drawable.setColor(Color.parseColor(mSelectedColor));
+                } else {
+                    drawable.setColor(Color.parseColor(mUnselectedColor));
+                }
+                view.setBackground(drawable);
+            }
+        }
 		//========
 		if(!onInit){
-			mBind.layoutIndicator.performAccessibilityAction(AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
+			mBind.tutorialControlLayout.performAccessibilityAction(AccessibilityNodeInfo.ACTION_CLEAR_ACCESSIBILITY_FOCUS, null);
 			mBind.viewPager.performAccessibilityAction(AccessibilityNodeInfo.ACTION_ACCESSIBILITY_FOCUS, null);
 		}
 

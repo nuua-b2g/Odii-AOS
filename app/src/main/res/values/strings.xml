@@ -306,6 +306,8 @@
     <string name="pe_desc_3">Use Audio Service</string>
     <string name="pe_desc_4">Upload Image</string>
     <string name="pe_desc_5">Capture or take picture</string>
+    <string name="tutorial_next_btn">다음 (%d/%d)</string>
+    <string name="tutorial_skip">건너뛰기</string>
 </resources>
 
 

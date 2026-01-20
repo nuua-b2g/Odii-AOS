@@ -100,8 +100,10 @@
                         android:text="@string/tutorial_next_btn"
                         android:textSize="18sp"
                         android:textColor="@android:color/white"
-                        android:background="#696CFF"
-                        android:gravity="center"/>
+                        android:background="@drawable/tutorial_next_page_btn_round"
+                        android:gravity="center">
+
+                    </Button>
 
                     <!-- 건너뛰기 -->
                     <TextView

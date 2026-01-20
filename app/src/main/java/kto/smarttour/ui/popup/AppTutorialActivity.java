@@ -35,8 +35,6 @@ public class AppTutorialActivity extends BaseActivity {
 	private int[] layouts = new int[]{R.layout.tutorial_layout_1, R.layout.tutorial_layout_2, R.layout.tutorial_layout_3, R.layout.tutorial_layout_4};
 	private HashMap<String,String> mapLayoutContentDesc = new HashMap<>();
 	private int positionCurrent = 0;
-	private final String mSelectedColor = "#696CFF";
-	private final String mUnselectedColor = "#C0C0C0";
 
 	@Override
 	protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -267,9 +265,9 @@ public class AppTutorialActivity extends BaseActivity {
                 GradientDrawable drawable = new GradientDrawable();
                 drawable.setShape(GradientDrawable.OVAL);
                 if(position == i) {
-                    drawable.setColor(Color.parseColor(mSelectedColor));
+                    drawable.setColor(Color.parseColor("#5D397F"));
                 } else {
-                    drawable.setColor(Color.parseColor(mUnselectedColor));
+                    drawable.setColor(Color.parseColor("#80111111"));
                 }
                 view.setBackground(drawable);
             }

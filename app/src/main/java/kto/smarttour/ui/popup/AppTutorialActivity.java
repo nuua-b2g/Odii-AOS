@@ -267,7 +267,7 @@ public class AppTutorialActivity extends BaseActivity {
                 if(position == i) {
                     drawable.setColor(Color.parseColor("#5D397F"));
                 } else {
-                    drawable.setColor(Color.parseColor("#80111111"));
+                    drawable.setColor(Color.parseColor("#B0B0B0"));
                 }
                 view.setBackground(drawable);
             }

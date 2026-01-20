@@ -98,7 +98,7 @@
                         android:layout_height="56dp"
                         android:contentDescription="다음 가이드 화면 보기"
                         android:text="@string/tutorial_next_btn"
-                        android:textSize="18sp"
+                        android:textSize="16sp"
                         android:textColor="@android:color/white"
                         android:background="@drawable/tutorial_next_page_btn_round"
                         android:gravity="center">
@@ -113,9 +113,10 @@
                         android:padding="5dp"
                         android:contentDescription="가이드 화면 건너뛰기"
                         android:text="@string/tutorial_skip"
-                        android:textSize="16sp"
+                        android:textSize="14sp"
                         android:textColor="#B0B0B0"
                         android:textAlignment="center"
+                        android:textStyle="bold"
                         android:layout_marginTop="16dp"/>
 
                 </LinearLayout>

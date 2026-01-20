@@ -228,5 +228,7 @@
     <string name="pe_desc_3">오디오 서비스 이용</string>
     <string name="pe_desc_4">이미지 업로드</string>
     <string name="pe_desc_5">사진 및 동영상 촬영</string>
+    <string name="tutorial_next_btn">다음 (%d/%d)</string>
+    <string name="tutorial_skip">건너뛰기</string>
 </resources>
 

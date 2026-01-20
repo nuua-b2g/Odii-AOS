@@ -263,5 +263,7 @@
     <string name="pe_desc_3">オーディオサービスを使用する</string>
     <string name="pe_desc_4">画像をアップロードする</string>
     <string name="pe_desc_5">写真と動画を撮影する</string>
+    <string name="tutorial_next_btn">次へ (%d/%d)</string>
+    <string name="tutorial_skip">スキップ</string>
 </resources>
 

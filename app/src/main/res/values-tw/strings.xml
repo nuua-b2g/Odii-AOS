@@ -262,6 +262,7 @@
     <string name="pe_desc_3">使用音訊服務</string>
     <string name="pe_desc_4">上傳圖像</string>
     <string name="pe_desc_5">拍照和錄影</string>
-
+    <string name="tutorial_next_btn">下一步 (%d/%d)</string>
+    <string name="tutorial_skip">跳過</string>
 </resources>
 

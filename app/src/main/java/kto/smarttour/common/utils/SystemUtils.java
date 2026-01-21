@@ -61,7 +61,8 @@ public class SystemUtils {
 	public static String[] getPermissionRequestList() {
 
 		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			return new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.MANAGE_EXTERNAL_STORAGE, Manifest.permission.READ_MEDIA_IMAGES, Manifest.permission.READ_MEDIA_VIDEO, Manifest.permission.READ_MEDIA_AUDIO};
+			// Photo Picker API 사용으로 미디어 권한 불필요
+			return new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
 		} else {
 			return new String[]{ Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE };
 		}
@@ -73,7 +74,7 @@ public class SystemUtils {
 
 	//안드로이드 11 Build.VERSION_CODES.R 부터는 ACCESS_FINE_LOCATION
 	//주의: 앱이 Android 11(API 수준 30) 이상을 타겟팅하면 시스템에서는 이 권장사항을 적용합니다. 포그라운드 위치 정보 액세스 권한과 백그라운드 위치 정보 액세스 권한을 동시에 요청하면 시스템이 요청을 무시하고 앱에 어떤 권한도 부여하지 않습니다.
-	//public static final String[] PERMISSION_REQUEST_LIST_R = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
+	//public static final String[] PERMISSIOldN_REQUEST_LIST_R = {Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.WRITE_EXTERNAL_STORAGE};
 
 	public static final String[] PERMISSION_REQUEST_GPS = { Manifest.permission.ACCESS_FINE_LOCATION, Manifest.permission.ACCESS_COARSE_LOCATION };
 

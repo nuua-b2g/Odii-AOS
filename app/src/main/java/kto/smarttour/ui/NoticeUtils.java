@@ -15,7 +15,6 @@ import android.util.Log;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.scottyab.rootbeer.RootBeer;
 import com.socks.library.KLog;
 
@@ -672,21 +671,9 @@ public class NoticeUtils {
 					@Override
 					public void work() {
 
-						FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(activity, pendingDynamicLinkData -> {
-							Uri deepLink = null;
-							if (pendingDynamicLinkData != null) {
-								deepLink = pendingDynamicLinkData.getLink();
-							}
-
-							if (deepLink != null) {
-								Uri finalDeepLink = deepLink;
-								ttid = finalDeepLink.getQueryParameter("ttid");
-
-							}
-							nextWork();
-						}).addOnFailureListener(activity, e -> {
-							nextWork();
-						});
+                        nextWork();
+                        //TODO DeepLink ttid get
+                        //ttid = link.getQueryParameter("ttid");
 					}
 				});
 
@@ -934,32 +921,30 @@ public class NoticeUtils {
 
 
 	private void getDynamicLink() {
-
-		KLog.i("DynamicLink", "getDynamicLink()");
-
-		FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(activity, pendingDynamicLinkData -> {
-			Uri deepLink = null;
-			if (pendingDynamicLinkData != null) {
-				deepLink = pendingDynamicLinkData.getLink();
-				//KLog.i("DynamicLink", "deepLink : " + deepLink.toString());
-			}
-
-			if (deepLink != null && callback != null) {
-				mWorkerChain.clearWork();
-				Uri finalDeepLink = deepLink;
-				new Handler() {
-					@Override
-					public void handleMessage(Message msg) {
-						callback.onQRCodeListener(finalDeepLink.toString());
-						super.handleMessage(msg);
-					}
-				}.sendEmptyMessageDelayed(0, 1000);
-			} else {
-				nextWork();
-			}
-		}).addOnFailureListener(activity, e -> {
-			nextWork();
-		});
+//
+//		FirebaseDynamicLinks.getInstance().getDynamicLink(activity.getIntent()).addOnSuccessListener(activity, pendingDynamicLinkData -> {
+//			Uri deepLink = null;
+//			if (pendingDynamicLinkData != null) {
+//				deepLink = pendingDynamicLinkData.getLink();
+//				//KLog.i("DynamicLink", "deepLink : " + deepLink.toString());
+//			}
+//
+//			if (deepLink != null && callback != null) {
+//				mWorkerChain.clearWork();
+//				Uri finalDeepLink = deepLink;
+//				new Handler() {
+//					@Override
+//					public void handleMessage(Message msg) {
+//						callback.onQRCodeListener(finalDeepLink.toString());
+//						super.handleMessage(msg);
+//					}
+//				}.sendEmptyMessageDelayed(0, 1000);
+//			} else {
+//				nextWork();
+//			}
+//		}).addOnFailureListener(activity, e -> {
+//			nextWork();
+//		});
 	}
 
 

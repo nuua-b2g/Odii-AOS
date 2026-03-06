@@ -58,7 +58,6 @@ import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.dynamiclinks.FirebaseDynamicLinks;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.scottyab.rootbeer.RootBeer;
 import com.socks.library.KLog;
@@ -575,58 +574,58 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	 * @param intent
 	 */
 	private void getDynamicLink(Intent intent) {
-		FirebaseDynamicLinks.getInstance().getDynamicLink(intent).addOnSuccessListener(this, pendingDynamicLinkData -> {
-			Uri deepLink = null;
-			if (pendingDynamicLinkData != null) {
-				deepLink = pendingDynamicLinkData.getLink();
-			}
-
-			if (deepLink != null) {
-				Uri finalDeepLink = deepLink;
-
-
-				try {
-					String ttid = finalDeepLink.getQueryParameter("ttid");
-					if (!TextUtils.isEmpty(ttid)) {
-
-						int newTtid = Integer.valueOf(ttid);
-						int oldTtid = SettingsUtil.getTaxiTtid(activity);
-
-						//-1 택시모드 qr진입, 기존 다운로드 데이터 초기화됨.
-						//-2 초기화 하지않음
-						if (oldTtid == -1 || newTtid != oldTtid) {
-							if (oldTtid == -2){
-								//nothing to do
-							}else{
-								StoryDbManager.getInstance(activity).clearAll();
-								FileUtils.clearCacheStoryDelete(activity);
-							}
-							SettingsUtil.setTaxiTtid(activity, Integer.valueOf(ttid));
-						}
-
-						stopService(new Intent(activity, PlayerService.class));
-						SystemUtils.setTaxiPlayerServiceEnabled(activity);
-
-						FileUtils.setGlideCacheClear(activity);
-
-						startActivity(new Intent(MainActivity.this, TaxiMainActivity.class));
-						finish();
-					} else {
-						new Handler() {
-							@Override
-							public void handleMessage(Message msg) {
-								mBind.mainWebView.loadUrl(finalDeepLink.toString());
-								super.handleMessage(msg);
-							}
-						}.sendEmptyMessageDelayed(0, 1000);
-					}
-				} catch (Exception e) {
-
-				}
-			}
-		}).addOnFailureListener(this, e -> {
-
-		});
+//		FirebaseDynamicLinks.getInstance().getDynamicLink(intent).addOnSuccessListener(this, pendingDynamicLinkData -> {
+//			Uri deepLink = null;
+//			if (pendingDynamicLinkData != null) {
+//				deepLink = pendingDynamicLinkData.getLink();
+//			}
+//
+//			if (deepLink != null) {
+//				Uri finalDeepLink = deepLink;
+//
+//
+//				try {
+//					String ttid = finalDeepLink.getQueryParameter("ttid");
+//					if (!TextUtils.isEmpty(ttid)) {
+//
+//						int newTtid = Integer.valueOf(ttid);
+//						int oldTtid = SettingsUtil.getTaxiTtid(activity);
+//
+//						//-1 택시모드 qr진입, 기존 다운로드 데이터 초기화됨.
+//						//-2 초기화 하지않음
+//						if (oldTtid == -1 || newTtid != oldTtid) {
+//							if (oldTtid == -2){
+//								//nothing to do
+//							}else{
+//								StoryDbManager.getInstance(activity).clearAll();
+//								FileUtils.clearCacheStoryDelete(activity);
+//							}
+//							SettingsUtil.setTaxiTtid(activity, Integer.valueOf(ttid));
+//						}
+//
+//						stopService(new Intent(activity, PlayerService.class));
+//						SystemUtils.setTaxiPlayerServiceEnabled(activity);
+//
+//						FileUtils.setGlideCacheClear(activity);
+//
+//						startActivity(new Intent(MainActivity.this, TaxiMainActivity.class));
+//						finish();
+//					} else {
+//						new Handler() {
+//							@Override
+//							public void handleMessage(Message msg) {
+//								mBind.mainWebView.loadUrl(finalDeepLink.toString());
+//								super.handleMessage(msg);
+//							}
+//						}.sendEmptyMessageDelayed(0, 1000);
+//					}
+//				} catch (Exception e) {
+//
+//				}
+//			}
+//		}).addOnFailureListener(this, e -> {
+//
+//		});
 	}
 
 	/**

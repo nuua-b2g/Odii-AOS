@@ -65,6 +65,7 @@ public class OdiiWebView extends WebView {
 		webSetting.setGeolocationEnabled(true);
 		webSetting.setTextZoom(100);
 		webSetting.setLayoutAlgorithm(WebSettings.LayoutAlgorithm.NARROW_COLUMNS);
+        webSetting.setUserAgentString("OdiiWebview");
 
 		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.HONEYCOMB) {
 			webSetting.setDisplayZoomControls(false);

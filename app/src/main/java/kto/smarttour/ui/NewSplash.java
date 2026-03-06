@@ -10,6 +10,7 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
 import kto.smarttour.R;
+import kto.smarttour.common.consts.URLS;
 import kto.smarttour.common.utils.FileUtils;
 import kto.smarttour.common.utils.SettingsUtil;
 import kto.smarttour.common.utils.SystemUtils;
@@ -107,7 +108,10 @@ public class NewSplash extends AppCompatActivity {
         Intent intent = new Intent(NewSplash.this, MainActivity.class);
         KLog.i("startMainActivity", "ifwId: " + ifwId);
         if(ifwId != null) {
-            intent.putExtra("ifwid", ifwId);
+            intent.putExtra(
+                    "mainNextUrl",
+                    String.format(URLS.INFLOW_URL, ifwId)
+            );
         }
         startActivity(intent);
     }

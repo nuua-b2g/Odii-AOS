@@ -124,6 +124,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	private RootBeer rootBeer;
 
 	private int colorIntroTint;
+    private String onPlayMainWebViewUrl = URLS.URL;
 
 	//안드로이드 13권한 다이얼로그
 	//private Dialog dialogRequest_POST_NOTIFICATIONS;
@@ -360,6 +361,13 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 
+        onPlayMainWebViewUrl = String.format(URLS.URL, SettingsUtil.getLocale(this));
+        Intent intent = getIntent();
+        String mainNextUrl = intent.getStringExtra("mainNextUrl");
+        if (mainNextUrl != null) {
+            onPlayMainWebViewUrl = mainNextUrl;
+        }
+
 		onCreate_SoundPool(false);
 		//------------------------------------------------------------------
 		//------------------------------------------------------------------
@@ -542,6 +550,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	@Override
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
+        KLog.i("MainActivity.onNewIntent", intent.getData());
 
 		if (intent.getBooleanExtra("notification", false)) {
 			Intent playerIntent = new Intent(this, Player.class);
@@ -927,7 +936,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			});
 			mBind.videoIntro.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
 				mBind.layoutVideo.setVisibility(View.GONE);
-				mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(this)));
+				mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 				return false;
 			});
 		} catch (Exception e) {
@@ -970,7 +979,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			//mBind.layoutVideo.setVisibility(View.GONE);
 
 			mBind.contIntro.setVisibility(View.GONE);
-			mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(this)));
+			mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 			return;
 		}
 
@@ -1010,7 +1019,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 			//예외시
 			mBind.contIntro.setVisibility(View.GONE);
-			mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(this)));
+			mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 		}
 	}
 	//안드로이드 13관련 노티권한
@@ -1137,7 +1146,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			});
 			mBind.videoIntro.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
 				mBind.layoutVideo.setVisibility(View.GONE);
-				mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(this)));
+				mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 				return false;
 			});
 
@@ -1340,7 +1349,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		CheckPlay();
 
 		mBind.contIntro.setVisibility(View.GONE);
-		mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(this)));
+		mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 
 		//추가
 		new Handler(Looper.getMainLooper()).postDelayed(() -> {
@@ -1688,7 +1697,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	private NoticeUtils.OnNoticeListener noticeListener = new NoticeUtils.OnNoticeListener() {
 		@Override
 		public void onNoticeComplete() {
-			mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(MainActivity.this)));
+			mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
 
 			if (getIntent().getBooleanExtra("stamp", false)) {
 				try {

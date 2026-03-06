@@ -202,9 +202,9 @@ public class OdiiInterface {
 					//------------
 					
 					SettingsUtil.setLocale(activity, localeLanguage);
-
-					ActivityCompat.finishAffinity(activity);
-					activity.startActivity(new Intent(activity, MainActivity.class));
+                    Intent intent = new Intent(activity, MainActivity.class);
+                    intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+					activity.startActivity(intent);
 				}
 			}
 		});

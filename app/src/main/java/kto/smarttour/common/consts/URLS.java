@@ -8,6 +8,7 @@ public class URLS {
 //	public static final String BASE_URL = "http://dev.odii.ntcon.co:18080/";
 
 	public static final String URL = BASE_URL + "/smarttour_web/home/main?lang=%s";
+	public static final String INFLOW_URL = BASE_URL + "/smarttour_web/inflow/log_new?ifwId=%s";
 	public static final String SEARCH_URL = BASE_URL + "/smarttour_web/search/main";
 	public static final String DETAIL_URL = BASE_URL + "/smarttour_web/story/detail";
 	public static final String API_NOTICE = "/smarttour_web/home/ajax/noticeList";

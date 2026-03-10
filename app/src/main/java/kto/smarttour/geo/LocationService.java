@@ -23,19 +23,20 @@ import android.text.TextUtils;
 import android.util.Log;
 
 import androidx.core.app.NotificationCompat;
-import androidx.core.app.NotificationManagerCompat;
 import androidx.core.app.TaskStackBuilder;
+import androidx.lifecycle.Lifecycle;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
+
+import com.socks.library.KLog;
 
 import java.util.ArrayList;
 
 import kto.smarttour.OdiiApplication;
 import kto.smarttour.R;
 import kto.smarttour.common.utils.CommonUtils;
-import kto.smarttour.common.utils.ForegroundDetector;
 import kto.smarttour.common.utils.PendingIntentUtils;
 import kto.smarttour.common.utils.SettingsUtil;
-import kto.smarttour.common.utils.SystemUtils;
 import kto.smarttour.db.StampDBManager;
 import kto.smarttour.network.response.dao.StampEventList;
 import kto.smarttour.ui.MainActivity;
@@ -77,12 +78,13 @@ public class LocationService extends Service {
     @Override
     public void onCreate() {
         LocationService.instance = LocationService.this;
-
+        KLog.i("LocationService", "onCreate");
         super.onCreate();
     }
 
     @Override
     public int onStartCommand(Intent intent, int flags, int startId) {
+        KLog.i("LocationService", "onStartCommand");
         if (mHandler == null) {
             mHandler = new Handler(Looper.myLooper());
         }
@@ -244,6 +246,7 @@ public class LocationService extends Service {
 
     @Override
     public void onDestroy() {
+        KLog.i("LocationService", "onDestroy");
         removeNotification();
 
         stopLocationManager();
@@ -304,7 +307,7 @@ public class LocationService extends Service {
                         notiIntent.putExtra("slid", slid);
                         notiIntent.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP | Intent.FLAG_ACTIVITY_SINGLE_TOP);
 
-                        if (ForegroundDetector.getInstance().isForeground()) {
+                        if (applicationInForeground()) {
                             // Foreground
                             notiIntent.setAction(EVENT_STAMP_ACTION);
                             LocalBroadcastManager.getInstance(getApplicationContext()).sendBroadcast(notiIntent);
@@ -346,6 +349,14 @@ public class LocationService extends Service {
         public void onStatusChanged(String provider, int status, Bundle extras) {
 
         }
+
+        private boolean applicationInForeground() {
+            return ProcessLifecycleOwner.get()
+                    .getLifecycle()
+                    .getCurrentState()
+                    .isAtLeast(Lifecycle.State.STARTED);
+        }
+
     }
 
     /**

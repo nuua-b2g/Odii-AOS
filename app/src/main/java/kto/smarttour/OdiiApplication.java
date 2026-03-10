@@ -7,20 +7,19 @@ import android.util.Log;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.DefaultLifecycleObserver;
+import androidx.lifecycle.LifecycleOwner;
+import androidx.lifecycle.ProcessLifecycleOwner;
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.FirebaseApp;
-import com.google.firebase.messaging.FirebaseMessaging;
 import com.naver.maps.map.NaverMapSdk;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
 
 import kto.smarttour.common.utils.AnalyticsInterface;
-import kto.smarttour.common.utils.ForegroundDetector;
 import kto.smarttour.db.StampDBManager;
 import kto.smarttour.geo.GeofenceController;
 import kto.smarttour.geo.LocationConstants;
@@ -28,10 +27,9 @@ import kto.smarttour.geo.LocationService;
 import kto.smarttour.geo.ServiceUtil;
 import kto.smarttour.location.CurrentLocation;
 import kto.smarttour.network.response.dao.StampEventList;
-import kto.smarttour.service.PlayerService;
 import kto.smarttour.ui.player.PlayListManager;
 
-public class OdiiApplication extends MultiDexApplication implements ForegroundDetector.Listener {
+public class OdiiApplication extends MultiDexApplication implements DefaultLifecycleObserver {
 	private static AppCompatActivity webActivity;
 	private static Location location;
 
@@ -66,9 +64,8 @@ public class OdiiApplication extends MultiDexApplication implements ForegroundDe
 		new CurrentLocation(this, loc -> OdiiApplication.setLocation(loc));
 		PlayListManager.getInstance().init(getApplicationContext());
 
-		//new ForegroundDetector(this);
-		ForegroundDetector foregroundDetector = new ForegroundDetector(this);
-		foregroundDetector.addListener(this);
+        ProcessLifecycleOwner.get().getLifecycle()
+                .addObserver(this);
 
 		AnalyticsInterface.getInstance().init(getApplicationContext());
 		Thread.setDefaultUncaughtExceptionHandler(new AppExceptionHandler());
@@ -118,26 +115,29 @@ public class OdiiApplication extends MultiDexApplication implements ForegroundDe
 		}
 	}
 
-	@Override
-	public void onBecameForeground() {
-		//	서비스 시작
-		if ((LocationConstants.isStampEventExisted || isStampEventExisted()) && !ServiceUtil.isRunning(context, LocationService.class)) {
-			ServiceUtil.startService(context, LocationService.class);
-		}
+    @Override
+    public void onStart(@NonNull LifecycleOwner owner) {
+        KLog.i("ApplicationLifecycle", "onStart");
+        DefaultLifecycleObserver.super.onStart(owner);
 
-	}
+        //	서비스 시작
+        if ((LocationConstants.isStampEventExisted || isStampEventExisted()) && !ServiceUtil.isRunning(context, LocationService.class)) {
+            ServiceUtil.startService(context, LocationService.class);
+        }
+    }
 
-	@Override
-	public void onBecameBackground() {
-		//	서비스 종료
-		boolean isServiceRunning = ServiceUtil.isRunning(getApplicationContext(), LocationService.class);
-		if (isServiceRunning) {
-			Intent intent = new Intent(getApplicationContext(), LocationService.class);
-			intent.putExtra(LocationConstants.EXTRA_STRING_STOP_LOCATION_SERVICE, true);
-			startService(intent);
-		}
+    @Override
+    public void onStop(@NonNull LifecycleOwner owner) {
+        KLog.i("ApplicationLifecycle", "onStop");
+        DefaultLifecycleObserver.super.onStop(owner);
 
-	}
+        boolean isServiceRunning = ServiceUtil.isRunning(this, LocationService.class);
+        if (isServiceRunning) {
+            Intent intent = new Intent(this, LocationService.class);
+            intent.putExtra(LocationConstants.EXTRA_STRING_STOP_LOCATION_SERVICE, true);
+            startService(intent);
+        }
+    }
 
 	public boolean isStampEventExisted() {
 		ArrayList<StampEventList> stampEventList = StampDBManager.getInstance(context).getList();

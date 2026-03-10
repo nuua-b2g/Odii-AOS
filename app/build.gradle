@@ -23,7 +23,6 @@ android {
         targetSdkVersion 35
         versionCode 109
         versionName "4.3.6"
-        multiDexEnabled true
         buildConfigField("String", "SIGN_ACCESS_KEY", sign_access_key)
     }
     buildTypes {
@@ -79,7 +78,6 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.5.0'
     implementation 'androidx.appcompat:appcompat:1.2.0'
     implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
-    implementation 'androidx.multidex:multidex:2.0.1'
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
 
     implementation 'com.google.android.material:material:1.2.1'

@@ -1,5 +1,6 @@
 package kto.smarttour;
 
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
@@ -10,8 +11,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.DefaultLifecycleObserver;
 import androidx.lifecycle.LifecycleOwner;
 import androidx.lifecycle.ProcessLifecycleOwner;
-import androidx.multidex.MultiDex;
-import androidx.multidex.MultiDexApplication;
 
 import com.google.firebase.FirebaseApp;
 import com.naver.maps.map.NaverMapSdk;
@@ -29,7 +28,7 @@ import kto.smarttour.location.CurrentLocation;
 import kto.smarttour.network.response.dao.StampEventList;
 import kto.smarttour.ui.player.PlayListManager;
 
-public class OdiiApplication extends MultiDexApplication implements DefaultLifecycleObserver {
+public class OdiiApplication extends Application implements DefaultLifecycleObserver {
 	private static AppCompatActivity webActivity;
 	private static Location location;
 
@@ -44,7 +43,6 @@ public class OdiiApplication extends MultiDexApplication implements DefaultLifec
 	@Override
 	protected void attachBaseContext(Context base) {
 		super.attachBaseContext(base);
-		MultiDex.install(getApplicationContext());
 	}
 
 	@Override

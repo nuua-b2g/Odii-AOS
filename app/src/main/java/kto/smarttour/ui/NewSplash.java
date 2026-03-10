@@ -5,12 +5,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.content.Context;
 import android.net.Uri;
 import android.text.TextUtils;
-import android.view.View;
 import android.os.Bundle;
 import android.widget.Button;
 import android.content.Intent;
+
 import kto.smarttour.R;
-import kto.smarttour.common.consts.URLS;
 import kto.smarttour.common.utils.FileUtils;
 import kto.smarttour.common.utils.SettingsUtil;
 import kto.smarttour.common.utils.SystemUtils;
@@ -18,10 +17,7 @@ import kto.smarttour.db.StoryDbManager;
 import kto.smarttour.service.PlayerService;
 import kto.smarttour.ui.taxi.TaxiMainActivity;
 
-
 import android.content.SharedPreferences;
-
-import com.socks.library.KLog;
 
 public class NewSplash extends AppCompatActivity {
 
@@ -30,8 +26,6 @@ public class NewSplash extends AppCompatActivity {
         // 아무 작업도 하지 않음
     }
 
-    private String ifwId = null;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -39,9 +33,8 @@ public class NewSplash extends AppCompatActivity {
         Uri data = getIntent().getData();
 
         // 관광택시 딥링크
-        if(data != null) {
+        if (data != null) {
             String ttid = data.getQueryParameter("ttid");
-            String path = data.getPath();
             Context activity = this;
             if (!TextUtils.isEmpty(ttid)) {
 
@@ -68,8 +61,6 @@ public class NewSplash extends AppCompatActivity {
                 startActivity(new Intent(NewSplash.this, TaxiMainActivity.class));
                 finish();
                 return;
-            } else if(path != null && path.contains("inflow")) {
-                ifwId = data.getQueryParameter("ifwId");
             }
         }
 
@@ -78,7 +69,7 @@ public class NewSplash extends AppCompatActivity {
         SharedPreferences sharedPreferences = getSharedPreferences("local_prefer", Context.MODE_PRIVATE);
         boolean isFirst = sharedPreferences.getBoolean("ntcon_key_is_first", true);
         if (!isFirst) {
-            startMainActivity(ifwId);
+            startMainActivity();
             SharedPreferences.Editor editor = sharedPreferences.edit();
             editor.putBoolean("ntcon_key_is_first", false);
             editor.apply();
@@ -91,28 +82,17 @@ public class NewSplash extends AppCompatActivity {
         Button confirmButton = findViewById(R.id.confirmButton);
 
 
-
-        confirmButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                SharedPreferences.Editor editor = sharedPreferences.edit();
-                editor.putBoolean("ntcon_key_is_first", false);
-                editor.apply();
-                startMainActivity(ifwId);
-            }
+        confirmButton.setOnClickListener(v -> {
+            SharedPreferences.Editor editor = sharedPreferences.edit();
+            editor.putBoolean("ntcon_key_is_first", false);
+            editor.apply();
+            startMainActivity();
         });
     }
 
 
-    private void startMainActivity(String ifwId) {
+    private void startMainActivity() {
         Intent intent = new Intent(NewSplash.this, MainActivity.class);
-        KLog.i("startMainActivity", "ifwId: " + ifwId);
-        if(ifwId != null) {
-            intent.putExtra(
-                    "mainNextUrl",
-                    String.format(URLS.INFLOW_URL, ifwId)
-            );
-        }
         startActivity(intent);
     }
 

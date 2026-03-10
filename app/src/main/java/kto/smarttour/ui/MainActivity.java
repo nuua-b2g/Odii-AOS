@@ -3,7 +3,6 @@ package kto.smarttour.ui;
 import android.Manifest;
 import android.annotation.SuppressLint;
 import android.app.Activity;
-import android.app.Dialog;
 import android.app.NotificationManager;
 import android.content.BroadcastReceiver;
 import android.content.Context;
@@ -12,39 +11,27 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.ColorDrawable;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.AudioAttributes;
-import android.media.AudioManager;
 import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.Looper;
-import android.os.Message;
 import android.text.TextUtils;
-import android.util.Log;
 import android.view.Display;
 import android.view.View;
-import android.view.Window;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 import android.webkit.ValueCallback;
-import android.widget.Button;
-import android.widget.Toast;
 
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.collection.ArrayMap;
 import androidx.core.app.ActivityCompat;
-import androidx.core.app.NotificationCompat;
 import androidx.core.app.NotificationManagerCompat;
-import androidx.core.content.ContextCompat;
 import androidx.databinding.DataBindingUtil;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
@@ -62,7 +49,6 @@ import com.google.firebase.messaging.FirebaseMessaging;
 import com.scottyab.rootbeer.RootBeer;
 import com.socks.library.KLog;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -84,14 +70,11 @@ import kto.smarttour.common.utils.SystemUtils;
 import kto.smarttour.databinding.ActivityMainBinding;
 import kto.smarttour.db.StampDBManager;
 import kto.smarttour.db.StoryDbManager;
-import kto.smarttour.geo.GeofenceController;
 import kto.smarttour.geo.LocationService;
 import kto.smarttour.location.CurrentLocation;
 import kto.smarttour.network.ApiService;
 import kto.smarttour.network.response.IntroImageData;
 import kto.smarttour.network.response.NoticeData;
-import kto.smarttour.network.response.dao.EventList;
-import kto.smarttour.network.response.dao.StampEventList;
 import kto.smarttour.service.PlayerConstants;
 import kto.smarttour.service.PlayerService;
 import kto.smarttour.service.UnCatchTaskService;
@@ -355,10 +338,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		super.onCreate(savedInstanceState);
 
         onPlayMainWebViewUrl = String.format(URLS.URL, SettingsUtil.getLocale(this));
-        Intent intent = getIntent();
-        String mainNextUrl = intent.getStringExtra("mainNextUrl");
-        if (mainNextUrl != null) {
-            onPlayMainWebViewUrl = mainNextUrl;
+        String deepLinkUrl = getDeepLinkInflowUrl(getIntent());
+        if(deepLinkUrl != null) {
+            introSkip = true;
+            onPlayMainWebViewUrl = deepLinkUrl;
         }
 
 		onCreate_SoundPool(false);
@@ -419,7 +402,20 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 	}
 
-	private void onCreate_SoundPool(boolean soundPoolInitialized){
+    @Nullable
+    private String getDeepLinkInflowUrl(Intent intent) {
+        Uri data = intent.getData();
+        if(data != null) {
+            String path = data.getPath();
+            if(path != null && path.contains("inflow")) {
+                String ifwId = data.getQueryParameter("ifwId");
+                return String.format(URLS.INFLOW_URL, ifwId);
+            }
+        }
+        return null;
+    }
+
+    private void onCreate_SoundPool(boolean soundPoolInitialized){
 		if(!soundPoolInitialized){
 			activity = this;
 
@@ -441,7 +437,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			mBind.ivBottomlogo.setVisibility(View.INVISIBLE);
 
 			//택시모드 종료에 의한 MainActivity호출시 introSkip
-			if (intent != null) {
+			if (!introSkip && intent != null) {
 				introSkip = intent.getBooleanExtra("introSkip", false);
 			}
 
@@ -544,7 +540,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	protected void onNewIntent(Intent intent) {
 		super.onNewIntent(intent);
         KLog.i("MainActivity.onNewIntent", intent.getData());
-
+        String deepLinkUrl = getDeepLinkInflowUrl(intent);
+        if(deepLinkUrl != null) {
+            mBind.mainWebView.loadUrl(deepLinkUrl);
+            return;
+        }
 		if (intent.getBooleanExtra("notification", false)) {
 			Intent playerIntent = new Intent(this, Player.class);
 			playerIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);

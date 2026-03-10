@@ -54,7 +54,12 @@
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-
+        </activity>
+        <activity
+            android:name=".ui.MainActivity"
+            android:exported="true"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.WebMain">
             <intent-filter>
                 <data android:scheme="ktoodii" />
                 <action android:name="android.intent.action.VIEW"/>
@@ -84,10 +89,6 @@
                     android:pathPrefix="/smarttour_web"/>
             </intent-filter>
         </activity>
-        <activity
-            android:name=".ui.MainActivity"
-            android:screenOrientation="portrait"
-            android:theme="@style/AppTheme.WebMain" />
         <activity
             android:name=".ui.StoryLockerActivity"
             android:screenOrientation="portrait"

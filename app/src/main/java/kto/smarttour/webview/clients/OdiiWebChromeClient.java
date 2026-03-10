@@ -77,7 +77,6 @@ public class OdiiWebChromeClient extends WebChromeClient {
 
 
 	// For Lollipop 5.0+ Devices
-	@TargetApi(Build.VERSION_CODES.LOLLIPOP)
 	public boolean onShowFileChooser(WebView mWebView, ValueCallback<Uri[]> filePathCallback, FileChooserParams fileChooserParams) {
 		if (uploadMessage != null) {
 			uploadMessage.onReceiveValue(null);
@@ -189,21 +188,11 @@ public class OdiiWebChromeClient extends WebChromeClient {
 	}
 
 	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			if (requestCode == REQUEST_SELECT_FILE) {
-				if (uploadMessage == null)
-					return;
-				uploadMessage.onReceiveValue(WebChromeClient.FileChooserParams.parseResult(resultCode, intent));
-				uploadMessage = null;
-			}
-		} else if (requestCode == FILECHOOSER_RESULTCODE) {
-			if (null == mUploadMessage)
-				return;
-			// Use MainActivity.RESULT_OK if you're implementing WebView inside Fragment
-			// Use RESULT_OK only if you're implementing WebView inside an Activity
-			Uri result = intent == null || resultCode != Activity.RESULT_OK ? null : intent.getData();
-			mUploadMessage.onReceiveValue(result);
-			mUploadMessage = null;
-		}
-	}
+        if (requestCode == REQUEST_SELECT_FILE) {
+            if (uploadMessage == null)
+                return;
+            uploadMessage.onReceiveValue(FileChooserParams.parseResult(resultCode, intent));
+            uploadMessage = null;
+        }
+    }
 }

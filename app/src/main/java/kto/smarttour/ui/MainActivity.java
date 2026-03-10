@@ -138,29 +138,22 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	private SoundPool createSoundPool(){
 		SoundPool sp;
 		//반환용 사운드풀 준비
-		if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP){
+        AudioAttributes audioAttributes = new AudioAttributes.Builder()
+// USAGE_MEDIA
+// USAGE_GAME
+                .setUsage(AudioAttributes.USAGE_GAME)
+// CONTENT_TYPE_MUSIC
+// CONTENT_TYPE_SPEECH, etc.
+                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
+                .build();
 
-			AudioAttributes audioAttributes = new AudioAttributes.Builder()
-					// USAGE_MEDIA
-					// USAGE_GAME
-					.setUsage(AudioAttributes.USAGE_GAME)
-					// CONTENT_TYPE_MUSIC
-					// CONTENT_TYPE_SPEECH, etc.
-					.setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-					.build();
+        sp = new SoundPool.Builder()
+                .setAudioAttributes(audioAttributes)
+                // Stream설정
+                .setMaxStreams(2)
+                .build();
 
-			sp = new SoundPool.Builder()
-					.setAudioAttributes(audioAttributes)
-					// Stream설정
-					.setMaxStreams(2)
-					.build();
-		}else{
-
-			//maxStreams, int streamType, int srcQualit
-			sp = new SoundPool(2, AudioManager.STREAM_MUSIC,0);
-		}
-
-		return sp;
+        return sp;
 	}
 	private void playJingleSound(int soundJingle_id){
 

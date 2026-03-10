@@ -168,7 +168,7 @@ public class STGFirebaseMessageService extends FirebaseMessagingService {
             }
 
             notificationBuilder = new NotificationCompat.Builder(this, chId)
-                    .setSmallIcon(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? R.drawable.ic_stat : R.drawable.icon)
+                    .setSmallIcon(R.drawable.ic_stat)
                     .setColor(0xff3277ff)
                     .setAutoCancel(true)
                     .setSound(defaultSoundUri)
@@ -178,7 +178,7 @@ public class STGFirebaseMessageService extends FirebaseMessagingService {
                     .setContentIntent(pendingIntent);
         } else {
             notificationBuilder = new NotificationCompat.Builder(this, chId)
-                    .setSmallIcon(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.LOLLIPOP ? R.drawable.ic_stat : R.drawable.icon)
+                    .setSmallIcon(R.drawable.ic_stat)
                     .setColor(0xff3277ff)
                     .setContentTitle(title)
                     .setContentText(messageBody)

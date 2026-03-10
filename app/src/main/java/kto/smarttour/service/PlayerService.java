@@ -1306,14 +1306,10 @@ public class PlayerService extends MediaBrowserServiceCompat implements AudioMan
 
 			NotificationCompat.Builder builder = MediaStyleHelper.from(this, mediaSessionCompat);
 			//--
-			if (android.os.Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-				builder.setColor(Color.parseColor("#00ffffff"));
-				builder.setSmallIcon(smallNotificationIconId);
-			} else {
-				builder.setSmallIcon(smallNotificationIconId);
-			}
+            builder.setColor(Color.parseColor("#00ffffff"));
+            builder.setSmallIcon(smallNotificationIconId);
 
-			PendingIntent pplayIntent;
+            PendingIntent pplayIntent;
 			if (isPlay) {
 				pplayIntent = MediaButtonReceiver.buildMediaButtonPendingIntent(this, PlaybackStateCompat.ACTION_PAUSE);
 			} else {

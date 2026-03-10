@@ -312,12 +312,8 @@ public class BottomSheetDialogUtil {
 	}
 
 	protected static Drawable getDrawableFromResource(View view, int resourceId) {
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
-			return view.getContext().getDrawable(resourceId);
-		} else {
-			return view.getResources().getDrawable(resourceId);
-		}
-	}
+        return view.getContext().getDrawable(resourceId);
+    }
 
 	public void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
 		if (requestCode == Config.RC_PICK_IMAGES && resultCode == RESULT_OK && data != null) {

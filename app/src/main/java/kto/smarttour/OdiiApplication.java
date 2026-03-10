@@ -125,9 +125,6 @@ public class OdiiApplication extends MultiDexApplication implements ForegroundDe
 			ServiceUtil.startService(context, LocationService.class);
 		}
 
-		if (PlayerService.isPlay) {
-
-		}
 	}
 
 	@Override
@@ -140,9 +137,6 @@ public class OdiiApplication extends MultiDexApplication implements ForegroundDe
 			startService(intent);
 		}
 
-		if (PlayerService.isPlay) {
-
-		}
 	}
 
 	public boolean isStampEventExisted() {
@@ -159,10 +153,6 @@ public class OdiiApplication extends MultiDexApplication implements ForegroundDe
 
 	public static Context getContext() {
 		return context;
-	}
-
-	public static void finishApplication() {
-		android.os.Process.killProcess(android.os.Process.myPid());
 	}
 
 }

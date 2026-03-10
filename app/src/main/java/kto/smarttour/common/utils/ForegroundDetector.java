@@ -20,8 +20,6 @@ public class ForegroundDetector implements Application.ActivityLifecycleCallback
 	}
 
 	private int refs;
-	private boolean wasInBackground = true;
-	private long enterBackgroundTime = 0;
 	private CopyOnWriteArrayList<Listener> listeners = new CopyOnWriteArrayList<>();
 	private static ForegroundDetector Instance = null;
 
@@ -53,9 +51,6 @@ public class ForegroundDetector implements Application.ActivityLifecycleCallback
 	@Override
 	public void onActivityStarted(Activity activity) {
 		if (++refs == 1) {
-			if (System.currentTimeMillis() - enterBackgroundTime < 200) {
-				wasInBackground = false;
-			}
 			KLog.e("TEST_LOG", "switch to foreground");
 			for (Listener listener : listeners) {
 				try {
@@ -67,22 +62,9 @@ public class ForegroundDetector implements Application.ActivityLifecycleCallback
 		}
 	}
 
-	public boolean isWasInBackground(boolean reset) {
-		if (reset && Build.VERSION.SDK_INT >= 21 && (System.currentTimeMillis() - enterBackgroundTime < 200)) {
-			wasInBackground = false;
-		}
-		return wasInBackground;
-	}
-
-	public void resetBackgroundVar() {
-		wasInBackground = false;
-	}
-
 	@Override
 	public void onActivityStopped(Activity activity) {
 		if (--refs == 0) {
-			enterBackgroundTime = System.currentTimeMillis();
-			wasInBackground = true;
 			KLog.e("TEST_LOG", "switch to background");
 			for (Listener listener : listeners) {
 				try {

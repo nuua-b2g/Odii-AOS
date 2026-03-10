@@ -7,6 +7,7 @@ import android.os.Message;
 import android.text.TextUtils;
 import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
+import android.webkit.CookieManager;
 import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
@@ -27,7 +28,6 @@ import kto.smarttour.common.utils.CommonUtils;
 import kto.smarttour.common.utils.DialogUtil;
 import kto.smarttour.ui.MainActivity;
 import kto.smarttour.webview.WebUrlDelegator;
-import kto.smarttour.webview.cookie.OdiiCookieSync;
 
 /**
  * The Class OdiiWebViewClient.
@@ -116,7 +116,7 @@ public class OdiiWebViewClient extends WebViewClient {
 		handler.sendMessageDelayed(handler.obtainMessage(35, view), 300);
 		super.onPageFinished(view, url);
 		((MainActivity) OdiiApplication.getWebActivity()).hideBlock();
-		OdiiCookieSync.sync();
+        CookieManager.getInstance().flush();
 
 		if (progressBar != null) {
 			progressBar.setVisibility(View.GONE);

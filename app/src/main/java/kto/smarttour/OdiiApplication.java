@@ -26,10 +26,11 @@ import kto.smarttour.geo.LocationService;
 import kto.smarttour.geo.ServiceUtil;
 import kto.smarttour.location.CurrentLocation;
 import kto.smarttour.network.response.dao.StampEventList;
+import kto.smarttour.ui.MainActivity;
 import kto.smarttour.ui.player.PlayListManager;
 
 public class OdiiApplication extends Application implements DefaultLifecycleObserver {
-	private static AppCompatActivity webActivity;
+	private static MainActivity webActivity;
 	private static Location location;
 
 	private static Context context;
@@ -89,11 +90,11 @@ public class OdiiApplication extends Application implements DefaultLifecycleObse
 
 	}
 
-	public static AppCompatActivity getWebActivity() {
+	public static MainActivity getWebActivity() {
 		return webActivity;
 	}
 
-	public static void setWebActivity(AppCompatActivity webActivity1) {
+	public static void setWebActivity(MainActivity webActivity1) {
 		webActivity = webActivity1;
 	}
 

@@ -73,7 +73,7 @@ public class OdiiInterface {
 	/**
 	 * The activity.
 	 */
-	private final AppCompatActivity activity;
+	private final MainActivity activity;
 	/**
 	 * 추가 - 메인 이외의 activity
 	 */
@@ -94,11 +94,12 @@ public class OdiiInterface {
 	 * @param activity the activity
 	 * @param webView  the web view
 	 */
-	public OdiiInterface(AppCompatActivity activity, OdiiWebView webView) {
+	public OdiiInterface(MainActivity activity, OdiiWebView webView) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
 		this.webView = webView;
 	}
+
 	//추가 - subActivity 전달
 	public void setSubActivity(AppCompatActivity subActivity){
 		this.subActivity = subActivity;
@@ -662,7 +663,8 @@ public class OdiiInterface {
 				} else {
 					Intent gpsPermissionCheckIntent = new Intent(activity, PermissionCheckActivity.class);
 					gpsPermissionCheckIntent.putExtra("onlyGps", true);
-					activity.startActivityForResult(gpsPermissionCheckIntent, 1599);
+                    activity.getGpsLauncher()
+                            .launch(gpsPermissionCheckIntent);
 					activity.overridePendingTransition(0,0);
 				}
 

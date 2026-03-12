@@ -27,6 +27,7 @@ import android.view.animation.TranslateAnimation;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
+import androidx.activity.result.contract.ActivityResultContracts.StartActivityForResult;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
@@ -111,6 +112,54 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             registerForActivityResult(
                     new ActivityResultContracts.RequestPermission(),
                     isGranted -> startWeb_Next()
+            );
+
+    // 공지 관련
+    private final ActivityResultLauncher<Intent> noticeNextWorkLauncher =
+            registerForActivityResult(
+                    new StartActivityForResult(),
+                    result -> noticeUtils.nextWork()
+            );
+
+    // 이벤트 URL 관련
+    private final ActivityResultLauncher<Intent> eventUrlLauncher =
+            registerForActivityResult(
+                    new StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == Activity.RESULT_OK && result.getData() != null) {
+                            String url = result.getData().getStringExtra("Event_URL");
+                            if (!TextUtils.isEmpty(url)) {
+                                if (url.toLowerCase().startsWith(URLS.BASE_URL)) {
+                                    mBind.mainWebView.loadUrl(url);
+                                } else {
+                                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                                }
+                            }
+                            noticeUtils.nextWork();
+                        } else if (result.getResultCode() == Activity.RESULT_CANCELED) {
+                            noticeUtils.nextWork();
+                        }
+                    }
+            );
+
+    // GPS 권한 관련
+    private final ActivityResultLauncher<Intent> gpsLauncher =
+            registerForActivityResult(
+                    new StartActivityForResult(),
+                    result -> {
+                        if (result.getResultCode() == Activity.RESULT_OK) {
+                            mBind.mainWebView.getOdiiInterface().getGPS();
+                        }
+                    }
+            );
+
+    // 크롬 클라이언트 관련
+    private final ActivityResultLauncher<Intent> chromeClientLauncher =
+            registerForActivityResult(
+                    new StartActivityForResult(),
+                    result -> odiiWebChromeClient.onActivityResult(
+                            result.getResultCode(), result.getData()
+                    )
             );
 
     //--------------------------------------------------------------------------
@@ -738,7 +787,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         }
 
         if (!TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
-            mBind.mainWebView.loadUrl("javascript:requestFootStampList()");
+            mBind.mainWebView.requestFootStampList();
         }
 
     }
@@ -836,6 +885,23 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             }
         });
     }
+
+    public ActivityResultLauncher<Intent> getNoticeNextWorkLauncher() {
+        return noticeNextWorkLauncher;
+    }
+
+    public ActivityResultLauncher<Intent> getEventUrlLauncher() {
+        return eventUrlLauncher;
+    }
+
+    public ActivityResultLauncher<Intent> getGpsLauncher() {
+        return gpsLauncher;
+    }
+
+    public ActivityResultLauncher<Intent> getChromeClientLauncher() {
+        return chromeClientLauncher;
+    }
+
 
     /**
      * Show quit dialog.
@@ -1026,38 +1092,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
             mNotificationManager.cancel(LocationService.GEOFENCING_NOTIFICATION_ID);
         } catch (Exception ignored) {
-        }
-    }
-
-    @Override
-    protected void onActivityResult(int requestCode, int resultCode, @Nullable Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-        if (requestCode == 8775) {
-            noticeUtils.nextWork();
-        } else if (requestCode == 8776 && resultCode == Activity.RESULT_OK) {
-            if (data != null) {
-                String url = data.getStringExtra("Event_URL");
-                if (!TextUtils.isEmpty(url)) {
-                    if (url.toLowerCase().startsWith(URLS.BASE_URL)) {
-                        mBind.mainWebView.loadUrl(url);
-                    } else {
-                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-                    }
-
-                }
-            }
-            noticeUtils.nextWork();
-        } else if (requestCode == 8776 && resultCode != Activity.RESULT_CANCELED) {
-            noticeUtils.nextWork();
-        } else if (requestCode == 1599 && Activity.RESULT_OK == resultCode) {
-            mBind.mainWebView.getOdiiInterface().getGPS();
-        } else if (requestCode == 4589) {
-            startWeb();
-        } else if (requestCode == 6154) {
-            //추가 - 전반적인 권한안내 팝업에 동의하여 진행하였지만 권한이 부족한경우, 시스템 권한설정에서 돌아올 경우
-            startWeb();
-        } else {
-            odiiWebChromeClient.onActivityResult(requestCode, resultCode, data);
         }
     }
 

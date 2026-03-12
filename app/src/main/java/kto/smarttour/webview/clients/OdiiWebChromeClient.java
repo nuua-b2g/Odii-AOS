@@ -22,6 +22,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
+import kto.smarttour.ui.MainActivity;
+
 /**
  * The Class OdiiWebChromeClient.
  *
@@ -33,7 +35,6 @@ public class OdiiWebChromeClient extends WebChromeClient {
 	private AppCompatActivity activity;
 	public ValueCallback<Uri[]> uploadMessage;
 	private ValueCallback<Uri> mUploadMessage;
-	public static final int REQUEST_SELECT_FILE = 100;
 	private final static int FILECHOOSER_RESULTCODE = 1;
 
 	/**
@@ -87,7 +88,11 @@ public class OdiiWebChromeClient extends WebChromeClient {
 
 		Intent intent = fileChooserParams.createIntent();
 		try {
-			activity.startActivityForResult(intent, REQUEST_SELECT_FILE);
+            AppCompatActivity currentActivity = activity;
+            if(currentActivity instanceof MainActivity) {
+                ((MainActivity) currentActivity).getChromeClientLauncher()
+                        .launch(intent);
+            }
 		} catch (ActivityNotFoundException e) {
 			uploadMessage = null;
 			Toast.makeText(activity, "Cannot Open File Chooser", Toast.LENGTH_LONG).show();
@@ -187,12 +192,11 @@ public class OdiiWebChromeClient extends WebChromeClient {
 		}
 	}
 
-	public void onActivityResult(int requestCode, int resultCode, Intent intent) {
-        if (requestCode == REQUEST_SELECT_FILE) {
-            if (uploadMessage == null)
-                return;
-            uploadMessage.onReceiveValue(FileChooserParams.parseResult(resultCode, intent));
-            uploadMessage = null;
-        }
+	public void onActivityResult(int resultCode, Intent intent) {
+        if (uploadMessage == null)
+            return;
+        uploadMessage.onReceiveValue(FileChooserParams.parseResult(resultCode, intent));
+        uploadMessage = null;
     }
+
 }

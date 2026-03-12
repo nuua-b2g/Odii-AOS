@@ -53,7 +53,7 @@ import kto.smarttour.ui.taxi.TaxiMainActivity;
 
 public class NoticeUtils {
 
-	private AppCompatActivity activity;
+	private MainActivity activity;
 	private NoticeData data;
 
 	private String ttid = "-1";
@@ -75,7 +75,7 @@ public class NoticeUtils {
 	}
 	private OnCheckListener checkListener;
 
-	public NoticeUtils(AppCompatActivity activity, NoticeData data, OnNoticeListener callback) {
+	public NoticeUtils(MainActivity activity, NoticeData data, OnNoticeListener callback) {
 		this.activity = activity;
 		this.data = data;
 		this.callback = callback;
@@ -83,7 +83,7 @@ public class NoticeUtils {
 	}
 
 	//--
-	public NoticeUtils(AppCompatActivity activity, OnCheckListener callback) {
+	public NoticeUtils(MainActivity activity, OnCheckListener callback) {
 		this.activity = activity;
 		//this.data = data;
 		this.checkListener = callback;
@@ -703,7 +703,8 @@ public class NoticeUtils {
 				mWorkerChain.add(new WorkerChain.SimpleWorker("Tutorial", "Tutorial") {
 					@Override
 					public void work() {
-						activity.startActivityForResult(new Intent(activity, AppTutorialActivity.class), 8775);
+                        Intent intent = new Intent(activity, AppTutorialActivity.class);
+                        activity.getNoticeNextWorkLauncher().launch(intent);
 					}
 				});
 			}
@@ -753,7 +754,7 @@ public class NoticeUtils {
 								Intent intent = new Intent(activity, NoticeActivity.class);
 								intent.putExtra("disaster_notice", true);
 								intent.putExtra("disaster_notice_data", item);
-								activity.startActivityForResult(intent, 8775);
+                                activity.getNoticeNextWorkLauncher().launch(intent);
 							}
 						});
 					}
@@ -801,7 +802,7 @@ public class NoticeUtils {
 
 //								intent.putExtra("normal_notice", true);
 //								intent.putExtra("normal_notice_data", item);
-								activity.startActivityForResult(intent, 8775);
+                                activity.getNoticeNextWorkLauncher().launch(intent);
 							}
 						});
 					}
@@ -907,7 +908,7 @@ public class NoticeUtils {
 						public void work() {
 							Intent intent = new Intent(activity, EventActivity.class);
 							intent.putParcelableArrayListExtra("event_data", visibilityEventList);
-							activity.startActivityForResult(intent, 8776);
+                            activity.getEventUrlLauncher().launch(intent);
 						}
 					});
 				} else {

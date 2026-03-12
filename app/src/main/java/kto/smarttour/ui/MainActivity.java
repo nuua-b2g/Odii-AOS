@@ -247,7 +247,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     /***
      * 디버깅용 택시모드 진입
-     * SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
+     *
      * <p>
      * //(양양)
      * Integer.valueOf(7)
@@ -271,6 +271,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         }
 
         //(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입 시점
+        //SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
 
         if (intent != null && intent.getBooleanExtra("notification", false)) {
             introSkip = true;

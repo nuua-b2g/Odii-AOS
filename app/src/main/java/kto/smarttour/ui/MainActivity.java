@@ -125,18 +125,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
                 int tlid = intent.getIntExtra("tlid", -1);
                 int slid = intent.getIntExtra("slid", -1);
                 if (tlid >= 0 && slid >= 0) {
-                    sendAudioFinished(tlid, slid);
+                    mBind.mainWebView.updateAudioEndStatus(tlid, slid);
                 }
-
             }
         }
 
-    }
-
-    private void sendAudioFinished(int tlid, int slid) {
-        String javascript = "STG_SVR.updateAudioEndStatus('" + tlid + "','" + slid + "');";
-        mBind.mainWebView.evaluateJavascript(javascript, value -> {
-        });
     }
 
     @Override

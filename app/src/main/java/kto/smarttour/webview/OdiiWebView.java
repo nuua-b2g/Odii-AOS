@@ -174,4 +174,9 @@ public class OdiiWebView extends WebView {
         loadUrl(JAVASCRIPT_PREFIX + "resUUIDAndAppVersion('" + id + "'" + ", '" + finalVersion + "')");
     }
 
+    public void updateAudioEndStatus(int tlid, int slid) {
+        String javascript = "STG_SVR.updateAudioEndStatus('" + tlid + "','" + slid + "');";
+        evaluateJavascript(javascript, value -> {
+        });
+    }
 }

@@ -105,14 +105,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     // 필드로 등록
     private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(),
-            result -> startWeb()
+            result -> startWeb_Next()
     );
-
-    private final ActivityResultLauncher<String> notificationLauncher =
-            registerForActivityResult(
-                    new ActivityResultContracts.RequestPermission(),
-                    isGranted -> startWeb_Next()
-            );
 
     // 공지 관련
     private final ActivityResultLauncher<Intent> noticeNextWorkLauncher =
@@ -459,12 +453,18 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
                     remainPermission.add(permission);
                 }
             }
-            if (!remainPermission.isEmpty()) {
+            boolean notificationEnabled = checkNotificationsEnabled();
+            if (!notificationEnabled && Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                    remainPermission.add(Manifest.permission.POST_NOTIFICATIONS);
+                }
+            }
+            if (remainPermission.isEmpty()) {
+                startWeb_Next();
+            } else {
                 //요청할 권한있음.
                 String[] permissionRemained = remainPermission.toArray(new String[0]);
                 permissionLauncher.launch(permissionRemained);
-            } else {
-                startWeb();
             }
         }
     }
@@ -480,32 +480,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             }
         } catch (Exception e) {
             LocalBroadcastManager.getInstance(MainActivity.this).sendBroadcast(new Intent(PlayerConstants.ACTION_HIDE_MINI_PLAYER));
-        }
-    }
-
-    /**
-     * 인트로 영상 이후 웹페이지 호출
-     */
-    private void startWeb() {
-
-        //-- 안드로이드 13 노티피게이션 권한 추가체크
-        boolean notificationEnabled = checkNotificationsEnabled();
-        if (notificationEnabled) {
-            //Toast.makeText(MainActivity.this,"checkNotificationsEnabled",Toast.LENGTH_SHORT).show();
-            startWeb_Next();
-        } else {
-            //권한요청
-            requestPostNotification();
-        }
-    }
-
-    private void requestPostNotification() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-            if (!MainActivity.this.isFinishing()) {
-                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                    notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
-                }
-            }
         }
     }
 

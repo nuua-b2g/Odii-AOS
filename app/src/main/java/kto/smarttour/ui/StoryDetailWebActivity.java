@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
 import android.view.View;
+import android.webkit.WebResourceRequest;
 import android.widget.RelativeLayout;
 
 import androidx.core.app.ActivityCompat;
@@ -106,7 +107,12 @@ public class StoryDetailWebActivity extends BaseActivity implements View.OnClick
         mBind.progress.setVisibility(View.GONE);
     }
 
-	@Override
+    @Override
+    public Boolean shouldOverrideUrlLoading(WebResourceRequest request) {
+        return null;
+    }
+
+    @Override
 	protected void onResume() {
 
 		if (CommonUtils.isRooted(this)) {

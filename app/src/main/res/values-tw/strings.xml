@@ -264,5 +264,7 @@
     <string name="pe_desc_5">拍照和錄影</string>
     <string name="tutorial_next_btn">下一步 (%d/%d)</string>
     <string name="tutorial_skip">跳過</string>
+
+    <string name="unsupported_language">此內容目前不支援該語言。</string>
 </resources>
 

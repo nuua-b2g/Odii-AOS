@@ -24,6 +24,8 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
+import android.webkit.WebResourceRequest;
+import android.widget.Toast;
 
 import androidx.activity.result.ActivityResultLauncher;
 import androidx.activity.result.contract.ActivityResultContracts;
@@ -43,9 +45,11 @@ import com.bumptech.glide.request.target.Target;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.socks.library.KLog;
 
+import java.net.URL;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Locale;
 import java.util.Objects;
 import java.util.Random;
 
@@ -173,6 +177,25 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     @Override
     public void onPageStart() {
         mBind.progress.setVisibility(View.GONE);
+    }
+
+    @Nullable
+    @Override
+    public Boolean shouldOverrideUrlLoading(WebResourceRequest request) {
+        Uri uri = request.getUrl();
+        if (uri != null && uri.toString().contains("/story/detail")) {
+            String lang = uri.getQueryParameter("lang");
+            if (lang != null) {
+                String currentLang = SettingsUtil.getLocale(this);
+                if (!lang.equals(currentLang)) {
+                    Toast.makeText(this, R.string.unsupported_language, Toast.LENGTH_SHORT)
+                            .show();
+                    mBind.mainWebView.loadUrl(webViewHomeUrl);
+                    return true;
+                }
+            }
+        }
+        return null;
     }
 
     private class AudioFinishedReceiver extends BroadcastReceiver {

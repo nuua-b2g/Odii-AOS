@@ -308,6 +308,8 @@
     <string name="pe_desc_5">Capture or take picture</string>
     <string name="tutorial_next_btn">Next (%d/%d)</string>
     <string name="tutorial_skip">Skip</string>
+
+    <string name="unsupported_language">This content is currently not available in this language.</string>
 </resources>
 
 

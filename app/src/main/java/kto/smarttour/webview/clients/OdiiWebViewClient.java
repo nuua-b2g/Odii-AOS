@@ -96,7 +96,16 @@ public class OdiiWebViewClient extends WebViewClient {
 		return true;
 	}
 
-	/* (non-Javadoc)
+    @Override
+    public boolean shouldOverrideUrlLoading(WebView view, WebResourceRequest request) {
+        Boolean callBack = callback.shouldOverrideUrlLoading(request);
+        if(callBack != null) {
+            return callBack;
+        }
+        return super.shouldOverrideUrlLoading(view, request);
+    }
+
+    /* (non-Javadoc)
 	 * @see android.webkit.WebViewClient#onPageStarted(android.webkit.WebView, java.lang.String, android.graphics.Bitmap)
 	 */
 	@Override

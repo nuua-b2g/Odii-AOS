@@ -265,5 +265,8 @@
     <string name="pe_desc_5">写真と動画を撮影する</string>
     <string name="tutorial_next_btn">次へ (%d/%d)</string>
     <string name="tutorial_skip">スキップ</string>
+
+    <string name="unsupported_language">サポートされていない言語のコンテンツです。</string>
+
 </resources>
 

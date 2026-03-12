@@ -105,7 +105,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     // 필드로 등록
     private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
             new ActivityResultContracts.RequestMultiplePermissions(),
-            result -> startWeb_Next()
+            result -> startIntro()
     );
 
     // 공지 관련
@@ -460,7 +460,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
                 }
             }
             if (remainPermission.isEmpty()) {
-                startWeb_Next();
+                startIntro();
             } else {
                 //요청할 권한있음.
                 String[] permissionRemained = remainPermission.toArray(new String[0]);
@@ -483,7 +483,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         }
     }
 
-    private void startWeb_Next() {
+    private void startIntro() {
         if (introSkip) {
             //mBind.layoutVideo.setVisibility(View.GONE);
 

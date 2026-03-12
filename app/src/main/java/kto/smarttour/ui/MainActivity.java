@@ -13,8 +13,6 @@ import android.graphics.Color;
 import android.graphics.Point;
 import android.graphics.drawable.Drawable;
 import android.location.Location;
-import android.media.AudioAttributes;
-import android.media.SoundPool;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
@@ -41,8 +39,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.getbase.floatingactionbutton.FloatingActionButton;
-import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
@@ -92,8 +88,6 @@ import static kto.smarttour.webview.javascript.OdiiInterface.JAVASCRIPT_PREFIX;
 
 public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener {
 
-    private final String JINGLE_SOUND_AT = "JINGLE_SOUND_AT";
-
     private ActivityMainBinding mBind;
     private Activity activity;
     private CurrentLocation currentLocation;
@@ -110,161 +104,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     private String webViewHomeUrl;
     private String onLoadMainWebViewUrl = URLS.URL;
-
-    //안드로이드 13권한 다이얼로그
-    //private Dialog dialogRequest_POST_NOTIFICATIONS;
-
-    //Jingle SoundPool
-    private SoundPool soundPool;
-    private int soundJingle_short;
-    private boolean b_ready_soundJingle_short; //로드완료 상태
-    private int soundJingle_long;
-    private boolean b_ready_soundJingle_long; //로드완료 상태
-
-    private SoundPool createSoundPool() {
-        SoundPool sp;
-        //반환용 사운드풀 준비
-        AudioAttributes audioAttributes = new AudioAttributes.Builder()
-// USAGE_MEDIA
-// USAGE_GAME
-                .setUsage(AudioAttributes.USAGE_GAME)
-// CONTENT_TYPE_MUSIC
-// CONTENT_TYPE_SPEECH, etc.
-                .setContentType(AudioAttributes.CONTENT_TYPE_MUSIC)
-                .build();
-
-        sp = new SoundPool.Builder()
-                .setAudioAttributes(audioAttributes)
-                // Stream설정
-                .setMaxStreams(2)
-                .build();
-
-        return sp;
-    }
-
-    private void playJingleSound(int soundJingle_id) {
-
-        //도이도 재생기능 중단 (임시기능 호출안함)
-        boolean allowPlaySound = false;
-        if (!allowPlaySound) {
-            return;
-        }
-
-        if (soundPool != null) {
-            soundPool.play(soundJingle_id, 1.0f, 1.0f, 1, 0, 1);
-        }
-    }
-
-    //floating actions menu , to config about soundpool useage
-    private FloatingActionsMenu floatingMenu;
-    private HashMap<String, Integer> map_floatingButtons;
-
-    private String createTargetKey_map_floatingButton(String at, String type) {
-        if (at != null && type != null) {
-            return String.format("%s_%s", at, type);
-        }
-        return null;
-    }
-
-    private void initFloatingMenu(
-            @SuppressWarnings("SameParameterValue") boolean useShow
-    ) {
-        if (useShow) {
-            if (floatingMenu == null) {
-                floatingMenu = findViewById(R.id.floating_action_soundpool);
-
-                map_floatingButtons = new HashMap<>();
-                int sizeBtn = floatingMenu.getChildCount();
-                for (int i = 0; i < sizeBtn; i++) {
-
-                    View v = floatingMenu.getChildAt(i);
-                    int id = v.getId();
-                    String value_sound_at = null;
-                    String value_sound_type = null;
-                    if (id == R.id.floating_action_soundpool_intro_start_short) {
-                        value_sound_at = "start";
-                        value_sound_type = "short";
-                    } else if (id == R.id.floating_action_soundpool_intro_start_long) {
-                        value_sound_at = "start";
-                        value_sound_type = "long";
-                    } else if (id == R.id.floating_action_soundpool_intro_end_short) {
-                        value_sound_at = "end";
-                        value_sound_type = "short";
-                    } else if (id == R.id.floating_action_soundpool_intro_end_long) {
-                        value_sound_at = "end";
-                        value_sound_type = "long";
-                    }
-                    String key = createTargetKey_map_floatingButton(value_sound_at, value_sound_type);
-                    if (key != null) {
-                        map_floatingButtons.put(key, id);
-                        v.setOnClickListener(listenerFloatingMenuButtonAction);
-                    }
-                }
-
-                floatingMenu.setOnFloatingActionsMenuUpdateListener(new FloatingActionsMenu.OnFloatingActionsMenuUpdateListener() {
-                    @Override
-                    public void onMenuExpanded() {
-
-                        //활성화 상태 반영 ( 사운드플 재생 설정값 기준 맵핑 )
-                        String value_sound_at = PreferenceUtils.getPreferenceString(activity, JINGLE_SOUND_AT); // "start" , "end"
-                        String value_sound_type = PreferenceUtils.getPreferenceString(activity, "JINGLE_SOUND_TYPE"); //"short" , "long"
-                        String targetKey = createTargetKey_map_floatingButton(value_sound_at, value_sound_type);
-
-                        if (targetKey != null) {
-                            for (String key : map_floatingButtons.keySet()) {
-                                Integer targetViewId = map_floatingButtons.get(key);
-                                if (targetViewId != null) {
-                                    FloatingActionButton floatingActionButton = findViewById(targetViewId);
-                                    floatingActionButton.setPressed(targetKey.equals(key));
-                                }
-                            }
-                        }
-                    }
-
-                    @Override
-                    public void onMenuCollapsed() {
-
-                    }
-                });
-            }
-        }
-    }
-
-    private final View.OnClickListener listenerFloatingMenuButtonAction = new View.OnClickListener() {
-
-        @Override
-        public void onClick(View v) {
-            int id = v.getId();
-            //String key_sound_at = JINGLE_SOUND_AT;
-            String value_sound_at = null;
-            //String key_sound_type = "JINGLE_SOUND_TYPE";
-            String value_sound_type = null;
-
-            if (id == R.id.floating_action_soundpool_intro_start_short) {
-                value_sound_at = "start";
-                value_sound_type = "short";
-            } else if (id == R.id.floating_action_soundpool_intro_start_long) {
-                value_sound_at = "start";
-                value_sound_type = "long";
-            } else if (id == R.id.floating_action_soundpool_intro_end_short) {
-                value_sound_at = "end";
-                value_sound_type = "short";
-            } else if (id == R.id.floating_action_soundpool_intro_end_long) {
-                value_sound_at = "end";
-                value_sound_type = "long";
-            }
-            if (value_sound_at != null) {
-                PreferenceUtils.setPreference(activity, JINGLE_SOUND_AT, value_sound_at);
-            }
-            if (value_sound_type != null) {
-                PreferenceUtils.setPreference(activity, "JINGLE_SOUND_TYPE", value_sound_type);
-            }
-            //---------------------------
-            if (floatingMenu != null) {
-                floatingMenu.collapse();
-            }
-        }
-    };
 
     //--------------------------------------------------------------------------
     private final AudioFinishedReceiver mAudioFinishedReceiver = new AudioFinishedReceiver();
@@ -342,55 +181,16 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             onLoadMainWebViewUrl = deepLinkUrl;
         }
 
-        onCreate_SoundPool(false);
-        //------------------------------------------------------------------
-        //------------------------------------------------------------------
-        //jingle soundPool
-        if (soundPool == null) {
-
-            //사운드풀 재생설정 기본값
-            String value_sound_at = PreferenceUtils.getPreferenceString(activity, JINGLE_SOUND_AT);
-            if (value_sound_at == null) {
-                PreferenceUtils.setPreference(activity, JINGLE_SOUND_AT, "start"); //"start" , "end"
-            }
-
-            String value_sound_type = PreferenceUtils.getPreferenceString(activity, "JINGLE_SOUND_TYPE");
-            if (value_sound_type == null) {
-                PreferenceUtils.setPreference(activity, "JINGLE_SOUND_TYPE", "short"); // "short", "long"
-            }
-            soundPool = createSoundPool();
-            //--
-            //sound리소스 로드
-            soundJingle_short = soundPool.load(this, R.raw.jingle_short, 1);
-            soundJingle_long = soundPool.load(this, R.raw.jingle_long, 1);
-            //SoundPool.OnLoadCompleteListener가 수신 되기전 soundPool.load의 사운드id는 이미 할당됨(soundId != 0)
-            //setOnLoadCompleteListener
-            soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
-
-                boolean success = status == 0;
-                //success
-                if (sampleId == soundJingle_short && success) {
-                    b_ready_soundJingle_short = true;
-                }
-                if (sampleId == soundJingle_long && success) {
-                    b_ready_soundJingle_long = true;
-                }
-
-                //사전할당된 사운드id로 할당여부로 판단하지않고 로드완료로 판단.
-                if (b_ready_soundJingle_short && b_ready_soundJingle_long) {
-                    //------------------------------------------------------------------
-                    //-- init floating actions menu
-                    //ui, floating actions menu - soundpool config useage
-                    initFloatingMenu(false); //설정용 UI출력 여부.
-                    //------------------------------------------------------------------
-                    //------------------------------------------------------------------
-
-                    onCreate_SoundPool(true); //남은 onCreate동작 수행
-                }
-                //--
-            });
+        activity = this;
+        OdiiApplication.setWebActivity(this);
+        try {
+            startService(new Intent(this, UnCatchTaskService.class));
+        } catch (Exception ignored) {
         }
-
+        systemReceiver = new SystemReceiver();
+        mBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
+        currentLocation = new CurrentLocation(this, this);
+        initializer();
     }
 
     @Nullable
@@ -406,33 +206,19 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         return null;
     }
 
-    private void onCreate_SoundPool(boolean soundPoolInitialized) {
-        if (!soundPoolInitialized) {
-            activity = this;
+    private void initializer() {
+        Intent intent = getIntent();
+        //tint설정 대상 뷰 초기값 숨김
+        mBind.ivTypologo.setVisibility(View.INVISIBLE);
+        mBind.btnSkipintro.setVisibility(View.INVISIBLE);
+        mBind.ivBottomlogo.setVisibility(View.INVISIBLE);
 
-            OdiiApplication.setWebActivity(this);
-            try {
-                startService(new Intent(this, UnCatchTaskService.class));
-            } catch (Exception ignored) {
-            }
+        //택시모드 종료에 의한 MainActivity호출시 introSkip
+        if (!introSkip && intent != null) {
+            introSkip = intent.getBooleanExtra("introSkip", false);
+        }
 
-            systemReceiver = new SystemReceiver();
-
-            mBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
-            currentLocation = new CurrentLocation(this, this);
-        } else {
-            Intent intent = getIntent();
-            //tint설정 대상 뷰 초기값 숨김
-            mBind.ivTypologo.setVisibility(View.INVISIBLE);
-            mBind.btnSkipintro.setVisibility(View.INVISIBLE);
-            mBind.ivBottomlogo.setVisibility(View.INVISIBLE);
-
-            //택시모드 종료에 의한 MainActivity호출시 introSkip
-            if (!introSkip && intent != null) {
-                introSkip = intent.getBooleanExtra("introSkip", false);
-            }
-
-            //(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입
+        //(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입
 //			if(!introSkip){
 //				//필요시 주석해제
 //				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
@@ -444,61 +230,60 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 //				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(8));
 //			}
 
-            if (intent != null && intent.getBooleanExtra("notification", false)) {
-                introSkip = true;
-                Intent playerIntent = new Intent(this, Player.class);
-                playerIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
-                startActivity(playerIntent);
-            }
-
-            if (!NetworkUtil.isNetworkConnected(this)) {
-                DialogUtil.showWarning(
-                        this,
-                        getString(R.string.confirm),
-                        getString(R.string.network_error),
-                        "",
-                        getString(R.string.finish),
-                        () -> {
-                        },
-                        this::finish
-                );
-                return;
-            }
-            odiiWebChromeClient = new OdiiWebChromeClient(this, mBind.progress);
-            mBind.mainWebView.setWebViewClient(new OdiiWebViewClient(this, mBind.progress));
-            mBind.mainWebView.setWebChromeClient(odiiWebChromeClient);
-
-            setViewMiniPlayer(mBind.viewMiniPlayer, true); //initHide =true
-
-            IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
-            registerReceiver(systemReceiver, intentFilter);
-
-            LocalBroadcastManager.getInstance(this).registerReceiver(mAudioFinishedReceiver, new IntentFilter("AUDIO_FINISHED"));
-
-            if (CommonUtils.isRooted(this)) {
-                showWarningWithFinish(getString(R.string.rooted_message));
-            } else if (CommonUtils.isEmulator()) {
-                showWarningWithFinish(getString(R.string.emulator_message));
-            } else if (!CommonUtils.isKeyChecker(this, "MD5")) {
-                showWarningWithFinish(getString(R.string.Integrity_message));
-            } else {
-                if (CommonUtils.isRooted2(this)) {
-                    showWarningWithFinish(getString(R.string.rooted_message));
-                } else {
-                    if (Common.ignoreRooting) {
-                        //디버그시 checkUtil_start 주석처리 및 진행함수 직접호출 (추가 앱체크 생략)
-                        showInAppDisclosureUseLocation();
-                    } else {
-                        //릴리즈시 사용 (추가 앱체크)
-                        checkUtil_start();
-                    }
-
-                }
-
-            }
-            clearGeofencingNotification();
+        if (intent != null && intent.getBooleanExtra("notification", false)) {
+            introSkip = true;
+            Intent playerIntent = new Intent(this, Player.class);
+            playerIntent.addFlags(Intent.FLAG_ACTIVITY_REORDER_TO_FRONT);
+            startActivity(playerIntent);
         }
 
+        if (!NetworkUtil.isNetworkConnected(this)) {
+            DialogUtil.showWarning(
+                    this,
+                    getString(R.string.confirm),
+                    getString(R.string.network_error),
+                    "",
+                    getString(R.string.finish),
+                    () -> {
+                    },
+                    this::finish
+            );
+            return;
+        }
+        odiiWebChromeClient = new OdiiWebChromeClient(this, mBind.progress);
+        mBind.mainWebView.setWebViewClient(new OdiiWebViewClient(this, mBind.progress));
+        mBind.mainWebView.setWebChromeClient(odiiWebChromeClient);
+
+        setViewMiniPlayer(mBind.viewMiniPlayer, true); //initHide =true
+
+        IntentFilter intentFilter = new IntentFilter(Intent.ACTION_HEADSET_PLUG);
+        registerReceiver(systemReceiver, intentFilter);
+
+        LocalBroadcastManager.getInstance(this)
+                .registerReceiver(
+                        mAudioFinishedReceiver, new IntentFilter("AUDIO_FINISHED")
+                );
+
+        if (CommonUtils.isRooted(this)) {
+            showWarningWithFinish(getString(R.string.rooted_message));
+        } else if (CommonUtils.isEmulator()) {
+            showWarningWithFinish(getString(R.string.emulator_message));
+        } else if (!CommonUtils.isKeyChecker(this, "MD5")) {
+            showWarningWithFinish(getString(R.string.Integrity_message));
+        } else {
+            if (CommonUtils.isRooted2(this)) {
+                showWarningWithFinish(getString(R.string.rooted_message));
+            } else {
+                if (Common.ignoreRooting) {
+                    //디버그시 checkUtil_start 주석처리 및 진행함수 직접호출 (추가 앱체크 생략)
+                    showInAppDisclosureUseLocation();
+                } else {
+                    //릴리즈시 사용 (추가 앱체크)
+                    checkUtil_start();
+                }
+            }
+        }
+        clearGeofencingNotification();
         //---------------------------------------------------------------------------------------
     }
 
@@ -790,7 +575,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         try {
             mBind.btnSkipintro.setOnClickListener(view -> {
                 mBind.ivIntro.clearAnimation();
-                playIntroAnimationResult(false);
+                playIntroAnimationResult();
             });
 
             //리모트 이미지
@@ -903,34 +688,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
                 @Override
                 public void onAnimationStart(Animation animation) {
 
-                    //-------------------------------------------------------------
-                    //-------------------------------------------------------------
-                    //애니메이션 시작시, 징글 사운드 재생 하는 경우
-                    //사운드풀 재생 기준값 로드
-                    String value_sound_at = PreferenceUtils.getPreferenceString(activity, JINGLE_SOUND_AT);
-                    if (value_sound_at != null) {
-                        //"start" , "end"
-                        if (value_sound_at.equals("start")) {
-
-                            String value_sound_type = PreferenceUtils.getPreferenceString(activity, "JINGLE_SOUND_TYPE");
-                            if (value_sound_type != null) {
-                                // "short", "long"
-                                if (value_sound_type.equals("short")) {
-                                    playJingleSound(soundJingle_short);
-                                } else if (value_sound_type.equals("long")) {
-                                    playJingleSound(soundJingle_long);
-                                }
-
-                            }
-
-                        }
-                    }
-                    //-------------------------------------------------------------
                 }
 
                 @Override
                 public void onAnimationEnd(Animation animation) {
-                    playIntroAnimationResult(true);
+                    playIntroAnimationResult();
 
                 }
 
@@ -952,7 +714,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
         } else {
             //--
-            playIntroAnimationResult(false);
+            playIntroAnimationResult();
 
         }
     }
@@ -960,44 +722,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     // 애니메이션 결과 중복호출 방지
     private boolean onceFlag_playIntroAnimationResult = false;
 
-    private void playIntroAnimationResult(boolean imageAnimationSuccess) {
+    private void playIntroAnimationResult() {
         if (onceFlag_playIntroAnimationResult) {
             return;
         }
         onceFlag_playIntroAnimationResult = true;
-
-        //-------------------------------------------------------------
-        //-------------------------------------------------------------
-        //애니메이션 종료시, 징글 사운드 재생 하는 경우
-        //사운드풀 재생 기준값 로드
-        String value_sound_at = PreferenceUtils.getPreferenceString(activity, JINGLE_SOUND_AT);
-        if (value_sound_at != null) {
-            //"start" , "end"
-            if (value_sound_at.equals("end")) {
-
-                String value_sound_type = PreferenceUtils.getPreferenceString(activity, "JINGLE_SOUND_TYPE");
-                if (value_sound_type != null) {
-                    // "short", "long"
-                    if (value_sound_type.equals("short")) {
-                        playJingleSound(soundJingle_short);
-                    } else if (value_sound_type.equals("long")) {
-                        playJingleSound(soundJingle_long);
-                    }
-
-                }
-
-            }
-        }
-
-        if (floatingMenu != null) {
-            ;
-            if (floatingMenu.getVisibility() != View.VISIBLE) {
-                floatingMenu.setVisibility(View.VISIBLE);
-            }
-        }
-        //-------------------------------------------------------------
-        //-------------------------------------------------------------
-
 
         //애니메이션이 완료되었거나, 애니매이션이 없을때 다음동작 호출
         setNoticeNetwork();

@@ -91,6 +91,8 @@ import retrofit2.Response;
 import static kto.smarttour.webview.javascript.OdiiInterface.JAVASCRIPT_PREFIX;
 
 public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener {
+    
+    private final String JINGLE_SOUND_AT = "JINGLE_SOUND_AT";
 
 	private ActivityMainBinding mBind;
 	private Activity activity;
@@ -102,8 +104,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	private OdiiWebChromeClient odiiWebChromeClient;
 
 	private boolean introSkip = false;
-	private NoticeUtils checkUtils;
-	private NoticeUtils noticeUtils;
+    private NoticeUtils noticeUtils;
 	private RootBeer rootBeer;
 
 	private int colorIntroTint;
@@ -204,7 +205,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					public void onMenuExpanded() {
 
 						//활성화 상태 반영 ( 사운드플 재생 설정값 기준 맵핑 )
-						String value_sound_at = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_AT"); // "start" , "end"
+						String value_sound_at = PreferenceUtils.getPreferenceString(activity,JINGLE_SOUND_AT); // "start" , "end"
 						String value_sound_type = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_TYPE"); //"short" , "long"
 						String targetKey = createTargetKey_map_floatingButton(value_sound_at,value_sound_type);
 
@@ -233,7 +234,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		@Override
 		public void onClick(View v) {
 			int id = v.getId();
-			//String key_sound_at = "JINGLE_SOUND_AT";
+			//String key_sound_at = JINGLE_SOUND_AT;
 			String value_sound_at = null;
 			//String key_sound_type = "JINGLE_SOUND_TYPE";
 			String value_sound_type = null;
@@ -257,7 +258,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					break;
 			}
 			if(value_sound_at!=null){
-				PreferenceUtils.setPreference(activity, "JINGLE_SOUND_AT", value_sound_at);
+				PreferenceUtils.setPreference(activity, JINGLE_SOUND_AT, value_sound_at);
 			}
 			if(value_sound_type!=null){
 				PreferenceUtils.setPreference(activity, "JINGLE_SOUND_TYPE", value_sound_type);
@@ -354,9 +355,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		if(soundPool==null){
 
 			//사운드풀 재생설정 기본값
-			String value_sound_at = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_AT");
+			String value_sound_at = PreferenceUtils.getPreferenceString(activity,JINGLE_SOUND_AT);
 			if(value_sound_at==null){
-				PreferenceUtils.setPreference(activity, "JINGLE_SOUND_AT", "start"); //"start" , "end"
+				PreferenceUtils.setPreference(activity, JINGLE_SOUND_AT, "start"); //"start" , "end"
 			}
 
 			String value_sound_type = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_TYPE");
@@ -517,7 +518,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 						showInAppDisclosureUseLocation();
 					}else{
 						//릴리즈시 사용 (추가 앱체크)
-						checkUtil_start(true);
+						checkUtil_start();
 					}
 
 				}
@@ -1250,7 +1251,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					//-------------------------------------------------------------
 					//애니메이션 시작시, 징글 사운드 재생 하는 경우
 					//사운드풀 재생 기준값 로드
-					String value_sound_at = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_AT");
+					String value_sound_at = PreferenceUtils.getPreferenceString(activity,JINGLE_SOUND_AT);
 					if(value_sound_at!=null){
 						//"start" , "end"
 						if(value_sound_at.equals("start")){
@@ -1312,7 +1313,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		//-------------------------------------------------------------
 		//애니메이션 종료시, 징글 사운드 재생 하는 경우
 		//사운드풀 재생 기준값 로드
-		String value_sound_at = PreferenceUtils.getPreferenceString(activity,"JINGLE_SOUND_AT");
+		String value_sound_at = PreferenceUtils.getPreferenceString(activity,JINGLE_SOUND_AT);
 		if(value_sound_at!=null){
 			//"start" , "end"
 			if(value_sound_at.equals("end")){
@@ -1580,7 +1581,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 	}
 
-	private NoticeUtils.OnCheckListener checkSeListener = new NoticeUtils.OnCheckListener() {
+	private final NoticeUtils.OnCheckListener checkSeListener = new NoticeUtils.OnCheckListener() {
 		@Override
 		public void onCheckComplete() {
 		}
@@ -1597,10 +1598,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 		}
 	};
+
 	//앱체크
-	private void checkUtil_start(boolean isOnCreate){
-		checkUtils = new NoticeUtils(MainActivity.this, checkSeListener);
-		checkUtils.start(isOnCreate);
+	private void checkUtil_start(){
+        NoticeUtils checkUtils = new NoticeUtils(MainActivity.this, checkSeListener);
+		checkUtils.start(true);
 	}
 
 	private void setNoticeNetwork() {

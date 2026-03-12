@@ -24,7 +24,6 @@ import android.view.View;
 import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
-import android.webkit.ValueCallback;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -39,8 +38,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.socks.library.KLog;
 
@@ -127,20 +124,14 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     private void sendAudioFinished(int tlid, int slid) {
         String javascript = "STG_SVR.updateAudioEndStatus('" + tlid + "','" + slid + "');";
-        mBind.mainWebView.evaluateJavascript(javascript, new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String value) {
-
-            }
+        mBind.mainWebView.evaluateJavascript(javascript, value -> {
         });
     }
 
     @Override
     protected void attachBaseContext(Context newBase) {
         String locale = SettingsUtil.getLocale(newBase);
-        if (locale != null) {
-            newBase = CommonUtils.changeLocaleLanguage2(newBase, locale);
-        } else {
+        if (locale == null) {
             locale = newBase.getResources().getConfiguration().locale.getLanguage();
             switch (locale) {
                 case "ko":
@@ -163,9 +154,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             }
             String finalLocale = locale;
             new Handler(Looper.getMainLooper()).post(() -> SettingsUtil.setLocale(this, finalLocale));
-            newBase = CommonUtils.changeLocaleLanguage2(newBase, locale);
 
         }
+        newBase = CommonUtils.changeLocaleLanguage2(newBase, locale);
         super.attachBaseContext(newBase);
     }
 
@@ -206,6 +197,20 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         return null;
     }
 
+
+    /***
+     * 디버깅용 택시모드 진입
+     * SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
+     * <p>
+     * //(양양)
+     * Integer.valueOf(7)
+     * <p>
+     * //(곡성)
+     * Integer.valueOf(9)
+     * <p>
+     * //(순천)
+     * Integer.valueOf(8)
+     */
     private void initializer() {
         Intent intent = getIntent();
         //tint설정 대상 뷰 초기값 숨김
@@ -218,17 +223,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             introSkip = intent.getBooleanExtra("introSkip", false);
         }
 
-        //(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입
-//			if(!introSkip){
-//				//필요시 주석해제
-//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
-//				//(양양)
-//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(7));
-//				//(곡성)
-//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(9));
-//				//(순천)
-//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(8));
-//			}
+        //(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입 시점
 
         if (intent != null && intent.getBooleanExtra("notification", false)) {
             introSkip = true;
@@ -319,10 +314,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             if (!TextUtils.isEmpty(url)) {
                 int tlid = intent.getIntExtra("tlid", 0);
                 int slid = intent.getIntExtra("slid", 0);
-                runOnUiThread(() -> {
-                    StampDBManager.getInstance(this).updateStampComplete(tlid, slid);
-                });
-
+                runOnUiThread(() -> StampDBManager.getInstance(this).updateStampComplete(tlid, slid));
                 mBind.mainWebView.loadUrl(url);
             }
         } else if (!TextUtils.isEmpty(intent.getStringExtra("url"))) {
@@ -330,14 +322,14 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         }
 
         //추가
-        checkFcmData(intent, "onNewIntent");
+        checkFcmData(intent);
     }
 
     /**
      * FCM 수신데이터 처리
      * intent.putExtra("fcmData",fcmData); //Serializable
      */
-    private void checkFcmData(Intent intent, String from) {
+    private void checkFcmData(Intent intent) {
         if (intent != null) {
             @SuppressWarnings("unchecked")
             HashMap<String, String> data = (HashMap<String, String>) intent.getSerializableExtra("fcmData");
@@ -394,12 +386,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         checkPermission();
 
         FirebaseMessaging.getInstance().setAutoInitEnabled(false);
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(this, new OnCompleteListener<String>() {
-            @Override
-            public void onComplete(@NonNull Task<String> task) {
-            }
-        });
-        FirebaseMessaging.getInstance().subscribeToTopic("ALL_ANDROID_PRD"); //ALL_ANDROID_DEV , ALL_ANDROID_PRD , ALL_IOS_DEV, ALL_IOS_PRD
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(this, task -> {});
+        //ALL_ANDROID_DEV , ALL_ANDROID_PRD , ALL_IOS_DEV, ALL_IOS_PRD
+        FirebaseMessaging.getInstance().subscribeToTopic("ALL_ANDROID_PRD");
     }
 
     /**
@@ -704,12 +693,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             t_animation.setDuration(3000); //3초
             t_animation.setFillAfter(true);
 
-            Runnable delayAnimationRunnable = new Runnable() {
-                @Override
-                public void run() {
-                    mBind.ivIntro.startAnimation(t_animation);
-                }
-            };
+            Runnable delayAnimationRunnable = () -> mBind.ivIntro.startAnimation(t_animation);
             new Handler(getMainLooper()).postDelayed(delayAnimationRunnable, 300);
 
         } else {
@@ -736,9 +720,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         mBind.mainWebView.loadUrl(onLoadMainWebViewUrl);
 
         //추가
-        new Handler(Looper.getMainLooper()).postDelayed(() -> {
-            checkFcmData(getIntent(), "MainWebLoad");
-        }, 2500);
+        new Handler(Looper.getMainLooper())
+                .postDelayed(() -> checkFcmData(getIntent()), 2500);
 
     }
 
@@ -853,18 +836,15 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
      * 다운로드 카운터 갱신
      */
     public void refreshDownloadCount() {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryDownloadCount('" + StoryDbManager.getInstance(this).getDownloadCount() + "')");
-        });
+        new Handler(Looper.getMainLooper())
+                .post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryDownloadCount('" + StoryDbManager.getInstance(this).getDownloadCount() + "')"));
     }
 
     /**
      * 보관함 카운터 갱신
      */
     public void refreshLockerCount() {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryLockerCount('" + StoryDbManager.getInstance(this).getStoryCount() + "')");
-        });
+        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryLockerCount('" + StoryDbManager.getInstance(this).getStoryCount() + "')"));
     }
 
     /**
@@ -878,9 +858,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
      * 웹 URL 호출
      */
     public void loadUrl(String url) {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mBind.mainWebView.loadUrl(url);
-        });
+        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(url));
     }
 
     public void loadStampPageChange() {
@@ -924,15 +902,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     }
 
     public void isMiniPlayer() {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resMiniPlayer('" + (mBind.viewMiniPlayer.getVisibility() == View.VISIBLE) + "')");
-        });
+        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resMiniPlayer('" + (mBind.viewMiniPlayer.getVisibility() == View.VISIBLE) + "')"));
     }
 
     public void hideSlidMenu() {
-        new Handler(Looper.getMainLooper()).post(() -> {
-            mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "closeRnbMenu()");
-        });
+        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "closeRnbMenu()"));
     }
 
     public void showBlock() {

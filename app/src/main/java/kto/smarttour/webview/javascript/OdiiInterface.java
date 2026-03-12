@@ -12,6 +12,7 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.webkit.JavascriptInterface;
 import android.webkit.ValueCallback;
+import android.webkit.WebView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -63,6 +64,7 @@ import kto.smarttour.webview.OdiiWebView;
  * @author Changhyun Jeon
  * @since 2015. 3. 17
  */
+@SuppressWarnings("unused")
 public class OdiiInterface {
 
 	public static final String PREF_TOKEN = "token";
@@ -71,7 +73,7 @@ public class OdiiInterface {
 	/**
 	 * The activity.
 	 */
-	private AppCompatActivity activity;
+	private final AppCompatActivity activity;
 	/**
 	 * 추가 - 메인 이외의 activity
 	 */
@@ -80,21 +82,11 @@ public class OdiiInterface {
 	/**
 	 * The web view.
 	 */
-	private OdiiWebView webView;
+	private final OdiiWebView webView;
 	/**
 	 * Javascript interface name.
 	 */
 	public static final String APP_NAME = "STG_APP";
-
-	/**
-	 * The Constant SVR_NAME.
-	 */
-	public static final String SVR_NAME = "STG_SVR";
-
-	/**
-	 * The Constant JAVASCRIPT_PREFIX.
-	 */
-	public static final String JAVASCRIPT_PREFIX = "javascript:" + SVR_NAME + ".";
 
 	/**
 	 * Instantiates a new smart tour interface.
@@ -120,10 +112,9 @@ public class OdiiInterface {
 			webView.post(() -> {
 				try {
 					String version = activity.getPackageManager().getPackageInfo(activity.getPackageName(), 0).versionName;
-
-					webView.loadUrl(JAVASCRIPT_PREFIX + "resAppVersion('" + version + "')");
+					webView.resAppVersion(version);
 				} catch (NameNotFoundException e) {
-					webView.loadUrl(JAVASCRIPT_PREFIX + "resAppVersion('" + 1.0 + "')");
+					webView.resAppVersion("1.0");
 				}
 			});
 		}
@@ -137,7 +128,7 @@ public class OdiiInterface {
 		if(webView!=null){
 			webView.post(() -> {
 				String os = "ANDROID";
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resPlatform('" + os + "')");
+				webView.resPlatform(os);
 			});
 		}
 	}
@@ -160,13 +151,13 @@ public class OdiiInterface {
 							jsonObject.put("latitude", location.getLatitude());
 							jsonObject.put("longitude", location.getLongitude());
 							OdiiApplication.setLocation(location);
-						} catch (JSONException e) {
+						} catch (JSONException ignored) {
 						}
 					} else {
 						try {
 							jsonObject.put("latitude", 37.566668);
 							jsonObject.put("longitude", 126.978371);
-						} catch (JSONException e) {
+						} catch (JSONException ignored) {
 						}
 					}
 				} else {
@@ -179,7 +170,7 @@ public class OdiiInterface {
 
 				}
 
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resGPS('" + jsonObject.toString() + "')");
+                webView.resGPS(jsonObject.toString());
 			});
 		}
 	}
@@ -225,8 +216,7 @@ public class OdiiInterface {
 
 		if(webView!=null){
 			webView.post(() ->{
-				String value = JAVASCRIPT_PREFIX + "resDefaultNetworkUse('" + SettingsUtil.isUseDataNetwork(activity) + "')";
-				webView.loadUrl(value);
+                webView.resDefaultNetworkUse(SettingsUtil.isUseDataNetwork(activity));
 			});
 		}
 	}
@@ -254,17 +244,14 @@ public class OdiiInterface {
 					PreferenceUtils.setPreference(activity, PREF_REGISTERED_TOKEN, false);
 
 					if(webView!=null){
-						webView.post(() ->{
-							webView.loadUrl(JAVASCRIPT_PREFIX + "resDefaultPushUse('" + SettingsUtil.isUseFcm(activity) + "', " + "'" + pushToken + "')");
-						});
+						webView.post(() -> webView.resDefaultPushUse(SettingsUtil.isUseFcm(activity), pushToken));
 					}
-
 				});
 			} else {
 
 				if(webView!=null){
 					webView.post(() ->{
-						webView.loadUrl(JAVASCRIPT_PREFIX + "resDefaultPushUse('" + SettingsUtil.isUseFcm(activity) + "', " + "'" + token + "')");
+                        webView.resDefaultPushUse(SettingsUtil.isUseFcm(activity), token);
 					});
 				}
 			}
@@ -288,7 +275,7 @@ public class OdiiInterface {
 
 		if(webView!=null){
 			webView.post(() ->{
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resDefaultGPSUse('" + SettingsUtil.isUseGps(activity) + "')");
+                webView.resDefaultGPSUse(SettingsUtil.isUseGps(activity));
 			});
 		}
 
@@ -349,7 +336,7 @@ public class OdiiInterface {
 		if(webView!=null){
 			webView.post(() ->{
 				int count = StoryDbManager.getInstance(activity).getStoryCount();
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resStoryLockerCount('" + count + "')");
+                webView.resStoryLockerCount(count);
 			});
 		}
 	}
@@ -382,7 +369,7 @@ public class OdiiInterface {
 		if(webView!=null){
 			webView.post(() -> {
 				int count = StoryDbManager.getInstance(activity).getPlayListCount();
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resPlaylistCount('" + count + "')");
+                webView.resPlaylistCount(count);
 			});
 		}
 
@@ -415,7 +402,7 @@ public class OdiiInterface {
 		if(webView!=null){
 			webView.post(() -> {
 				int count = StoryDbManager.getInstance(activity).getDownloadCount();
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resStoryDownloadCount('" + count + "')");
+                webView.resStoryDownloadCount(count);
 			});
 		}
 	}
@@ -630,9 +617,7 @@ public class OdiiInterface {
 
 	public void backPress() {
 		if(webView!=null){
-			webView.post(() -> {
-				webView.loadUrl(JAVASCRIPT_PREFIX + "backPress()");
-			});
+			webView.post(webView::scriptBackPress);
 		}
 	}
 
@@ -641,7 +626,7 @@ public class OdiiInterface {
 
 		if(webView!=null){
 			webView.post(() -> {
-				webView.loadUrl(JAVASCRIPT_PREFIX + "setCountry('" + CommonUtils.getCountry(activity) + "')");
+                webView.setCountry(CommonUtils.getCountry(activity));
 			});
 		}
 
@@ -659,7 +644,7 @@ public class OdiiInterface {
 					version = "1.0.0";
 				}
 				String finalVersion = version;
-				webView.loadUrl(JAVASCRIPT_PREFIX + "resUUIDAndAppVersion('" + CCLUUIDHelper.id(activity) + "'" + ", '" + finalVersion + "')");
+                webView.resUUIDAndAppVersion(CCLUUIDHelper.id(activity), finalVersion);
 			});
 		}
 

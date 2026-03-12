@@ -81,8 +81,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-import static kto.smarttour.webview.javascript.OdiiInterface.JAVASCRIPT_PREFIX;
-
 public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener {
 
     private ActivityMainBinding mBind;
@@ -836,15 +834,18 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
      * 다운로드 카운터 갱신
      */
     public void refreshDownloadCount() {
+        int count = StoryDbManager.getInstance(this).getDownloadCount();
         new Handler(Looper.getMainLooper())
-                .post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryDownloadCount('" + StoryDbManager.getInstance(this).getDownloadCount() + "')"));
+                .post(() -> mBind.mainWebView.resStoryDownloadCount(count));
     }
 
     /**
      * 보관함 카운터 갱신
      */
     public void refreshLockerCount() {
-        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resStoryLockerCount('" + StoryDbManager.getInstance(this).getStoryCount() + "')"));
+        int count = StoryDbManager.getInstance(this).getStoryCount();
+        new Handler(Looper.getMainLooper())
+                .post(() -> mBind.mainWebView.resStoryLockerCount(count));
     }
 
     /**
@@ -864,7 +865,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     public void loadStampPageChange() {
         new Handler(Looper.getMainLooper()).post(() -> {
             if (mBind != null && !TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
-                mBind.mainWebView.loadUrl("javascript:requestFootStampList()");
+                mBind.mainWebView.requestFootStampList();
             }
         });
     }
@@ -902,11 +903,14 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     }
 
     public void isMiniPlayer() {
-        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resMiniPlayer('" + (mBind.viewMiniPlayer.getVisibility() == View.VISIBLE) + "')"));
+        boolean visible =  mBind.viewMiniPlayer.getVisibility() == View.VISIBLE;
+        new Handler(Looper.getMainLooper())
+                .post(() -> mBind.mainWebView.resMiniPlayer(visible));
     }
 
     public void hideSlidMenu() {
-        new Handler(Looper.getMainLooper()).post(() -> mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "closeRnbMenu()"));
+        new Handler(Looper.getMainLooper())
+                .post(() -> mBind.mainWebView.closeRnbMenu());
     }
 
     public void showBlock() {

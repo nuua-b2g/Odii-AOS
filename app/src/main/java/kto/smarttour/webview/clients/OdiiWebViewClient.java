@@ -5,23 +5,18 @@ import android.os.Handler;
 import android.os.Looper;
 import android.os.Message;
 import android.text.TextUtils;
-import android.view.View;
 import android.view.accessibility.AccessibilityEvent;
 import android.webkit.CookieManager;
-import android.webkit.WebResourceError;
 import android.webkit.WebResourceRequest;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
-import android.widget.ProgressBar;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.app.ActivityCompat;
 
 import com.scottyab.rootbeer.RootBeer;
-import com.socks.library.KLog;
 
-//import kto.smarttour.BuildConfig;
 import kto.smarttour.OdiiApplication;
 import kto.smarttour.R;
 import kto.smarttour.common.utils.CommonUtils;
@@ -38,7 +33,7 @@ import kto.smarttour.webview.WebUrlDelegator;
  */
 public class OdiiWebViewClient extends WebViewClient {
 
-	private Handler handler = new Handler(Looper.getMainLooper()) {
+	private final Handler handler = new Handler(Looper.getMainLooper()) {
 		@Override
 		public void handleMessage(@NonNull Message msg) {
 
@@ -58,21 +53,16 @@ public class OdiiWebViewClient extends WebViewClient {
 	/**
 	 * @see WebUrlDelegator
 	 */
-	private WebUrlDelegator webUrlDelegator;
+	private final WebUrlDelegator webUrlDelegator;
 
 	/**
 	 * 웹사이트 로딩시 진행바.
 	 */
-	private OdiiWebViewCallback callback;
+	private final OdiiWebViewCallback callback;
 
-	public static final String ACTION_RECEIVED_ERROR = "kto.smarttour.webview.ACTION_RECEIVED_ERROR";
+	private final AppCompatActivity activity;
 
-	public static final String EXTRA_URL = "url";
-
-	private AppCompatActivity activity;
-	private RootBeer rootBeer;
-
-	/**
+    /**
 	 * Instantiates a new smart tour web view client.
 	 *
 	 * @param activity    the activity
@@ -82,7 +72,6 @@ public class OdiiWebViewClient extends WebViewClient {
 		this.webUrlDelegator = new WebUrlDelegator(activity);
 		this.callback = callback;
 		this.activity = activity;
-		rootBeer = new RootBeer(activity);
 	}
 
 	/* (non-Javadoc)

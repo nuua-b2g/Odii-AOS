@@ -176,7 +176,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     @Override
     public void onPageStart() {
-        mBind.progress.setVisibility(View.GONE);
+        mBind.progress.setVisibility(View.VISIBLE);
     }
 
     @Nullable

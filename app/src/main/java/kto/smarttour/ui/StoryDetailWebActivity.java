@@ -104,7 +104,7 @@ public class StoryDetailWebActivity extends BaseActivity implements View.OnClick
 
     @Override
     public void onPageStart() {
-        mBind.progress.setVisibility(View.GONE);
+        mBind.progress.setVisibility(View.VISIBLE);
     }
 
     @Override

@@ -1,14 +1,9 @@
 package kto.smarttour.webview.clients;
 
-import android.annotation.TargetApi;
-import android.app.Activity;
 import android.app.Dialog;
 import android.content.ActivityNotFoundException;
-import android.content.DialogInterface;
-import android.content.DialogInterface.OnCancelListener;
 import android.content.Intent;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Message;
 import android.webkit.GeolocationPermissions.Callback;
 import android.webkit.JsResult;
@@ -32,15 +27,13 @@ import kto.smarttour.ui.MainActivity;
  */
 public class OdiiWebChromeClient extends WebChromeClient {
 
-	private AppCompatActivity activity;
+	private final AppCompatActivity activity;
 	public ValueCallback<Uri[]> uploadMessage;
-	private ValueCallback<Uri> mUploadMessage;
-	private final static int FILECHOOSER_RESULTCODE = 1;
 
 	/**
 	 * 웹사이트 로딩시 진행바.
 	 */
-	private ProgressBar progressBar;
+	private final ProgressBar progressBar;
 
 	/**
 	 * Instantiates a new smart tour web chrome client.
@@ -99,14 +92,6 @@ public class OdiiWebChromeClient extends WebChromeClient {
 			return false;
 		}
 		return true;
-	}
-
-	protected void openFileChooser(ValueCallback<Uri> uploadMsg) {
-		mUploadMessage = uploadMsg;
-		Intent i = new Intent(Intent.ACTION_GET_CONTENT);
-		i.addCategory(Intent.CATEGORY_OPENABLE);
-		i.setType("*/*");
-		activity.startActivityForResult(Intent.createChooser(i, "File Chooser"), FILECHOOSER_RESULTCODE);
 	}
 
 	@Override

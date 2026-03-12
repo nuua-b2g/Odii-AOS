@@ -776,52 +776,45 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 	}
 
-    @SuppressLint("DiscouragedApi")
-    private int GetImageResId(Context c, String ImageName) {
-		return c.getResources().getIdentifier(ImageName, "drawable", c.getPackageName());
-    }
-
-	private void initIntro(String imageUrlStr) {
-		try {
-			mBind.btnSkipintro.setOnClickListener(view -> {
+    private void initIntro(String imageUrlStr) {
+        try {
+            mBind.btnSkipintro.setOnClickListener(view -> {
                 mBind.ivIntro.clearAnimation();
                 playIntroAnimationResult(false);
             });
 
-			//리모트 이미지
-			if(imageUrlStr!=null && !imageUrlStr.trim().isEmpty()){
-				Glide.with(this).load(imageUrlStr).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
-			}else{
-				//로컬 이미지 리소스
-                ArrayList<String> arr_drawable_name = getLocalDrawableNameList();
-
+            //리모트 이미지
+            if (imageUrlStr != null && !imageUrlStr.trim().isEmpty()) {
+                Glide.with(this).load(imageUrlStr).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
+            } else {
+                //로컬 이미지 리소스
+                int[] localDrawableArray = getLocalDrawableArray();
                 Random random = new Random();
-				int randomIdx = random.nextInt(arr_drawable_name.size());
-				int selectedResId = GetImageResId(this,arr_drawable_name.get(randomIdx));
-
-				Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/" + selectedResId);
-				Glide.with(this).load(imageUri).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
-			}
-		} catch (Exception ignored) {
-		}
-	}
+                int randomIdx = random.nextInt(localDrawableArray.length);
+                int selectedResId = localDrawableArray[randomIdx];
+                Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/" + selectedResId);
+                Glide.with(this).load(imageUri).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
+            }
+        } catch (Exception ignored) {
+        }
+    }
 
     @NonNull
-    private static ArrayList<String> getLocalDrawableNameList() {
-        ArrayList<String> arr_drawable_name = new ArrayList<>();
-        arr_drawable_name.add("imgintro03_1");
-        arr_drawable_name.add("imgintro03");
-        arr_drawable_name.add("imgintro04");
-        arr_drawable_name.add("imgintro08");
-        arr_drawable_name.add("imgintro12_1");
-        arr_drawable_name.add("imgintro13");
-        arr_drawable_name.add("imgintro15");
-        arr_drawable_name.add("imgintro17");
-        arr_drawable_name.add("imgintro18");
-        arr_drawable_name.add("imgintro19_1");
-        arr_drawable_name.add("imgintro19_2");
-        arr_drawable_name.add("imgintro19_3");
-        return arr_drawable_name;
+    private static int[] getLocalDrawableArray() {
+        return new int[]{
+                R.drawable.imgintro03_1,
+                R.drawable.imgintro03,
+                R.drawable.imgintro04,
+                R.drawable.imgintro08,
+                R.drawable.imgintro12_1,
+                R.drawable.imgintro13,
+                R.drawable.imgintro15,
+                R.drawable.imgintro17,
+                R.drawable.imgintro18,
+                R.drawable.imgintro19_1,
+                R.drawable.imgintro19_2,
+                R.drawable.imgintro19_3,
+        };
     }
 
     private void applyIntroTintColor(){
@@ -835,6 +828,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		mBind.btnSkipintro.setVisibility(View.VISIBLE);
 		mBind.ivBottomlogo.setVisibility(View.VISIBLE);
 	}
+
 	private final RequestListener<Drawable> listenerIntroLoad = new RequestListener<Drawable>() {
 
         @Override

@@ -25,9 +25,10 @@ import android.view.animation.AlphaAnimation;
 import android.view.animation.Animation;
 import android.view.animation.TranslateAnimation;
 
+import androidx.activity.result.ActivityResultLauncher;
+import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
@@ -99,6 +100,18 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     private String webViewHomeUrl;
     private String onLoadMainWebViewUrl = URLS.URL;
+
+    // 필드로 등록
+    private final ActivityResultLauncher<String[]> permissionLauncher = registerForActivityResult(
+            new ActivityResultContracts.RequestMultiplePermissions(),
+            result -> startWeb()
+    );
+
+    private final ActivityResultLauncher<String> notificationLauncher =
+            registerForActivityResult(
+                    new ActivityResultContracts.RequestPermission(),
+                    isGranted -> startWeb_Next()
+            );
 
     //--------------------------------------------------------------------------
     private final AudioFinishedReceiver mAudioFinishedReceiver = new AudioFinishedReceiver();
@@ -381,10 +394,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
     private void showInAppDisclosureUseLocation() {
         //	수정 - 권한 사용 알림 제거
-        checkPermission();
+        requestPermission();
 
         FirebaseMessaging.getInstance().setAutoInitEnabled(false);
-        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(this, task -> {});
+        FirebaseMessaging.getInstance().getToken().addOnCompleteListener(this, task -> {
+        });
         //ALL_ANDROID_DEV , ALL_ANDROID_PRD , ALL_IOS_DEV, ALL_IOS_PRD
         FirebaseMessaging.getInstance().subscribeToTopic("ALL_ANDROID_PRD");
     }
@@ -392,15 +406,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     /**
      * 권한 체크
      */
-    private void checkPermission() {
-
+    private void requestPermission() {
         //--관한요청
         if (!MainActivity.this.isFinishing()) {
-            //--관한요청
-            //ArrayList<String> resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.getPermissionRequestList());
-
             String[] resPermission = SystemUtils.getPermissionRequestList();
-
             ArrayList<String> remainPermission = new ArrayList<>();
             for (String permission : resPermission) {
 
@@ -408,43 +417,12 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
                     remainPermission.add(permission);
                 }
             }
-
             if (!remainPermission.isEmpty()) {
                 //요청할 권한있음.
                 String[] permissionRemained = remainPermission.toArray(new String[0]);
-                ActivityCompat.requestPermissions(MainActivity.this, permissionRemained, 4989);
+                permissionLauncher.launch(permissionRemained);
             } else {
                 startWeb();
-            }
-
-        }
-    }
-
-    /**
-     * 권한 요청 결과
-     * 권한 승인 여부 상관없이 진행
-     */
-    @Override
-    public void onRequestPermissionsResult(
-            int requestCode,
-            @NonNull String[] permissions,
-            @NonNull int[] grantResults
-    ) {
-        if (requestCode != -1) {      // && (requestCode&0xffff0000) != 0  //java.lang.IllegalArgumentException: Can only use lower 8 bits for requestCode 오류
-
-            switch (requestCode) {
-                case 4989: {
-                    startWeb();
-                    break;
-                }
-
-                case 61540:
-                    //안드로이드 13 노티권한 요청결과
-                    startWeb_Next();
-                    break;
-
-                default:
-                    super.onRequestPermissionsResult(requestCode, permissions, grantResults);
             }
         }
     }
@@ -475,8 +453,16 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             startWeb_Next();
         } else {
             //권한요청
-            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-                request_POST_NOTIFICATIONS();
+            requestPostNotification();
+        }
+    }
+
+    private void requestPostNotification() {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            if (!MainActivity.this.isFinishing()) {
+                if (ActivityCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
+                    notificationLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
+                }
             }
         }
     }
@@ -543,18 +529,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         } else {
             //안드로이드 13미만, 권한이 있는것으로 간주한다.
             return true;
-        }
-    }
-
-    //안드로이드 13관련 노티권한 요청
-    @RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
-    private void request_POST_NOTIFICATIONS() {
-        //--관한요청
-        if (!MainActivity.this.isFinishing()) {
-            //--관한요청
-            if (ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED) {
-                ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS}, 61540);
-            }
         }
     }
 
@@ -903,7 +877,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     }
 
     public void isMiniPlayer() {
-        boolean visible =  mBind.viewMiniPlayer.getVisibility() == View.VISIBLE;
+        boolean visible = mBind.viewMiniPlayer.getVisibility() == View.VISIBLE;
         new Handler(Looper.getMainLooper())
                 .post(() -> mBind.mainWebView.resMiniPlayer(visible));
     }

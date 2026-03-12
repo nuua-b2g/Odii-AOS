@@ -11,7 +11,6 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
-import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
@@ -566,8 +565,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 		} else if (!TextUtils.isEmpty(intent.getStringExtra("url"))) {
 			loadUrl(intent.getStringExtra("url"));
-		} else {
-			getDynamicLink(intent);
 		}
 
 		//추가
@@ -575,71 +572,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	}
 
 	/**
-	 * 동적 링크 파싱
-	 * 관광택시 구분 호출시 사용
-	 * @param intent
-	 */
-	private void getDynamicLink(Intent intent) {
-//		FirebaseDynamicLinks.getInstance().getDynamicLink(intent).addOnSuccessListener(this, pendingDynamicLinkData -> {
-//			Uri deepLink = null;
-//			if (pendingDynamicLinkData != null) {
-//				deepLink = pendingDynamicLinkData.getLink();
-//			}
-//
-//			if (deepLink != null) {
-//				Uri finalDeepLink = deepLink;
-//
-//
-//				try {
-//					String ttid = finalDeepLink.getQueryParameter("ttid");
-//					if (!TextUtils.isEmpty(ttid)) {
-//
-//						int newTtid = Integer.valueOf(ttid);
-//						int oldTtid = SettingsUtil.getTaxiTtid(activity);
-//
-//						//-1 택시모드 qr진입, 기존 다운로드 데이터 초기화됨.
-//						//-2 초기화 하지않음
-//						if (oldTtid == -1 || newTtid != oldTtid) {
-//							if (oldTtid == -2){
-//								//nothing to do
-//							}else{
-//								StoryDbManager.getInstance(activity).clearAll();
-//								FileUtils.clearCacheStoryDelete(activity);
-//							}
-//							SettingsUtil.setTaxiTtid(activity, Integer.valueOf(ttid));
-//						}
-//
-//						stopService(new Intent(activity, PlayerService.class));
-//						SystemUtils.setTaxiPlayerServiceEnabled(activity);
-//
-//						FileUtils.setGlideCacheClear(activity);
-//
-//						startActivity(new Intent(MainActivity.this, TaxiMainActivity.class));
-//						finish();
-//					} else {
-//						new Handler() {
-//							@Override
-//							public void handleMessage(Message msg) {
-//								mBind.mainWebView.loadUrl(finalDeepLink.toString());
-//								super.handleMessage(msg);
-//							}
-//						}.sendEmptyMessageDelayed(0, 1000);
-//					}
-//				} catch (Exception e) {
-//
-//				}
-//			}
-//		}).addOnFailureListener(this, e -> {
-//
-//		});
-	}
-
-	/**
 	 *  FCM 수신데이터 처리
 	 *  intent.putExtra("fcmData",fcmData); //Serializable
 	 */
 	private void checkFcmData(Intent intent, String from){
-
 		if(intent!=null){
 			HashMap<String,String> data = (HashMap<String, String>)intent.getSerializableExtra("fcmData");
 			if(data!=null){
@@ -688,20 +624,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	 */
 
 	private void showInAppDisclosureUseLocation(){
-		//String appName = getString(R.string.app_name);
-
-		//	기존 - 권한 사용 알림 항상 표시
-//		String title = getString(R.string.disclosure_use_location_title);
-//		String messageFormat = getString(R.string.disclosure_use_location_message);
-//
-//		DialogPerUtil.showWarning(this, title, messageFormat, getString(R.string.ok), "", () -> {
-//			//권한체크 진행
-//			checkPermission();
-//
-//		}, () -> {
-//
-//		});
-
 		//	수정 - 권한 사용 알림 제거
 		checkPermission();
 
@@ -754,67 +676,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		//기존 권한요청구조
 		if (!SettingsUtil.isCheckPermission(this)) {
 			ArrayList<String> resPermission;
-
-			/*
-			if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-				//resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.PERMISSION_REQUEST_LIST_Q);
-				resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.getPermissionRequestList());
-			} else {
-				resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.getPermissionRequestList());
-			}
-
-
-
-			SettingsUtil.setCheckPermission(this, true); //전반적인 권한안내 팝업 이력기록
-			if (resPermission.size() == 0) {
-				startWeb();
-			} else {
-				startActivityForResult(new Intent(this, PermissionCheckActivity.class), 4589);
-			}
-			*/
-
-
-
 		} else {
 			//최초 전반적인 권한안내 팝업에서 사용자가 권한설정관련 동작일 진행했을때
-			if (SettingsUtil.isCheckPermissionDialogAgree(this)) {
-				if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
-					//ACCESS_BACKGROUND_LOCATION 활성화 여부 체크
-//					String permissions[] = {Manifest.permission.ACCESS_BACKGROUND_LOCATION};
-//					ArrayList<String> resPermission = SystemUtils.checkSelfPermission(this, permissions);
-//					if (resPermission.size() == 0) {
-//						startWeb();
-//						return;
-//					} else if (ActivityCompat.shouldShowRequestPermissionRationale(this, permissions[0])) {
-//
-//						//위치권한 설정에서 돌아온 후 결과체크 ACCESS_BACKGROUND_LOCATION 허용여부
-//						DialogPerUtil.showWarning(this, getString(R.string.permission_content_location_alltime_title), getString(R.string.permission_content_location_alltime) , getString(R.string.settings), getString(R.string.cancel), () -> {
-//							//안드로이드 10이상 에서 한번더 사용자에게 권한 안내 및 설정요청 ( 그에대한 결과는 사용자가 무엇을 선택하든 진행 시켜주자 requestCode 4589)
-//							String[] permissionList = {Manifest.permission.ACCESS_BACKGROUND_LOCATION};
-//							ActivityCompat.requestPermissions(this, permissionList, 4589);
-//
-//						}, () -> {
-//							//추가적인 설정요청도 거절하면 그냥 진행
-//							startWeb();
-//						});
-//					} else {
-//
-//						//안드로이드 10이상 에서 한번더 사용자에게 권한 안내 및 설정요청 ( 그에대한 결과는 사용자가 무엇을 선택하든 진행 시켜주자 requestCode 4589)
-//						String[] permissionList = {Manifest.permission.ACCESS_BACKGROUND_LOCATION};
-//						ActivityCompat.requestPermissions(this, permissionList, 4589);
-//
-//					}
-					startWeb();
-				}else{
-					startWeb();
-				}
-
-			}else{
-				//최초 전반적인 권한안내 팝업에서 사용자가 권한설정관련을 처음부터 거절 했을때
-				startWeb();
-			}
-
-		}
+            startWeb();
+        }
 
 	}
 
@@ -833,113 +698,19 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			switch (requestCode) {
 				case 4989:
 				{
-					//--
-					//boolean isDenied_ACCESS_BACKGROUND_LOCATION = false;
-
-//			for (int i = 0; i < permissions.length; i++) {
-//				String permission = permissions[i];
-//				if (grantResults[i] == PackageManager.PERMISSION_DENIED) {
-//					//검출대상 android.permission.ACCESS_BACKGROUND_LOCATION
-//					String deniedPermissionName = permissions[i];
-//					if(deniedPermissionName.equalsIgnoreCase( Manifest.permission.ACCESS_BACKGROUND_LOCATION )){
-//						isDenied_ACCESS_BACKGROUND_LOCATION = true;
-//					}
-//				}
-//			}
-
-					//펜스 백그라운드 권한요청 여부
-//			if(isDenied_ACCESS_BACKGROUND_LOCATION){
-//				//권한문있음
-//				DialogPerUtil.showWarning(this, getString(R.string.permission_content_location_alltime_denied_title), getString(R.string.permission_content_location_alltime_denied), getString(R.string.ok), "", () -> {
-//					startWeb();
-//				}, () -> {
-//					//nothing
-//				});
-//			}else{
-					//권한문제 없음
 					startWeb();
-//			}
-
 					break;
 				}
 
 				case 61540:
 					//안드로이드 13 노티권한 요청결과
-					if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
-						//성공
-						//Toast.makeText(MainActivity.this,"가가가가가가가가가가가가가가가가가가",Toast.LENGTH_SHORT).show();
-						startWeb_Next();
-					} else {
-						//Toast.makeText(MainActivity.this,"나나나나나나나나나나나나나나나나나나나나",Toast.LENGTH_SHORT).show();
-						//미승인
-						startWeb_Next();
+                    startWeb_Next();
+                    break;
 
-					}
-					break;
-
-				default:
-					super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+				default: super.onRequestPermissionsResult(requestCode, permissions, grantResults);
 			}
 		}
 	}
-
-	// FCM알림 권한 추가체크 (Android 13이상 관련)
-	// Declare the launcher at the top of your Activity/Fragment:
-	/*
-	private final ActivityResultLauncher<String> requestPermissionLauncher =
-			registerForActivityResult(new ActivityResultContracts.RequestPermission(), isGranted -> {
-				if (isGranted) {
-					// FCM SDK (and your app) can post notifications.
-				} else {
-					// TODO: Inform user that that your app will not show notifications.
-				}
-			});
-
-	private void askNotificationPermission() {
-		// This is only necessary for API level >= 33 (TIRAMISU)
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
-			if (ContextCompat.checkSelfPermission(this, Manifest.permission.POST_NOTIFICATIONS) ==
-					PackageManager.PERMISSION_GRANTED) {
-				// FCM SDK (and your app) can post notifications.
-			} else if (shouldShowRequestPermissionRationale(Manifest.permission.POST_NOTIFICATIONS)) {
-				// TODO: display an educational UI explaining to the user the features that will be enabled
-				//       by them granting the POST_NOTIFICATION permission. This UI should provide the user
-				//       "OK" and "No thanks" buttons. If the user selects "OK," directly request the permission.
-				//       If the user selects "No thanks," allow the user to continue without notifications.
-			} else {
-				// Directly ask for the permission
-				requestPermissionLauncher.launch(Manifest.permission.POST_NOTIFICATIONS);
-			}
-		}
-	}
-	*/
-
-	/**
-	 * 인트로 비디오 영상 초기화
-	 */
-	/*
-	private void initVideo() {
-		try {
-			Uri video = Uri.parse("android.resource://" + getPackageName() + "/" + R.raw.intro_ani);
-			mBind.videoIntro.setDataSource(this, video);
-			mBind.videoIntro.setLooping(false);
-			mBind.videoIntro.setOnCompletionListener((mp) -> {
-				mBind.layoutVideo.setVisibility(View.GONE);
-
-				setNoticeNetwork();
-
-				CheckPlay();
-
-			});
-			mBind.videoIntro.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
-				mBind.layoutVideo.setVisibility(View.GONE);
-				mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
-				return false;
-			});
-		} catch (Exception e) {
-		}
-	}
-	*/
 
 	private void CheckPlay() {
 		try {
@@ -1033,61 +804,15 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	}
 	//안드로이드 13관련 노티권한 요청
 	private void request_POST_NOTIFICATIONS(){
-		/*
-		if(!MainActivity.this.isFinishing() && dialogRequest_POST_NOTIFICATIONS!=null && dialogRequest_POST_NOTIFICATIONS.isShowing()){
-			dialogRequest_POST_NOTIFICATIONS.dismiss();
-			//--관한요청
-			if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
-				ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS},61540);
-			}
-
-		}
-		*/
-
 		//--관한요청
 		if(!MainActivity.this.isFinishing()){
 			//--관한요청
 			if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
 				ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS},61540);
 			}
-
 		}
-
-		/*
-		dialogRequest_POST_NOTIFICATIONS = new Dialog(MainActivity.this);
-		dialogRequest_POST_NOTIFICATIONS.requestWindowFeature(Window.FEATURE_NO_TITLE);
-		dialogRequest_POST_NOTIFICATIONS.setContentView(R.layout.easy_dialog_noti_guide);
-		if(dialogRequest_POST_NOTIFICATIONS.getWindow()!=null){
-			dialogRequest_POST_NOTIFICATIONS.getWindow().setBackgroundDrawable(new ColorDrawable(0));
-			dialogRequest_POST_NOTIFICATIONS.setCancelable(false);
-			Button btnConfirm = (Button) dialogRequest_POST_NOTIFICATIONS.findViewById(R.id.btn_confirm_post_notification);
-			btnConfirm.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					if(!MainActivity.this.isFinishing() && dialogRequest_POST_NOTIFICATIONS!=null && dialogRequest_POST_NOTIFICATIONS.isShowing()){
-						dialogRequest_POST_NOTIFICATIONS.dismiss();
-						//--관한요청
-						if(ActivityCompat.checkSelfPermission(MainActivity.this, Manifest.permission.POST_NOTIFICATIONS) != PackageManager.PERMISSION_GRANTED){
-							ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.POST_NOTIFICATIONS},61540);
-						}
-
-					}
-				}
-			});
-			//--show
-			if(!MainActivity.this.isFinishing() && dialogRequest_POST_NOTIFICATIONS!=null && !dialogRequest_POST_NOTIFICATIONS.isShowing() ){
-				dialogRequest_POST_NOTIFICATIONS.show();
-			}
-		}
-		*/
 	}
 
-	/**
-	 * 인트로 이미지 초기화
-	 */
-	private Drawable GetImage(Context c, String ImageName) {
-		return c.getResources().getDrawable(c.getResources().getIdentifier(ImageName, "drawable", c.getPackageName()));
-	}
 	private int GetImageResId(Context c, String ImageName) {
 		return c.getResources().getIdentifier(ImageName, "drawable", c.getPackageName());
 	}
@@ -1128,26 +853,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 				Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/" + selectedResId);
 				Glide.with(this).load(imageUri).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
 			}
-
-			/*
-			mBind.videoIntro.setDataSource(this, video);
-			mBind.videoIntro.setLooping(false);
-			mBind.videoIntro.setOnCompletionListener((mp) -> {
-				KLog.i("ODII_CHECK", "Intro video complete");
-				mBind.layoutVideo.setVisibility(View.GONE);
-
-				setNoticeNetwork();
-
-				CheckPlay();
-
-			});
-			mBind.videoIntro.setOnErrorListener((MediaPlayer mp, int what, int extra) -> {
-				mBind.layoutVideo.setVisibility(View.GONE);
-				mBind.mainWebView.loadUrl(onPlayMainWebViewUrl);
-				return false;
-			});
-
-			*/
 		} catch (Exception e) {
 		}
 	}
@@ -1209,29 +914,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		a_animation.setFillAfter(true);
 
 		mBind.ivIntro.startAnimation(a_animation);
-		/*
-		Runnable delayAnimationRunnable = new Runnable() {
-			@Override
-			public void run() {
-				mBind.ivIntro.startAnimation(a_animation);
-			}
-		};
-		new Handler(getMainLooper()).postDelayed(delayAnimationRunnable,0);
-		*/
 	}
 	private void playIvIntroAnimation(boolean imageSuccess) {
 
 		//--
 		if(imageSuccess){
-			//이미지 로드 성공,애니메이션 호출
-			/*
-			TranslateAnimation animation = new TranslateAnimation(
-					Animation.ABSOLUTE, -100,
-					Animation.ABSOLUTE, -100,
-					Animation.RELATIVE_TO_SELF, 1.2f,
-					Animation.RELATIVE_TO_PARENT, 0.8f);
-			*/
-
 			Display display = getWindowManager().getDefaultDisplay();
 			Point size = new Point();
 			display.getSize(size);
@@ -1466,15 +1153,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	}
 
 	/**
-	 * 재생목록 카운터 갱신 (2021.09.02) 추가
-	 */
-	public void refreshPlaylistCount() {
-		new Handler(Looper.getMainLooper()).post(() -> {
-			mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resPlaylistCount('" + StoryDbManager.getInstance(this).getPlayListCount() + "')");
-		});
-	}
-
-	/**
 	 * 다운로드 카운터 갱신
 	 */
 	public void refreshDownloadCount() {
@@ -1507,15 +1185,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	public void loadUrl(String url) {
 		new Handler(Looper.getMainLooper()).post(() -> {
 			mBind.mainWebView.loadUrl(url);
-		});
-	}
-
-	/**
-	 * 웹 새로고침 호출
-	 */
-	public void reloadMainWeb() {
-		new Handler(Looper.getMainLooper()).post(() -> {
-			mBind.mainWebView.reload();
 		});
 	}
 
@@ -1631,51 +1300,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					/**
 					 * 작업공지 > 업데이트 > 튜토리얼 > 재난공지 > 일반공지 > 이벤트 > QR
 					 */
-					//	테스트
-//					ArrayList<StampEventList> arrayList = new ArrayList<>();
-//					for (int i = 0 ; i < 4 ; i++) {
-//						StampEventList stampEventList = new StampEventList();
-//						stampEventList._id = 1 + i;
-//						stampEventList.eid = 1 + i;
-//						stampEventList.elid = 1 + i;
-//						stampEventList.tid = 1 + i;
-//						stampEventList.slid = 1 + i;
-//						stampEventList.tlid = 1 + i;
-//						stampEventList.radius = 25;
-//						stampEventList.startDate = 1678028400000L;
-//						stampEventList.startDateMillis = 1678028400000L;
-//						stampEventList.end_date = 1683298800000L;
-//						stampEventList.endDateMillis = 1683298800000L;
-//						stampEventList.stamp_v_yn = "N";
-//						stampEventList.stamp_p_yn = "N";
-//
-//						if (i == 0) {
-//							//	좌측 하단
-//							stampEventList.posY = "35.11206962840675";
-//							stampEventList.posX = "126.87690530326879";
-//							stampEventList.linkUrl = "https://www.naver.com";
-//						}
-//						else if (i == 1) {
-//							//	좌측 상단
-//							stampEventList.posY = "35.11259762649068";
-//							stampEventList.posX = "126.87759557898507";
-//							stampEventList.linkUrl = "https://www.daum.net";
-//						}
-//						else if (i == 2) {
-//							//	우측 상단
-//							stampEventList.posY = "35.112314000833194";
-//							stampEventList.posX = "126.87789765950511";
-//							stampEventList.linkUrl = "https://www.google.com";
-//						}
-//						else {
-//							//	우측 하단
-//							stampEventList.posY = "35.111934940556935";
-//							stampEventList.posX = "126.87741557697053";
-//							stampEventList.linkUrl = "https://www.nate.com";
-//						}
-//						arrayList.add(stampEventList);
-//					}
-//					response.body().setStampEventList(arrayList);
 					noticeUtils = new NoticeUtils(MainActivity.this, response.body(), noticeListener);
 					noticeUtils.start();
 				} else {

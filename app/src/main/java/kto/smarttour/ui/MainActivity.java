@@ -11,6 +11,7 @@ import android.content.IntentFilter;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
 import android.graphics.Point;
+import android.graphics.drawable.Drawable;
 import android.location.Location;
 import android.media.AudioAttributes;
 import android.media.SoundPool;
@@ -29,6 +30,7 @@ import android.webkit.ValueCallback;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.annotation.RequiresApi;
 import androidx.core.app.ActivityCompat;
 import androidx.core.app.NotificationManagerCompat;
 import androidx.databinding.DataBindingUtil;
@@ -38,19 +40,18 @@ import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
-import com.bumptech.glide.request.target.SizeReadyCallback;
 import com.bumptech.glide.request.target.Target;
 import com.getbase.floatingactionbutton.FloatingActionButton;
 import com.getbase.floatingactionbutton.FloatingActionsMenu;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.messaging.FirebaseMessaging;
-import com.scottyab.rootbeer.RootBeer;
 import com.socks.library.KLog;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
+import java.util.Objects;
 import java.util.Random;
 
 import kto.smarttour.OdiiApplication;
@@ -90,7 +91,7 @@ import retrofit2.Response;
 import static kto.smarttour.webview.javascript.OdiiInterface.JAVASCRIPT_PREFIX;
 
 public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener {
-    
+
     private final String JINGLE_SOUND_AT = "JINGLE_SOUND_AT";
 
 	private ActivityMainBinding mBind;
@@ -104,9 +105,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 	private boolean introSkip = false;
     private NoticeUtils noticeUtils;
-	private RootBeer rootBeer;
 
-	private int colorIntroTint;
+    private int colorIntroTint;
 
     private String webViewHomeUrl;
     private String onLoadMainWebViewUrl = URLS.URL;
@@ -161,10 +161,13 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 		return null;
 	}
-	private void initFloatingMenu(boolean useShow){
+
+    private void initFloatingMenu(
+            @SuppressWarnings("SameParameterValue") boolean useShow
+    ){
 		if(useShow){
 			if(floatingMenu==null) {
-				floatingMenu = (FloatingActionsMenu) findViewById(R.id.floating_action_soundpool);
+				floatingMenu = findViewById(R.id.floating_action_soundpool);
 
 				map_floatingButtons = new HashMap<>();
 				int sizeBtn = floatingMenu.getChildCount();
@@ -174,24 +177,19 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					int id = v.getId();
 					String value_sound_at = null;
 					String value_sound_type = null;
-					switch (id){
-						case R.id.floating_action_soundpool_intro_start_short:
-							value_sound_at = "start";
-							value_sound_type = "short";
-							break;
-						case R.id.floating_action_soundpool_intro_start_long:
-							value_sound_at = "start";
-							value_sound_type = "long";
-							break;
-						case R.id.floating_action_soundpool_intro_end_short:
-							value_sound_at = "end";
-							value_sound_type = "short";
-							break;
-						case R.id.floating_action_soundpool_intro_end_long:
-							value_sound_at = "end";
-							value_sound_type = "long";
-							break;
-					}
+                    if(id == R.id.floating_action_soundpool_intro_start_short) {
+                        value_sound_at = "start";
+                        value_sound_type = "short";
+                    } else if(id == R.id.floating_action_soundpool_intro_start_long) {
+                        value_sound_at = "start";
+                        value_sound_type = "long";
+                    } else if(id == R.id.floating_action_soundpool_intro_end_short) {
+                        value_sound_at = "end";
+                        value_sound_type = "short";
+                    } else if(id == R.id.floating_action_soundpool_intro_end_long) {
+                        value_sound_at = "end";
+                        value_sound_type = "long";
+                    }
 					String key = createTargetKey_map_floatingButton(value_sound_at,value_sound_type);
 					if(key!=null){
 						map_floatingButtons.put(key,id);
@@ -210,13 +208,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 						if(targetKey!=null){
 							for ( String key : map_floatingButtons.keySet() ) {
-								int targetViewId = map_floatingButtons.get(key);
-								FloatingActionButton floatingActionButton = (FloatingActionButton)findViewById(targetViewId);
-								if(targetKey.equals(key)){
-									floatingActionButton.setPressed(true);
-								}else{
-									floatingActionButton.setPressed(false);
-								}
+								Integer targetViewId = map_floatingButtons.get(key);
+                                if(targetViewId != null) {
+                                    FloatingActionButton floatingActionButton = findViewById(targetViewId);
+                                    floatingActionButton.setPressed(targetKey.equals(key));
+                                }
 							}
 						}
 					}
@@ -229,8 +225,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 		}
 	}
-	private View.OnClickListener listenerFloatingMenuButtonAction = new View.OnClickListener() {
-		@Override
+	private final View.OnClickListener listenerFloatingMenuButtonAction = new View.OnClickListener() {
+
+        @Override
 		public void onClick(View v) {
 			int id = v.getId();
 			//String key_sound_at = JINGLE_SOUND_AT;
@@ -238,32 +235,25 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			//String key_sound_type = "JINGLE_SOUND_TYPE";
 			String value_sound_type = null;
 
-			switch (id){
-				case R.id.floating_action_soundpool_intro_start_short:
-					value_sound_at = "start";
-					value_sound_type = "short";
-					break;
-				case R.id.floating_action_soundpool_intro_start_long:
-					value_sound_at = "start";
-					value_sound_type = "long";
-					break;
-				case R.id.floating_action_soundpool_intro_end_short:
-					value_sound_at = "end";
-					value_sound_type = "short";
-					break;
-				case R.id.floating_action_soundpool_intro_end_long:
-					value_sound_at = "end";
-					value_sound_type = "long";
-					break;
-			}
+            if(id == R.id.floating_action_soundpool_intro_start_short) {
+                value_sound_at = "start";
+                value_sound_type = "short";
+            } else if(id == R.id.floating_action_soundpool_intro_start_long) {
+                value_sound_at = "start";
+                value_sound_type = "long";
+            } else if(id == R.id.floating_action_soundpool_intro_end_short) {
+                value_sound_at = "end";
+                value_sound_type = "short";
+            } else if(id == R.id.floating_action_soundpool_intro_end_long) {
+                value_sound_at = "end";
+                value_sound_type = "long";
+            }
 			if(value_sound_at!=null){
 				PreferenceUtils.setPreference(activity, JINGLE_SOUND_AT, value_sound_at);
 			}
 			if(value_sound_type!=null){
 				PreferenceUtils.setPreference(activity, "JINGLE_SOUND_TYPE", value_sound_type);
 			}
-
-
 			//---------------------------
 			if(floatingMenu!=null){
 				floatingMenu.collapse();
@@ -272,13 +262,12 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	};
 
 	//--------------------------------------------------------------------------
-	private AudioFinishedReceiver mAudioFinishedReceiver = new AudioFinishedReceiver();
+	private final AudioFinishedReceiver mAudioFinishedReceiver = new AudioFinishedReceiver();
 	private class AudioFinishedReceiver extends BroadcastReceiver {
 
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent != null && intent.getAction().equals("AUDIO_FINISHED")) {
-
+			if (intent != null && Objects.equals(intent.getAction(), "AUDIO_FINISHED")) {
 				//--
 				int tlid = intent.getIntExtra("tlid",-1);
 				int slid = intent.getIntExtra("slid",-1);
@@ -363,8 +352,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			if(value_sound_type==null){
 				PreferenceUtils.setPreference(activity, "JINGLE_SOUND_TYPE", "short"); // "short", "long"
 			}
-
-
 			soundPool = createSoundPool();
 			//--
 			//sound리소스 로드
@@ -372,35 +359,30 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			soundJingle_long = soundPool.load(this,R.raw.jingle_long,1);
 			//SoundPool.OnLoadCompleteListener가 수신 되기전 soundPool.load의 사운드id는 이미 할당됨(soundId != 0)
 			//setOnLoadCompleteListener
-			soundPool.setOnLoadCompleteListener(new SoundPool.OnLoadCompleteListener() {
-				@Override
-				public void onLoadComplete(SoundPool soundPool, int sampleId, int status) {
+			soundPool.setOnLoadCompleteListener((soundPool, sampleId, status) -> {
 
-					boolean success = false;
-					if(status == 0){//success
-						success = true;
-					}
-					if(sampleId == soundJingle_short && success){
-						b_ready_soundJingle_short = true;
-					}
-					if(sampleId == soundJingle_long && success){
-						b_ready_soundJingle_long = true;
-					}
+                boolean success = status == 0;
+                //success
+                if(sampleId == soundJingle_short && success){
+                    b_ready_soundJingle_short = true;
+                }
+                if(sampleId == soundJingle_long && success){
+                    b_ready_soundJingle_long = true;
+                }
 
-					//사전할당된 사운드id로 할당여부로 판단하지않고 로드완료로 판단.
-					if( b_ready_soundJingle_short && b_ready_soundJingle_long ){
-						//------------------------------------------------------------------
-						//-- init floating actions menu
-						//ui, floating actions menu - soundpool config useage
-						initFloatingMenu(false); //설정용 UI출력 여부.
-						//------------------------------------------------------------------
-						//------------------------------------------------------------------
+                //사전할당된 사운드id로 할당여부로 판단하지않고 로드완료로 판단.
+                if( b_ready_soundJingle_short && b_ready_soundJingle_long ){
+                    //------------------------------------------------------------------
+                    //-- init floating actions menu
+                    //ui, floating actions menu - soundpool config useage
+                    initFloatingMenu(false); //설정용 UI출력 여부.
+                    //------------------------------------------------------------------
+                    //------------------------------------------------------------------
 
-						onCreate_SoundPool(true); //남은 onCreate동작 수행
-					}
-					//--
-				}
-			});
+                    onCreate_SoundPool(true); //남은 onCreate동작 수행
+                }
+                //--
+            });
 		}
 
 	}
@@ -425,8 +407,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			OdiiApplication.setWebActivity(this);
 			try {
 				startService(new Intent(this, UnCatchTaskService.class));
-			} catch (Exception e) {
-			}
+			} catch (Exception ignored) {
+            }
 
 			systemReceiver = new SystemReceiver();
 
@@ -445,16 +427,16 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 
 			//(디버그용) 저장되어있는 택시id값이 있는것으로 택시모드 진입
-			if(!introSkip){
-				//필요시 주석해제
-				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
-				//(양양)
-				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(7));
-				//(곡성)
-				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(9));
-				//(순천)
-				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(8));
-			}
+//			if(!introSkip){
+//				//필요시 주석해제
+//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(3));
+//				//(양양)
+//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(7));
+//				//(곡성)
+//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(9));
+//				//(순천)
+//				//SettingsUtil.setTaxiTtid(activity, Integer.valueOf(8));
+//			}
 
 			if (intent != null && intent.getBooleanExtra("notification", false)) {
 				introSkip = true;
@@ -464,11 +446,15 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 
 			if (!NetworkUtil.isNetworkConnected(this)) {
-				DialogUtil.showWarning(this, getString(R.string.confirm), getString(R.string.network_error), "", getString(R.string.finish), () -> {
-
-				}, () -> {
-					finish();
-				});
+				DialogUtil.showWarning(
+                        this,
+                        getString(R.string.confirm),
+                        getString(R.string.network_error),
+                        "",
+                        getString(R.string.finish),
+                        () -> {},
+                        this::finish
+                );
 				return;
 			}
 			odiiWebChromeClient = new OdiiWebChromeClient(this, mBind.progress);
@@ -482,35 +468,15 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 			LocalBroadcastManager.getInstance(this).registerReceiver(mAudioFinishedReceiver, new IntentFilter("AUDIO_FINISHED"));
 
-			rootBeer = new RootBeer(this);
-
 			if (CommonUtils.isRooted(this)) {
-				DialogUtil.showWarning(this, getString(R.string.finish), getString(R.string.rooted_message), getString(R.string.finish), "", () -> {
-					finish();
-				}, () -> {
-
-				});
-			}
-			else if (CommonUtils.isEmulator()) {
-				DialogUtil.showWarning(this, getString(R.string.finish), getString(R.string.emulator_message), getString(R.string.finish), "", () -> {
-					finish();
-				}, () -> {
-
-				});
+				showWarningWithFinish(getString(R.string.rooted_message));
+			} else if (CommonUtils.isEmulator()) {
+				showWarningWithFinish(getString(R.string.emulator_message));
 			} else if (!CommonUtils.isKeyChecker(this, "MD5")) {
-				DialogUtil.showWarning(this, getString(R.string.finish), getString(R.string.Integrity_message), getString(R.string.finish), "", () -> {
-					finish();
-				}, () -> {
-
-				});
+				showWarningWithFinish(getString(R.string.Integrity_message));
 			} else {
-
 				if (CommonUtils.isRooted2(this)) {
-					DialogUtil.showWarning(this, getString(R.string.finish), getString(R.string.rooted_message), getString(R.string.finish), "", () -> {
-						finish();
-					}, () -> {
-
-					});
+					showWarningWithFinish(getString(R.string.rooted_message));
 				}else{
 					if(Common.ignoreRooting){
 						//디버그시 checkUtil_start 주석처리 및 진행함수 직접호출 (추가 앱체크 생략)
@@ -529,15 +495,19 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		//---------------------------------------------------------------------------------------
 	}
 
-	@Override
-	protected void onStart() {
-		super.onStart();
-	}
+    private void showWarningWithFinish(String message) {
+        DialogUtil.showWarning(
+                this,
+                getString(R.string.finish),
+                message,
+                getString(R.string.finish),
+                "",
+                this::finish,
+                () -> {
 
-	@Override
-	protected void onStop() {
-		super.onStop();
-	}
+                }
+        );
+    }
 
 	@Override
 	protected void onNewIntent(Intent intent) {
@@ -577,6 +547,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	 */
 	private void checkFcmData(Intent intent, String from){
 		if(intent!=null){
+            @SuppressWarnings("unchecked")
 			HashMap<String,String> data = (HashMap<String, String>)intent.getSerializableExtra("fcmData");
 			if(data!=null){
 				//--
@@ -610,11 +581,14 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		//click_log_url
 		ApiService.get().sendFeedbackFcm_click_log_url(click_log_url).enqueue(new Callback<ResponseBody>() {
 			@Override
-			public void onResponse(Call<ResponseBody> call, Response<ResponseBody> response) {
-			}
+			public void onResponse(
+                    @NonNull Call<ResponseBody> call,
+                    @NonNull Response<ResponseBody> response
+            ) {
+            }
 
 			@Override
-			public void onFailure(Call<ResponseBody> call, Throwable t) {
+			public void onFailure(@NonNull Call<ResponseBody> call, @NonNull Throwable t) {
 			}
 		});
 	}
@@ -640,59 +614,42 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	 */
 	private void checkPermission() {
 
+        //--관한요청
+        if(!MainActivity.this.isFinishing()){
+            //--관한요청
+            //ArrayList<String> resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.getPermissionRequestList());
 
-		boolean flagCheckPermission = true;
-		if(flagCheckPermission){
+            String[] resPermission = SystemUtils.getPermissionRequestList();
 
-			//--관한요청
-			if(!MainActivity.this.isFinishing()){
-				//--관한요청
-				//ArrayList<String> resPermission = SystemUtils.checkSelfPermission(this, SystemUtils.getPermissionRequestList());
+            ArrayList<String> remainPermission = new ArrayList<>();
+            for(String permission:resPermission) {
 
-				String[] resPermission = SystemUtils.getPermissionRequestList();
+                if(ActivityCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED){
+                    remainPermission.add(permission);
+                }
+            }
 
-				ArrayList<String> remainPermission = new ArrayList<>();
-				for(String permission:resPermission) {
+            if(!remainPermission.isEmpty()){
+                //요청할 권한있음.
+                String[] permissionRemained = remainPermission.toArray(new String[0]);
+                ActivityCompat.requestPermissions(MainActivity.this, permissionRemained,4989);
+            }else{
+                startWeb();
+            }
 
-					if(ActivityCompat.checkSelfPermission(MainActivity.this, permission) != PackageManager.PERMISSION_GRANTED){
-						remainPermission.add(permission);
-					}
-				}
-
-				if(remainPermission.size()>0){
-					//요청할 권한있음.
-					String[] permissionRemained = remainPermission.toArray(new String[remainPermission.size()]);
-					ActivityCompat.requestPermissions(MainActivity.this, permissionRemained,4989);
-				}else{
-					startWeb();
-				}
-
-			}
-
-			return;
-		}
-
-
-		//기존 권한요청구조
-		if (!SettingsUtil.isCheckPermission(this)) {
-			ArrayList<String> resPermission;
-		} else {
-			//최초 전반적인 권한안내 팝업에서 사용자가 권한설정관련 동작일 진행했을때
-            startWeb();
         }
-
-	}
+    }
 
 	/**
 	 * 권한 요청 결과
-	 *
 	 * 권한 승인 여부 상관없이 진행
-	 * @param requestCode
-	 * @param permissions
-	 * @param grantResults
 	 */
 	@Override
-	public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
+	public void onRequestPermissionsResult(
+            int requestCode,
+            @NonNull String[] permissions,
+            @NonNull int[] grantResults
+    ) {
 		if(requestCode != -1) {      // && (requestCode&0xffff0000) != 0  //java.lang.IllegalArgumentException: Can only use lower 8 bits for requestCode 오류
 
 			switch (requestCode) {
@@ -738,8 +695,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			startWeb_Next();
 		}else{
 			//권한요청
-			request_POST_NOTIFICATIONS();
-		}
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+                request_POST_NOTIFICATIONS();
+            }
+        }
 	}
 
 	private void startWeb_Next(){
@@ -752,21 +711,25 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 
 		try {
-			//mBind.videoIntro.prepare((mp) -> mp.start());
 
 			LinkedHashMap<String, String> map = new LinkedHashMap<>();
 			//IntroImageData
 			ApiService.get().introImages(map).enqueue(new Callback<IntroImageData>() {
 				@Override
-				public void onResponse(Call<IntroImageData> call, Response<IntroImageData> response) {
+				public void onResponse(
+                        @NonNull Call<IntroImageData> call,
+                        @NonNull Response<IntroImageData> response
+                ) {
 					if (response.isSuccessful()) {
-						/**
-						 * 인트로이미지 체크
-						 */
-						String imageUrlString = response.body().getImage();
-						colorIntroTint = Color.TRANSPARENT;
-
-						initIntro(imageUrlString);
+                        //인트로이미지 체크
+                        IntroImageData body = response.body();
+                        if(body != null) {
+                            String imageUrlString = response.body().getImage();
+                            colorIntroTint = Color.TRANSPARENT;
+                            initIntro(imageUrlString);
+                        } else {
+                            colorIntroTint = Color.TRANSPARENT;
+                        }
 					} else {
 						colorIntroTint = Color.TRANSPARENT;
 						initIntro(null);
@@ -774,7 +737,10 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 				}
 
 				@Override
-				public void onFailure(Call<IntroImageData> call, Throwable t) {
+				public void onFailure(
+                        @NonNull Call<IntroImageData> call,
+                        @NonNull Throwable t
+                ) {
 					KLog.i(call.toString());
 
 					colorIntroTint = Color.TRANSPARENT;
@@ -783,8 +749,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			});
 
 		} catch (Exception e) {
-			//mBind.layoutVideo.setVisibility(View.GONE);
-
 			//예외시
 			mBind.contIntro.setVisibility(View.GONE);
 			mBind.mainWebView.loadUrl(onLoadMainWebViewUrl);
@@ -792,9 +756,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 	}
 	//안드로이드 13관련 노티권한
 	private boolean checkNotificationsEnabled(){
-		boolean isNoficationEnable = false;
-
-		if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
 			//안드로이드 13이상
 			return NotificationManagerCompat.from(MainActivity.this).areNotificationsEnabled();
 		}else {
@@ -803,7 +765,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 	}
 	//안드로이드 13관련 노티권한 요청
-	private void request_POST_NOTIFICATIONS(){
+	@RequiresApi(api = Build.VERSION_CODES.TIRAMISU)
+    private void request_POST_NOTIFICATIONS(){
 		//--관한요청
 		if(!MainActivity.this.isFinishing()){
 			//--관한요청
@@ -813,50 +776,55 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		}
 	}
 
-	private int GetImageResId(Context c, String ImageName) {
+    @SuppressLint("DiscouragedApi")
+    private int GetImageResId(Context c, String ImageName) {
 		return c.getResources().getIdentifier(ImageName, "drawable", c.getPackageName());
-	}
+    }
+
 	private void initIntro(String imageUrlStr) {
 		try {
-			mBind.btnSkipintro.setOnClickListener(new View.OnClickListener() {
-				@Override
-				public void onClick(View view) {
-					mBind.ivIntro.clearAnimation();
-
-					playIntroAnimationResult(false);
-				}
-			});
+			mBind.btnSkipintro.setOnClickListener(view -> {
+                mBind.ivIntro.clearAnimation();
+                playIntroAnimationResult(false);
+            });
 
 			//리모트 이미지
-			if(imageUrlStr!=null && imageUrlStr.trim().length()>0){
+			if(imageUrlStr!=null && !imageUrlStr.trim().isEmpty()){
 				Glide.with(this).load(imageUrlStr).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
 			}else{
 				//로컬 이미지 리소스
-				ArrayList<String> arr_drawable_name = new ArrayList<>();
-				arr_drawable_name.add("imgintro03_1");
-				arr_drawable_name.add("imgintro03");
-				arr_drawable_name.add("imgintro04");
-				arr_drawable_name.add("imgintro08");
-				arr_drawable_name.add("imgintro12_1");
-				arr_drawable_name.add("imgintro13");
-				arr_drawable_name.add("imgintro15");
-				arr_drawable_name.add("imgintro17");
-				arr_drawable_name.add("imgintro18");
-				arr_drawable_name.add("imgintro19_1");
-				arr_drawable_name.add("imgintro19_2");
-				arr_drawable_name.add("imgintro19_3");
+                ArrayList<String> arr_drawable_name = getLocalDrawableNameList();
 
-				Random random = new Random();
+                Random random = new Random();
 				int randomIdx = random.nextInt(arr_drawable_name.size());
 				int selectedResId = GetImageResId(this,arr_drawable_name.get(randomIdx));
 
 				Uri imageUri = Uri.parse("android.resource://" + getPackageName() + "/" + selectedResId);
 				Glide.with(this).load(imageUri).fitCenter().addListener(listenerIntroLoad).into(mBind.ivIntro);
 			}
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 	}
-	private void applyIntroTintColor(){
+
+    @NonNull
+    private static ArrayList<String> getLocalDrawableNameList() {
+        ArrayList<String> arr_drawable_name = new ArrayList<>();
+        arr_drawable_name.add("imgintro03_1");
+        arr_drawable_name.add("imgintro03");
+        arr_drawable_name.add("imgintro04");
+        arr_drawable_name.add("imgintro08");
+        arr_drawable_name.add("imgintro12_1");
+        arr_drawable_name.add("imgintro13");
+        arr_drawable_name.add("imgintro15");
+        arr_drawable_name.add("imgintro17");
+        arr_drawable_name.add("imgintro18");
+        arr_drawable_name.add("imgintro19_1");
+        arr_drawable_name.add("imgintro19_2");
+        arr_drawable_name.add("imgintro19_3");
+        return arr_drawable_name;
+    }
+
+    private void applyIntroTintColor(){
 		//tint 적용
 		mBind.ivTypologo.setColorFilter(colorIntroTint);
 		mBind.btnSkipintro.setColorFilter(colorIntroTint);
@@ -867,8 +835,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		mBind.btnSkipintro.setVisibility(View.VISIBLE);
 		mBind.ivBottomlogo.setVisibility(View.VISIBLE);
 	}
-	private RequestListener listenerIntroLoad = new RequestListener() {
-		@Override
+	private final RequestListener<Drawable> listenerIntroLoad = new RequestListener<Drawable>() {
+
+        @Override
 		public boolean onLoadFailed(@Nullable GlideException e, Object model, Target target, boolean isFirstResource) {
 			//tint 적용
 			applyIntroTintColor();
@@ -877,19 +846,14 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			return false;
 		}
 
-		@Override
-		public boolean onResourceReady(Object resource, Object model, Target target, DataSource dataSource, boolean isFirstResource) {
-			//tint 적용
-			applyIntroTintColor();
-			playIvIntroFadeInAnimation();
-			return false;
-		}
-	};
+        @Override
+        public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+            //tint 적용
+            applyIntroTintColor();
+            playIvIntroFadeInAnimation();
+            return false;
+        }
 
-	private SizeReadyCallback mSizeReadyCallback = new SizeReadyCallback() {
-		@Override
-		public void onSizeReady(int width, int height) {
-		}
 	};
 
 	private void playIvIntroFadeInAnimation(){
@@ -1089,7 +1053,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 		}
 
-		if (mBind.mainWebView != null && !TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
+		if (!TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
 			mBind.mainWebView.loadUrl("javascript:requestFootStampList()");
 		}
 
@@ -1118,7 +1082,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 			mBind.mainWebView.clearCache(true);
 			stopService(new Intent(this, UnCatchTaskService.class));
-		} catch (Exception e) {
+		} catch (Exception ignored) {
 		}
 
 		OdiiApplication.isGeofenceNotifcationClick = false;
@@ -1146,11 +1110,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     }
 
 	@Override
-	public void onRecievedLocation(Location location) {
-		if (location == null) {
-
-		}
-	}
+	public void onRecievedLocation(Location location) { }
 
 	/**
 	 * 다운로드 카운터 갱신
@@ -1179,8 +1139,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 	/**
 	 * 웹 URL 호출
-	 *
-	 * @param url
 	 */
 	public void loadUrl(String url) {
 		new Handler(Looper.getMainLooper()).post(() -> {
@@ -1190,7 +1148,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 	public void loadStampPageChange() {
 		new Handler(Looper.getMainLooper()).post(() -> {
-			if (mBind != null && mBind.mainWebView != null && !TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
+			if (mBind != null && !TextUtils.isEmpty(mBind.mainWebView.getUrl()) && mBind.mainWebView.getUrl().contains("/story/main")) {
 				mBind.mainWebView.loadUrl("javascript:requestFootStampList()");
 			}
 		});
@@ -1218,8 +1176,8 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		@SuppressLint("StringFormatMatches")
 		@Override
 		public void onReceive(Context context, Intent intent) {
-			if (intent.getAction().equals(Intent.ACTION_HEADSET_PLUG)) {
-				boolean isEarphoneOn = (intent.getIntExtra("state", 0) > 0) ? true : false;
+			if (Objects.equals(intent.getAction(), Intent.ACTION_HEADSET_PLUG)) {
+				boolean isEarphoneOn = intent.getIntExtra("state", 0) > 0;
 
 				if (!isEarphoneOn && PlayerService.isPlay) {
 					PlayerService.startActionPause(MainActivity.this);
@@ -1230,7 +1188,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 	public void isMiniPlayer() {
 		new Handler(Looper.getMainLooper()).post(() -> {
-			mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resMiniPlayer('" + (mBind.viewMiniPlayer.getVisibility() == View.VISIBLE ? true : false) + "')");
+			mBind.mainWebView.loadUrl(JAVASCRIPT_PREFIX + "resMiniPlayer('" + (mBind.viewMiniPlayer.getVisibility() == View.VISIBLE) + "')");
 		});
 	}
 
@@ -1295,11 +1253,12 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 		ApiService.get().notice(map).enqueue(new Callback<NoticeData>() {
 			@Override
-			public void onResponse(Call<NoticeData> call, Response<NoticeData> response) {
+			public void onResponse(
+                    @NonNull Call<NoticeData> call,
+                    @NonNull Response<NoticeData> response
+            ) {
 				if (response.isSuccessful()) {
-					/**
-					 * 작업공지 > 업데이트 > 튜토리얼 > 재난공지 > 일반공지 > 이벤트 > QR
-					 */
+					//작업공지 > 업데이트 > 튜토리얼 > 재난공지 > 일반공지 > 이벤트 > QR
 					noticeUtils = new NoticeUtils(MainActivity.this, response.body(), noticeListener);
 					noticeUtils.start();
 				} else {
@@ -1309,14 +1268,17 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 			}
 
 			@Override
-			public void onFailure(Call<NoticeData> call, Throwable t) {
+			public void onFailure(
+                    @NonNull Call<NoticeData> call,
+                    @NonNull Throwable t
+            ) {
 				KLog.i(call.toString());
 				mBind.mainWebView.loadUrl(String.format(URLS.URL, SettingsUtil.getLocale(MainActivity.this)));
 			}
 		});
 	}
 
-	private NoticeUtils.OnNoticeListener noticeListener = new NoticeUtils.OnNoticeListener() {
+	private final NoticeUtils.OnNoticeListener noticeListener = new NoticeUtils.OnNoticeListener() {
 		@Override
 		public void onNoticeComplete() {
 			mBind.mainWebView.loadUrl(onLoadMainWebViewUrl);
@@ -1329,9 +1291,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					String tlid = uri.getQueryParameter("tlid");
 					String slid = uri.getQueryParameter("slid");
 
-					runOnUiThread(() -> StampDBManager.getInstance(activity).updateStampComplete(Integer.parseInt(tlid), Integer.parseInt(slid)));
+                    if(tlid != null && slid != null) {
+                        runOnUiThread(() -> StampDBManager.getInstance(activity).updateStampComplete(Integer.parseInt(tlid), Integer.parseInt(slid)));
+                    }
 				} catch (Exception e) {
-					e.printStackTrace();
+                    KLog.e(e);
 				}
 			}
 		}
@@ -1344,7 +1308,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 
 				if (!TextUtils.isEmpty(ttid)) {
 
-					int newTtid = Integer.valueOf(ttid);
+					int newTtid = Integer.parseInt(ttid);
 					int oldTtid = SettingsUtil.getTaxiTtid(activity);
 
 					//oldTtid
@@ -1352,15 +1316,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					//-2 기존데이터 초기화하지 않음
 
 					if (oldTtid == -1 || newTtid != oldTtid) {
-
-						if (oldTtid == -2){
-							//--
-							//nothing to do
-						}else{
-							StoryDbManager.getInstance(activity).clearAll();
-							FileUtils.clearCacheStoryDelete(activity);
+						if (oldTtid != -2){
+                            StoryDbManager.getInstance(activity).clearAll();
+                            FileUtils.clearCacheStoryDelete(activity);
 						}
-						SettingsUtil.setTaxiTtid(activity, Integer.valueOf(ttid));
+						SettingsUtil.setTaxiTtid(activity, Integer.parseInt(ttid));
 					}
 
 					stopService(new Intent(activity, PlayerService.class));
@@ -1371,7 +1331,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 					startActivity(new Intent(MainActivity.this, TaxiMainActivity.class));
 					finish();
 				}
-			} catch (Exception e) {
+			} catch (Exception ignored) {
 			}
 
 			mBind.mainWebView.loadUrl(url);
@@ -1383,8 +1343,7 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		try {
 			NotificationManager mNotificationManager = (NotificationManager) getSystemService(Context.NOTIFICATION_SERVICE);
 			mNotificationManager.cancel(LocationService.GEOFENCING_NOTIFICATION_ID);
-		} catch (Exception e) {
-
+		} catch (Exception ignored) {
 		}
 	}
 
@@ -1394,15 +1353,17 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
 		if (requestCode == 8775) {
 			noticeUtils.nextWork();
 		} else if (requestCode == 8776 && resultCode == Activity.RESULT_OK) {
-			String url = data.getStringExtra("Event_URL");
-			if (!TextUtils.isEmpty(url)) {
-				if (url.toLowerCase().startsWith(URLS.BASE_URL)) {
-					mBind.mainWebView.loadUrl(url);
-				} else {
-					startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
-				}
+            if(data != null) {
+                String url = data.getStringExtra("Event_URL");
+                if (!TextUtils.isEmpty(url)) {
+                    if (url.toLowerCase().startsWith(URLS.BASE_URL)) {
+                        mBind.mainWebView.loadUrl(url);
+                    } else {
+                        startActivity(new Intent(Intent.ACTION_VIEW, Uri.parse(url)));
+                    }
 
-			}
+                }
+            }
 			noticeUtils.nextWork();
 		} else if (requestCode == 8776 && resultCode != Activity.RESULT_CANCELED) {
 			noticeUtils.nextWork();

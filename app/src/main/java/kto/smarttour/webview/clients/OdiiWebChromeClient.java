@@ -11,13 +11,13 @@ import android.webkit.ValueCallback;
 import android.webkit.WebChromeClient;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
-import android.widget.ProgressBar;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import kto.smarttour.ui.MainActivity;
+import kto.smarttour.webview.OdiiWebViewCallback;
 
 /**
  * The Class OdiiWebChromeClient.
@@ -33,17 +33,17 @@ public class OdiiWebChromeClient extends WebChromeClient {
 	/**
 	 * 웹사이트 로딩시 진행바.
 	 */
-	private final ProgressBar progressBar;
+	private final OdiiWebViewCallback adapter;
 
 	/**
 	 * Instantiates a new smart tour web chrome client.
 	 *
-	 * @param progressBar the progress bar
+	 * @param callback the progress bar
 	 */
-	public OdiiWebChromeClient(AppCompatActivity activity, ProgressBar progressBar) {
+	public OdiiWebChromeClient(AppCompatActivity activity, OdiiWebViewCallback callback) {
 		// TODO Auto-generated constructor stub
 		this.activity = activity;
-		this.progressBar = progressBar;
+		this.adapter = callback;
 	}
 
 
@@ -64,8 +64,8 @@ public class OdiiWebChromeClient extends WebChromeClient {
 		// TODO Auto-generated method stub
 		super.onProgressChanged(view, newProgress);
 
-		if (progressBar != null) {
-			progressBar.setProgress(newProgress);
+		if (adapter != null) {
+            adapter.onProgressChanged(newProgress);
 		}
 	}
 

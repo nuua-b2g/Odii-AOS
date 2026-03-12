@@ -5,35 +5,23 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.location.Location;
 import android.os.Bundle;
-import android.util.Log;
-import android.util.TypedValue;
 import android.view.View;
 import android.widget.RelativeLayout;
 
 import androidx.core.app.ActivityCompat;
 import androidx.databinding.DataBindingUtil;
 
-import com.scottyab.rootbeer.RootBeer;
-
-import java.util.ArrayList;
-import java.util.List;
-
-import kto.smarttour.OdiiApplication;
 import kto.smarttour.R;
 import kto.smarttour.common.BaseActivity;
 import kto.smarttour.common.consts.URLS;
 import kto.smarttour.common.utils.AnalyticsInterface;
 import kto.smarttour.common.utils.CommonUtils;
 import kto.smarttour.common.utils.DialogUtil;
-import kto.smarttour.common.utils.FileUtils;
-import kto.smarttour.common.utils.ImageUtil;
 import kto.smarttour.common.utils.SettingsUtil;
 import kto.smarttour.databinding.ActivityStoryDetailWebBinding;
-import kto.smarttour.db.StoryDbManager;
 import kto.smarttour.db.item.StoryItem;
 import kto.smarttour.location.CurrentLocation;
-import kto.smarttour.service.PlayerService;
-import kto.smarttour.ui.view.Topbar;
+import kto.smarttour.webview.OdiiWebViewCallback;
 import kto.smarttour.webview.clients.OdiiWebChromeClient;
 import kto.smarttour.webview.clients.OdiiWebViewClient;
 
@@ -45,25 +33,19 @@ import kto.smarttour.webview.clients.OdiiWebViewClient;
  * sid
  * slid
  */
-public class StoryDetailWebActivity extends BaseActivity implements View.OnClickListener {
+public class StoryDetailWebActivity extends BaseActivity implements View.OnClickListener, OdiiWebViewCallback {
 	public static final int STORY_LOCKER_MODE = 5;
 	public static final int STORY_DOWNLOAD_MODE = 6;
 	private ActivityStoryDetailWebBinding mBind;
 
-	private StoryItem content;
-	int type;
+    int type;
 	boolean useLocation;
 
-	private Activity activity;
-
-	private OdiiWebChromeClient odiiWebChromeClient;
-
-	@Override
+    @Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		activity = this;
 
-		mBind = DataBindingUtil.setContentView(this, R.layout.activity_story_detail_web);
+        mBind = DataBindingUtil.setContentView(this, R.layout.activity_story_detail_web);
 		mBind.setLifecycleOwner(this);
 
 		((RelativeLayout.LayoutParams) mBind.detailWebView.getLayoutParams()).setMargins(0, statusBarHeight, 0, 0);
@@ -82,7 +64,7 @@ public class StoryDetailWebActivity extends BaseActivity implements View.OnClick
 
 		if(intent!=null){
 
-			content = (StoryItem) intent.getSerializableExtra("content");
+            StoryItem content = (StoryItem) intent.getSerializableExtra("content");
 
 			if (content == null) {
 				finish();
@@ -95,13 +77,13 @@ public class StoryDetailWebActivity extends BaseActivity implements View.OnClick
 			//웹뷰 초기화
 			mBind.detailWebView.getOdiiInterface().setSubActivity(this);//추가
 
-			odiiWebChromeClient = new OdiiWebChromeClient(this, mBind.progress);
-			mBind.detailWebView.setWebViewClient(new OdiiWebViewClient(this, mBind.progress));
+            OdiiWebChromeClient odiiWebChromeClient = new OdiiWebChromeClient(this, this);
+			mBind.detailWebView.setWebViewClient(new OdiiWebViewClient(this, this));
 			mBind.detailWebView.setWebChromeClient(odiiWebChromeClient);
 
 			//로드
 			String targetUrl = getStoryDetailWebUrl(content);
-			if( targetUrl!=null && targetUrl.length()>0){
+			if( targetUrl!=null && !targetUrl.isEmpty()){
 				mBind.detailWebView.loadUrl(targetUrl);
 			}
 
@@ -109,19 +91,20 @@ public class StoryDetailWebActivity extends BaseActivity implements View.OnClick
 
 	}
 
-	private void makeDumpView() {
-		RelativeLayout.LayoutParams rl = (RelativeLayout.LayoutParams) mBind.dumpView.getLayoutParams();
-		rl.height = statusBarHeight;
-		mBind.dumpView.setLayoutParams(rl);
-	}
+    @Override
+    public void onProgressChanged(int newProgress) {
+        mBind.progress.setProgress(newProgress);
+    }
 
-	public int changeAlpha(int color, float fraction) {
-		int red = Color.red(color);
-		int green = Color.green(color);
-		int blue = Color.blue(color);
-		int alpha = (int) (Color.alpha(color) * fraction);
-		return Color.argb(alpha, red, green, blue);
-	}
+    @Override
+    public void onPageFinished() {
+        mBind.progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPageStart() {
+        mBind.progress.setVisibility(View.GONE);
+    }
 
 	@Override
 	protected void onResume() {

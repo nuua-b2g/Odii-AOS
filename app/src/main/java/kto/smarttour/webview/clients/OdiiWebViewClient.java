@@ -27,6 +27,7 @@ import kto.smarttour.R;
 import kto.smarttour.common.utils.CommonUtils;
 import kto.smarttour.common.utils.DialogUtil;
 import kto.smarttour.ui.MainActivity;
+import kto.smarttour.webview.OdiiWebViewCallback;
 import kto.smarttour.webview.WebUrlDelegator;
 
 /**
@@ -62,7 +63,7 @@ public class OdiiWebViewClient extends WebViewClient {
 	/**
 	 * 웹사이트 로딩시 진행바.
 	 */
-	private ProgressBar progressBar;
+	private OdiiWebViewCallback callback;
 
 	public static final String ACTION_RECEIVED_ERROR = "kto.smarttour.webview.ACTION_RECEIVED_ERROR";
 
@@ -75,12 +76,11 @@ public class OdiiWebViewClient extends WebViewClient {
 	 * Instantiates a new smart tour web view client.
 	 *
 	 * @param activity    the activity
-	 * @param progressBar the progress bar
 	 */
-	public OdiiWebViewClient(AppCompatActivity activity, ProgressBar progressBar) {
+	public OdiiWebViewClient(AppCompatActivity activity, OdiiWebViewCallback callback) {
 		// TODO Auto-generated constructor stub
 		this.webUrlDelegator = new WebUrlDelegator(activity);
-		this.progressBar = progressBar;
+		this.callback = callback;
 		this.activity = activity;
 		rootBeer = new RootBeer(activity);
 	}
@@ -103,9 +103,7 @@ public class OdiiWebViewClient extends WebViewClient {
 	public void onPageStarted(WebView view, String url, Bitmap favicon) {
 		// TODO Auto-generated method stub
 		super.onPageStarted(view, url, favicon);
-		if (progressBar != null) {
-			progressBar.setVisibility(View.VISIBLE);
-		}
+        callback.onPageStart();
 	}
 
 	/* (non-Javadoc)
@@ -118,9 +116,7 @@ public class OdiiWebViewClient extends WebViewClient {
 		((MainActivity) OdiiApplication.getWebActivity()).hideBlock();
         CookieManager.getInstance().flush();
 
-		if (progressBar != null) {
-			progressBar.setVisibility(View.GONE);
-		}
+		callback.onPageFinished();
 
 		if(OdiiApplication.isGeofenceNotifcationClick && !TextUtils.isEmpty(OdiiApplication.stamp_url)) {
 			view.loadUrl(OdiiApplication.stamp_url);

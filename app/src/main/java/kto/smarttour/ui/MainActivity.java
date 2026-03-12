@@ -76,6 +76,7 @@ import kto.smarttour.service.UnCatchTaskService;
 import kto.smarttour.ui.player.PlayListManager;
 import kto.smarttour.ui.player.Player;
 import kto.smarttour.ui.taxi.TaxiMainActivity;
+import kto.smarttour.webview.OdiiWebViewCallback;
 import kto.smarttour.webview.clients.OdiiWebChromeClient;
 import kto.smarttour.webview.clients.OdiiWebViewClient;
 import okhttp3.ResponseBody;
@@ -83,7 +84,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener {
+public class MainActivity extends BaseActivity implements CurrentLocation.OnLocationListener, OdiiWebViewCallback {
 
     private ActivityMainBinding mBind;
     private Activity activity;
@@ -159,6 +160,21 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
     //--------------------------------------------------------------------------
     private final AudioFinishedReceiver mAudioFinishedReceiver = new AudioFinishedReceiver();
 
+    @Override
+    public void onProgressChanged(int newProgress) {
+        mBind.progress.setProgress(newProgress);
+    }
+
+    @Override
+    public void onPageFinished() {
+        mBind.progress.setVisibility(View.GONE);
+    }
+
+    @Override
+    public void onPageStart() {
+        mBind.progress.setVisibility(View.GONE);
+    }
+
     private class AudioFinishedReceiver extends BroadcastReceiver {
 
         @Override
@@ -228,6 +244,11 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
         systemReceiver = new SystemReceiver();
         mBind = DataBindingUtil.setContentView(this, R.layout.activity_main);
         currentLocation = new CurrentLocation(this, this);
+
+        //tint설정 대상 뷰 초기값 숨김
+        mBind.ivTypologo.setVisibility(View.INVISIBLE);
+        mBind.btnSkipintro.setVisibility(View.INVISIBLE);
+        mBind.ivBottomlogo.setVisibility(View.INVISIBLE);
         initializer();
     }
 
@@ -260,10 +281,6 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
      */
     private void initializer() {
         Intent intent = getIntent();
-        //tint설정 대상 뷰 초기값 숨김
-        mBind.ivTypologo.setVisibility(View.INVISIBLE);
-        mBind.btnSkipintro.setVisibility(View.INVISIBLE);
-        mBind.ivBottomlogo.setVisibility(View.INVISIBLE);
 
         //택시모드 종료에 의한 MainActivity호출시 introSkip
         if (!introSkip && intent != null) {
@@ -293,8 +310,9 @@ public class MainActivity extends BaseActivity implements CurrentLocation.OnLoca
             );
             return;
         }
-        odiiWebChromeClient = new OdiiWebChromeClient(this, mBind.progress);
-        mBind.mainWebView.setWebViewClient(new OdiiWebViewClient(this, mBind.progress));
+
+        odiiWebChromeClient = new OdiiWebChromeClient(this, this);
+        mBind.mainWebView.setWebViewClient(new OdiiWebViewClient(this, this));
         mBind.mainWebView.setWebChromeClient(odiiWebChromeClient);
 
         setViewMiniPlayer(mBind.viewMiniPlayer, true); //initHide =true

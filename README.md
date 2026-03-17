@@ -80,3 +80,22 @@ buildTypes {
     }
 }
 ```
+
+## AGP 버전 변경 8.13.2
+
+### 변경 사유: 구글 권장
+```groovy
+/* 변경 전 */
+classpath 'com.android.tools.build:gradle:8.9.1'
+
+/* 변경 후 */
+classpath 'com.android.tools.build:gradle:8.13.2'
+```
+
+```properties
+# 변경 전
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.11.1-bin.zip
+
+# 변경 후
+distributionUrl=https\://services.gradle.org/distributions/gradle-8.13-bin.zip
+```

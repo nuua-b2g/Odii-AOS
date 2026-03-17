@@ -2,13 +2,8 @@ package kto.smarttour.common.consts;
 
 import android.content.Context;
 import android.location.Location;
-import android.util.Log;
 
-import java.util.ArrayList;
-
-import kto.smarttour.db.StoryDbManager;
-import kto.smarttour.db.item.StoryData;
-import kto.smarttour.db.item.StoryItem;
+import kto.smarttour.BuildConfig;
 
 public class Common {
 
@@ -32,7 +27,8 @@ public class Common {
 	/**
 	 * 루팅 확인 무시 여부: 배포 시 false로 변경할 것
 	 */
-	public static boolean ignoreRooting = false;
+	@SuppressWarnings("ConstantValue")
+    public static boolean ignoreRooting = "debug".equals(BuildConfig.BUILD_TYPE);
 
 	/**
 	 * 요청사항 : 재생목록 화면에서 상세화면으로 이동 시 다시 돌아오는 경우 재생목록이 보이도록 처리

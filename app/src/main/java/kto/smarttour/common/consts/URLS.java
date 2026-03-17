@@ -1,11 +1,10 @@
 package kto.smarttour.common.consts;
 
+import kto.smarttour.BuildConfig;
+
 public class URLS {
 
-	public static final String BASE_URL = "https://www.odii.kr";//운영서버 (내재화 ssl 2022.07월부터 앱에서 사용)
-	//public static final String BASE_URL = "https://odii.witches.co.kr";//개발서버 (위치스 재구축)
-//	public static final String BASE_URL = "http://121.131.208.44:18080"; // 엔티콘 개발 서버
-//	public static final String BASE_URL = "http://dev.odii.ntcon.co:18080/";
+    public static final String BASE_URL = BuildConfig.BASE_URL;
 
 	public static final String URL = BASE_URL + "/smarttour_web/home/main?lang=%s";
 	public static final String INFLOW_URL = BASE_URL + "/smarttour_web/inflow/log_new?ifwId=%s";

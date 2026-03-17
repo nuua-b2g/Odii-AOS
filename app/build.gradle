@@ -8,7 +8,7 @@ android {
 //      서명 정보
     signingConfigs {
         release {
-            storeFile file('../../keystore/Vienam.keystore')
+            storeFile file('../keystore/Vienam.keystore')
             storePassword 'oniontech939'
             keyAlias 'mykey'
             keyPassword 'oniontech939'
@@ -34,6 +34,10 @@ android {
             proguardFile 'proguard-firebase.pro'
             proguardFile 'proguard-rules.pro'
             proguardFile 'proguard-stg.pro'
+            signingConfig signingConfigs.release
+
+            String releaseUrl = "\"https://www.odii.kr\""//운영서버 (내재화 ssl 2022.07월부터 앱에서 사용)
+            buildConfigField("String", "BASE_URL", releaseUrl)
         }
         debug {
             minifyEnabled true
@@ -46,6 +50,17 @@ android {
             firebaseCrashlytics {
                 mappingFileUploadEnabled false
             }
+
+            Properties localProperties = new Properties()
+            File file = rootProject.file("local.properties")
+            if (file.exists()) {
+                FileInputStream inputStream = new FileInputStream(file)
+                localProperties.load(inputStream)
+                inputStream.close()
+            }
+            String debugUrl = localProperties.getProperty("BASE_URL_LOCAL")
+                    ?: "\"http://121.131.208.44:18080\"" //엔티콘 개발 서버
+            buildConfigField("String", "BASE_URL", debugUrl)
         }
     }
 
@@ -112,7 +127,7 @@ dependencies {
     implementation 'com.github.nguyenhoanglam:ImagePicker:1.4.3'
     implementation 'com.github.amitshekhariitbhu:PRDownloader:1.0.2'
     implementation 'androidx.mediarouter:mediarouter:1.3.1'
-    implementation ("com.github.mkaflowski:HybridMediaPlayer:1.9.4") {
+    implementation("com.github.mkaflowski:HybridMediaPlayer:1.9.4") {
         exclude group: 'com.github.zhaokaiqiang.klog', module: 'library'
 
     }

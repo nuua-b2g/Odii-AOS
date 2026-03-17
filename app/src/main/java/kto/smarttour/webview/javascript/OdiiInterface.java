@@ -20,7 +20,8 @@ import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.localbroadcastmanager.content.LocalBroadcastManager;
 
-import com.google.firebase.iid.FirebaseInstanceId;
+
+import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.gson.Gson;
 import com.socks.library.KLog;
 
@@ -192,7 +193,7 @@ public class OdiiInterface {
 					PreferenceUtils.setPreference(activity, "PLAY_INDEX", 0); //저장값 클리어 강제 지정 0
 					PlayListManager.getInstance().setPlayIndex(0);//메모리 클리어
 					//------------
-					
+
 					SettingsUtil.setLocale(activity, localeLanguage);
                     Intent intent = new Intent(activity, MainActivity.class);
                     intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
@@ -239,14 +240,16 @@ public class OdiiInterface {
 			String token = PreferenceUtils.getPreferenceString(activity, PREF_TOKEN);
 
 			if (TextUtils.isEmpty(token)) {
-				FirebaseInstanceId.getInstance().getInstanceId().addOnCompleteListener(task -> {
-					String pushToken = task.getResult().getToken();
-					PreferenceUtils.setPreference(activity, PREF_TOKEN, pushToken);
-					PreferenceUtils.setPreference(activity, PREF_REGISTERED_TOKEN, false);
+                FirebaseMessaging.getInstance().getToken().addOnCompleteListener(task -> {
+                    if(task.isSuccessful()) {
+                        String pushToken = task.getResult();
+                        PreferenceUtils.setPreference(activity, PREF_TOKEN, pushToken);
+                        PreferenceUtils.setPreference(activity, PREF_REGISTERED_TOKEN, false);
 
-					if(webView!=null){
-						webView.post(() -> webView.resDefaultPushUse(SettingsUtil.isUseFcm(activity), pushToken));
-					}
+                        if(webView!=null){
+                            webView.post(() -> webView.resDefaultPushUse(SettingsUtil.isUseFcm(activity), pushToken));
+                        }
+                    }
 				});
 			} else {
 

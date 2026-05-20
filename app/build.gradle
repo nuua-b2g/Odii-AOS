@@ -21,8 +21,8 @@ android {
         // Android 15 SDK 설정
         compileSdk 35
         targetSdkVersion 35
-        versionCode 109
-        versionName "4.3.6"
+        versionCode 117
+        versionName "4.3.8"
         multiDexEnabled true
         buildConfigField("String", "SIGN_ACCESS_KEY", sign_access_key)
     }

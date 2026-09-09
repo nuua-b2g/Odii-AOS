@@ -16,10 +16,11 @@ buildscript {
     }
     dependencies {
         //'NUUA202510 : 변경내용'
-        // 16KB 및 Android 15 설정을 위한 AGP 버전 변경
+        // 16KB 및 Android 16(API 36) 설정을 위한 AGP 버전 변경
         // AGP 버전 8.3~8.5에서는 앱이 기본적으로 16KB로 정렬됩니다.
+        // compileSdk 36은 AGP 8.10 이상부터 정식 지원됩니다.
         // 참고 자료: https://developer.android.com/guide/practices/page-sizes?hl=ko#build
-        classpath 'com.android.tools.build:gradle:8.9.1'
+        classpath 'com.android.tools.build:gradle:8.13.0'
         classpath 'com.google.gms:google-services:4.3.15'
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath 'com.google.firebase:firebase-crashlytics-gradle:2.9.2'

@@ -42,7 +42,21 @@
         android:usesCleartextTraffic="true"
         tools:ignore="GoogleAppIndexingWarning,LockedOrientationActivity,UnusedAttribute,android:allowBackup,NonResizeableActivity"
         tools:overrideLibrary="gun0912.tedbottompicker"
-        tools:replace="android:icon,android:allowBackup,android:fullBackupContent">
+        tools:replace="android:icon,android:allowBackup,android:fullBackupContent"
+        android:enableOnBackInvokedCallback="false">
+
+        <!-- 'NUUA202510 : 변경내용' -->
+        <!--
+            Android 16(API 36) 대응: targetSdk 36부터 화면 크기가 sw600dp 이상인 기기에서
+            screenOrientation / resizeableActivity / maxAspectRatio 설정이 무시됩니다.
+            본 앱은 세로 고정 및 화면비 제한을 전제로 UI가 구성되어 있어 임시 opt-out을 사용합니다.
+            (targetSdk 37부터는 이 opt-out이 동작하지 않으므로 적응형 레이아웃 대응 필요)
+            참고 자료: https://developer.android.com/about/versions/16/behavior-changes-16?hl=ko#adaptive-layouts
+        -->
+        <property
+            android:name="android.window.PROPERTY_COMPAT_ALLOW_RESTRICTED_RESIZABILITY"
+            android:value="true" />
+
 <!--      Ntcon: 240510 MainActivity -> NewSplash 로 변경되었습니다-->
         <activity
             android:name=".ui.NewSplash"

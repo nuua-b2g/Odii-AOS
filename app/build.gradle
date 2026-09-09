@@ -18,9 +18,9 @@ android {
         applicationId "kto.smarttour"
         minSdkVersion 21
         //'NUUA202510 : 변경내용'
-        // Android 15 SDK 설정
-        compileSdk 35
-        targetSdkVersion 35
+        // Android 16 SDK 설정
+        compileSdk 36
+        targetSdkVersion 36
         versionCode 117
         versionName "4.3.8"
         multiDexEnabled true

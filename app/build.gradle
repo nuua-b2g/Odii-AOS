@@ -8,7 +8,7 @@ android {
 //      서명 정보
     signingConfigs {
         release {
-            storeFile file('../../keystore/Vienam.keystore')
+            storeFile rootProject.file('keystore/Vienam.keystore')
             storePassword 'oniontech939'
             keyAlias 'mykey'
             keyPassword 'oniontech939'
@@ -35,6 +35,7 @@ android {
             proguardFile 'proguard-firebase.pro'
             proguardFile 'proguard-rules.pro'
             proguardFile 'proguard-stg.pro'
+            signingConfig signingConfigs.release
         }
         debug {
             minifyEnabled true

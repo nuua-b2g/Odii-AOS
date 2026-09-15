@@ -87,10 +87,13 @@ public class LocationService extends Service {
             mHandler = new Handler(Looper.myLooper());
         }
 
-        isStopService = intent.getBooleanExtra(LocationConstants.EXTRA_STRING_STOP_LOCATION_SERVICE, false);
+        //  intent == null : 시스템이 서비스를 재시작한 경우 (프로세스 강제 종료 후)
+        //  서비스 수명은 앱 포그라운드에 묶여 있으므로 (OdiiApplication.onBecameForeground/Background) 재시작 시엔 그대로 종료
+        isStopService = intent == null || intent.getBooleanExtra(LocationConstants.EXTRA_STRING_STOP_LOCATION_SERVICE, false);
         if (isStopService) {
             stopForeground(true);
             stopSelf();
+            return START_NOT_STICKY;
         }
 
         eventList.clear();
@@ -107,8 +110,7 @@ public class LocationService extends Service {
 
         initializeLocationManager();
 
-
-        return START_STICKY;
+        return START_NOT_STICKY;
     }
 
     private void removeNotification() {

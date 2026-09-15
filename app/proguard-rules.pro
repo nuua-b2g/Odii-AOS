@@ -21,8 +21,6 @@
 #-renamesourcefileattribute SourceFile
 
 
--dontoptimize
--dontpreverify
 -ignorewarnings
 
 #androidx

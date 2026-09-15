@@ -24,14 +24,11 @@
 -ignorewarnings
 
 #androidx
--keep class com.google.android.material.** { *; }
 
 -dontwarn com.google.android.material.**
 -dontnote com.google.android.material.**
 
 -dontwarn androidx.**
--keep class androidx.** { *; }
--keep interface androidx.** { *; }
 
 #GLIDE
 -keep public class * implements com.bumptech.glide.module.GlideModule
@@ -101,9 +98,6 @@
 
 -keepattributes Signature
 
--keep class com.google.firebase.** { *; }
--keep class com.firebase.** { *; }
--keep class org.apache.** { *; }
 -keepnames class com.fasterxml.jackson.** { *; }
 -keepnames class javax.servlet.** { *; }
 -keepnames class org.ietf.jgss.** { *; }
@@ -133,7 +127,6 @@
 -keep public class **.*$JavaScriptInterface
 
 -dontnote sun.misc.Unsafe
--keep class com.google.android.gms.** { *; }
 -dontwarn com.squareup.okhttp.**
 
 
@@ -143,7 +136,6 @@
 -dontnote okhttp3.**
 -dontwarn com.google.android.gms.**
 
--keep public class com.google.android.gms.* { public *; }
 
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
@@ -172,5 +164,4 @@
 # Firebase Crashlytics SDK 추가
 -keepattributes SourceFile,LineNumberTable        # Keep file names and line numbers.
 -keep public class * extends java.lang.Exception  # Optional: Keep custom exceptions.
--keep class com.google.firebase.crashlytics.** { *; }
 -dontwarn com.google.firebase.crashlytics.**

@@ -39,11 +39,8 @@
 -keep public class **.*$JavaScriptInterface
 
 -dontnote sun.misc.Unsafe
--keep class com.google.android.gms.** { *; }
 -dontwarn com.squareup.okhttp.**
 
-#추가 'org.apache.commons
--keep class org.apache.commons.** { *; }
 
 # 추가
 -dontwarn okhttp3.**
@@ -51,7 +48,6 @@
 -dontnote okhttp3.**
 -dontwarn com.google.android.gms.**
 
--keep public class com.google.android.gms.* { public *; }
 
 -keep class * extends java.util.ListResourceBundle {
     protected Object[][] getContents();
